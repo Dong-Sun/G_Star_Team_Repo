@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
 
-    [HideInInspector] public float Character_Height = 0;
+    [HideInInspector] public float Character_Height = 1f;
     [HideInInspector] public int Block_Size = 1;
     [HideInInspector] public float Floor_Height = 0.5f;
     
@@ -18,7 +18,6 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         SingleTon();
-        Find_Player_Height();
     }
 
     // Update is called once per frame
@@ -39,25 +38,25 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void Find_Player_Height()
-    {
-        MeshFilter mf = this.transform.GetChild(0).GetComponent<MeshFilter>();
-        Vector3[] vertices = mf.mesh.vertices;
-        float least_y=Mathf.Infinity;
-        foreach (var vertice in vertices)
-        {
+    //private void Find_Player_Height()
+    //{
+    //    MeshFilter mf = this.transform.GetChild(0).GetComponent<MeshFilter>();
+    //    Vector3[] vertices = mf.mesh.vertices;
+    //    float least_y=Mathf.Infinity;
+    //    foreach (var vertice in vertices)
+    //    {
 
-            Vector3 pos = transform.TransformPoint(vertice);
+    //        Vector3 pos = transform.TransformPoint(vertice);
 
-            if (pos.y > Character_Height)
-            {
-                Character_Height = pos.y;
-            }
-            if (pos.y < least_y)
-            {
-                least_y = pos.y;
-            }
-        }
-            Character_Height -= least_y;
-    }
+    //        if (pos.y > Character_Height)
+    //        {
+    //            Character_Height = pos.y;
+    //        }
+    //        if (pos.y < least_y)
+    //        {
+    //            least_y = pos.y;
+    //        }
+    //    }
+    //        Character_Height -= least_y;
+    //}
 }

@@ -1,28 +1,31 @@
 using DataStruct;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMove : MonoBehaviour {
 
     private bool Can_Move;
     private Vector3 Target_Position;
     private Transform Look_Dir;
+    private NavMeshAgent Player_NavmeshAgent;
 
     [SerializeField] private int Moving_Speed = 3;
     // Start is called before the first frame update
 
 
     private void Start() {
+        Can_Move = true;
         Target_Position = this.transform.position;
         Look_Dir = transform.GetChild(1).transform;
+        Player_NavmeshAgent = GetComponent<NavMeshAgent>();
+        //StartCoroutine(Staying_Position());
     }
 
     // Update is called once per frame
     private void Update() {
-        Debug.DrawLine(this.transform.position, Look_Dir.position, Color.red);
         Change_Target_Position(Change_Dir_To_Position());//이동할 위치 지정함수와 게임 진행 방향에 따른 방향 변경 설정
         Player_Moving(); //실제 움직임 함수
-        //StartCoroutine(Staying_Position());
     }
     private Vector3 Change_Dir_To_Position() //게임 진행 방향에 따른 이동 될 위치 지정 함수
     {
@@ -48,14 +51,14 @@ public class PlayerMove : MonoBehaviour {
     {
         if (Can_Move == true) {
             if (Input.GetKey(KeyCode.RightArrow)) {
-                Look_Dir.localPosition = Moving_Dir;
+                Look_Dir.localPosition = Moving_Dir+Vector3.down*0.48f;
                 if (!Dont_Moving(Moving_Dir)) {
                     Target_Position += Moving_Dir;
                     Can_Move = false;
                 }
             }
             else if (Input.GetKey(KeyCode.LeftArrow)) {
-                Look_Dir.localPosition = -Moving_Dir;
+                Look_Dir.localPosition = -Moving_Dir+Vector3.down * 0.48f;
                 if (!Dont_Moving(-Moving_Dir)) {
                     Target_Position -= Moving_Dir;
                     Can_Move = false;
@@ -66,13 +69,11 @@ public class PlayerMove : MonoBehaviour {
 
     private void Player_Moving()//실제 움직임 함수
     {
-        if ((Target_Position - transform.position).magnitude < 0.05f) {
+        Player_NavmeshAgent.SetDestination(Target_Position);
+        transform.GetChild(0).LookAt(Look_Dir);
+        if ((Target_Position - transform.position).magnitude < 0.07f) {
             this.transform.position = Target_Position;
             Can_Move = true;
-        }
-        else {
-            this.transform.position += (Target_Position - transform.position).normalized * Time.deltaTime * Moving_Speed;
-            this.transform.GetChild(0).transform.LookAt(Look_Dir);
         }
     }
 
@@ -110,14 +111,12 @@ public class PlayerMove : MonoBehaviour {
                 }
             }
         }
-
         return Physics.Raycast(this.transform.position, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3) ||
         !Physics.Raycast(this.transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
     }
 
-    IEnumerator Staying_Position() {
-        StartCoroutine(Staying_Position());
-        this.transform.position = new Vector3(Mathf.Round(this.transform.position.x * 4) * 0.25f, Mathf.Round(this.transform.position.y * 4) * 0.25f + PlayerManager.Player_Manager_Instance.Character_Height, Mathf.Round(this.transform.position.z * 4) * 0.25f);
-        yield return new WaitForSeconds(5f);
-    }
+    //IEnumerator Staying_Position() {
+        
+    //        Target_Position = new Vector3(Mathf.Round(Target_Position.x * 4) * 0.25f, Mathf.Round((Target_Position.y - PlayerManager.Player_Manager_Instance.Character_Height * 0.5f) * 4) * 0.25f + PlayerManager.Player_Manager_Instance.Character_Height * 0.5f, Mathf.Round(Target_Position.z * 4) * 0.25f);
+    //}
 }

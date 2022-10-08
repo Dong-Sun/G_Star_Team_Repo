@@ -31,39 +31,33 @@ public class CameraController : Camera {
                 direction = Dir.Right;
             Rotate(Dir.Right);
         }
+        Debug.Log(Time.deltaTime);
     }
 
     void Rotate(Dir dir) {
         Time.timeScale = 0f;                                        // 카메라 동작 중에는 시간이 멈춰있어야 함
         GameManager.Game_Manager_Instance.Game_Dir = direction;     // 방향값을 지정 (GameManager에도 방향지정 함수가 있기에 회의 필요)
-        StartCoroutine(Around(dir));                                // 카메라의 회전을 담당하는 코루틴
-        StartCoroutine(CoverWall());                                // 벽의 활성화 여부를 담당하는 코루틴
+        StartCoroutine(RotateCamera(dir));                                // 카메라의 회전과 벽의 활성화 여부를 담당하는 코루틴
     }
 
-    IEnumerator Around(Dir dirAround) {     // dirAround = 돌아가는 방향
+    IEnumerator RotateCamera(Dir dirAround) {     // dirAround = 돌아가는 방향
         yield return null;
+        walls[(int)direction].SetActive(false);     // 바라보게 될 벽은 바로 비활성화 처리함
         float timer = 0f;
 
         while (timer <= 1f / aroundCycle) {
-            timer += 0.01f;
+            timer += myDeletaTime;
             if (dirAround == Dir.Left)      // 회전 방향으로 구분지어 center를 중심으로 돔
-                transform.RotateAround(center.position, Vector3.up, aroundCycle * 0.9f);
+                transform.RotateAround(center.position, Vector3.up, aroundCycle * (90f * myDeletaTime));
             if (dirAround == Dir.Right)
-                transform.RotateAround(center.position, Vector3.up, -aroundCycle * 0.9f);
-            yield return new WaitForSecondsRealtime(0.01f);     // WaitForSecondsRealtime = 실제 시간으로 작동
+                transform.RotateAround(center.position, Vector3.up, -aroundCycle * (90f * myDeletaTime));
+            yield return new WaitForSecondsRealtime(myDeletaTime);     // WaitForSecondsRealtime = 실제 시간으로 작동
         }
         // 다 돌고 난 뒤, 오차 범위로 인한 카메라 밀림(혹은 각도 오차범위)을 잡아주기 위한 초기화
         transform.rotation = Quaternion.Euler(new Vector3(8, initAngle[(int)direction], 0));
         transform.localPosition = initVector[(int)direction];
+        walls[(int)lastDirection].SetActive(true);  // 돌리고 난 뒤에는, 기존 비활성화 상태였던 벽을 다시 활성화 시켜줌
         Time.timeScale = 1f;        // 모든 작업이 끝나면 시간 원상복귀
         isRotate = true;            // 다시 돌릴 수 있는 상태로 돌아옴
-    }
-    IEnumerator CoverWall() {
-        yield return null;
-        walls[(int)direction].SetActive(false);     // 바라보게 될 벽은 바로 비활성화 처리함
-
-        yield return new WaitForSecondsRealtime(1f / aroundCycle); // 돌아가는 속도에 맞춰서 시간 지연을 시킴
-
-        walls[(int)lastDirection].SetActive(true);  // 돌리고 난 뒤에는, 기존 비활성화 상태였던 벽을 다시 활성화 시켜줌
     }
 }

@@ -1,56 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInteraction : MonoBehaviour
-{
-    // private
-    // Start is called before the first frame update
-
+public class PlayerInteraction : MonoBehaviour {
     Obstacle obstacle;
-    //Interact interact;
-    //Automatic automatic;
-    void Start()
-    {
-        
-    }
+    Interact interact;
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Interacting();
     }
 
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col != null)
-        {
-            col.TryGetComponent<Obstacle>(out obstacle);
-            //col.TryGetComponent<Interact>(out interact);
-            //col.TryGetComponent<Automatic>(out automatic);
+    private void OnTriggerEnter(Collider col) {
+        if (col.TryGetComponent<Obstacle>(out obstacle))
+            obstacle.Work();
+        else if (col.TryGetComponent<Interact>(out interact)) {
+            Debug.Log("Get Interact");
         }
     }
 
-    private void OnTriggerExit(Collider col)
-    {
-        if (col != null)
-        {
-
-             obstacle = null;
-             //interact = null;
-             //automatic = null; 
-        }
+    private void OnTriggerExit(Collider col) {
+        if (obstacle != null)
+            obstacle = null;
+        else if (interact != null)
+            interact = null;
     }
 
-    private void Interacting()
-    {
-        if(Input.GetKey(KeyCode.E))
-        {
-            if(obstacle !=null)
-            {
-                obstacle.Work();
+    private void Interacting() {
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (interact != null) {
+                interact.Work();
             }
+        }
+        else if (Input.GetKeyUp(KeyCode.E)) {
+            if (interact != null) {
 
+            }
         }
     }
+
 }

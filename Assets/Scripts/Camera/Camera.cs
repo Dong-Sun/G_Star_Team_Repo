@@ -10,7 +10,8 @@ public class Camera : MonoBehaviour {
     [SerializeField] protected float aroundCycle = 1f;            // 한 바퀴 돌리는데 걸리는 시간
     protected Dir direction = Dir.ForWard;              // 돌린 후 보고있는 면을 담는 변수
     protected Dir lastDirection;                        // 돌리기 직전 방향을 담는 변수
-    protected bool isRotate = true;
+    protected float myDeletaTime = 0.004f;              // 카메라 돌릴 때 반복하는 횟수를 조절
+    protected bool isRotate = true;                     // 한번씩만 돌아갈 수 있게 제어 해주는 변수
 
     protected int[] initAngle = new int[] { 0, 90, 180, -90 };  // 돌리면서 발생하는 각 오차를 없애기 위한 배열
     protected Vector3[] initVector = new Vector3[] {            // 돌리면서 발생하는 좌표 오차를 없애기 위한 벡터

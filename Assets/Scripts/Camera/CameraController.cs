@@ -31,7 +31,6 @@ public class CameraController : Camera {
                 direction = Dir.Right;
             Rotate(Dir.Right);
         }
-        Debug.Log(Time.deltaTime);
     }
 
     void Rotate(Dir dir) {

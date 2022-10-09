@@ -109,7 +109,7 @@ NavMeshSettings:
     agentRadius: 0.3
     agentHeight: 1
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.15
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -3521,7 +3521,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 453603140}
-  - component: {fileID: 453603139}
   - component: {fileID: 453603144}
   - component: {fileID: 453603138}
   - component: {fileID: 453603143}
@@ -3550,19 +3549,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &453603139
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453603137}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.96, z: 0.6}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &453603140
 Transform:
   m_ObjectHideFlags: 0
@@ -3604,10 +3590,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 453603137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5710c32886942124086054b748c4132e, type: 3}
+  m_Script: {fileID: 11500000, guid: 46eb04de6dbc90247a4f2a8a9b6ea3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Moving_Speed: 3
+  Moving_Speed: 10
 --- !u!195 &453603143
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3641,7 +3627,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.96, z: 0.6}
+  m_Size: {x: 0.6, y: 0.96, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &460795397
 PrefabInstance:
@@ -9286,6 +9272,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 5621626859471320488, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419539225404232071, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
@@ -9790,7 +9786,7 @@ PrefabInstance:
     - target: {fileID: 6215553940624383342, guid: c7fa8fd966d8c4192a4557f0bf0f1aeb,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6215553940624383342, guid: c7fa8fd966d8c4192a4557f0bf0f1aeb,
         type: 3}

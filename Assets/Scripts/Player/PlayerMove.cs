@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour {
     private bool Can_Move;
     private Vector3 Target_Position;
     private Transform Look_Dir;
-    private NavMeshAgent Player_NavmeshAgent;
+    private NavMeshAgent navMeshAgent;
 
     [SerializeField] private int Moving_Speed = 3;
     // Start is called before the first frame update
@@ -18,7 +18,8 @@ public class PlayerMove : MonoBehaviour {
         Can_Move = true;
         Target_Position = this.transform.position;
         Look_Dir = transform.GetChild(1).transform;
-        Player_NavmeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        
         //StartCoroutine(Staying_Position());
     }
 
@@ -69,11 +70,17 @@ public class PlayerMove : MonoBehaviour {
 
     private void Player_Moving()//실제 움직임 함수
     {
-        Player_NavmeshAgent.SetDestination(Target_Position);
+        navMeshAgent.SetDestination(Target_Position);
         transform.GetChild(0).LookAt(Look_Dir);
-        if ((Target_Position - transform.position).magnitude < 0.07f) {
-            this.transform.position = Target_Position;
-            Can_Move = true;
+        Debug.Log(Target_Position);
+        if (Can_Move == false)
+        {
+            if (Mathf.Sqrt(Mathf.Pow(Target_Position.x - this.transform.position.x, 2) + Mathf.Pow(Target_Position.z - this.transform.position.z, 2)) < 0.05f)
+            {
+                Target_Position = Target_Position - Vector3.up * (Target_Position.y - this.transform.position.y);
+                this.transform.position = Target_Position;
+                Can_Move = true;
+            }
         }
     }
 

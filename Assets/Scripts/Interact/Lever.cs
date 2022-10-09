@@ -5,8 +5,9 @@ using UnityEngine;
 /// </summary>
 public class Lever : MonoBehaviour, Interact {
     [SerializeField] GameObject rotateField;        // 돌려줄 오브젝트
+    [SerializeField] GameObject stick;              // 레버 스틱
     [SerializeField] float rotateAngle = 90f;       // 한번에 돌아가게 될 각도
-    float timer = 0f;                               // 시간 체크를 위한 임의의 타이머 변수
+    float timer = 0f;                               // rotateField 오브젝트 돌리는 시간 체크를 위한 임의의 타이머 변수
     float temp;
     bool isRotate = false;                          // 플레이어가 상호작용을 통해서 true로 변환 시키면 
     Vector3 rotating = new Vector3(0, 1f, 0);

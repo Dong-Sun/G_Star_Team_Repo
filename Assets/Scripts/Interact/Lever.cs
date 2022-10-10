@@ -7,26 +7,42 @@ public class Lever : MonoBehaviour, Interact {
     [SerializeField] GameObject rotateField;        // 돌려줄 오브젝트
     [SerializeField] GameObject stick;              // 레버 스틱
     [SerializeField] float rotateAngle = 90f;       // 한번에 돌아가게 될 각도
-    float timer = 0f;                               // rotateField 오브젝트 돌리는 시간 체크를 위한 임의의 타이머 변수
-    float temp;
-    bool isRotate = false;                          // 플레이어가 상호작용을 통해서 true로 변환 시키면 
-    Vector3 rotating = new Vector3(0, 1f, 0);
+    [SerializeField] float stickSpeed = 1f;         // 스틱 당기는 속도
+    [SerializeField] float fieldSpeed = 1f;         // 필드 돌리는 속도
+    float stickTimer = 0f;                          // stick 오브젝트 돌리는 시간 체크를 위한 임의의 타이머 변수
+    float fieldTimer = 0f;                          // rotateField 오브젝트 돌리는 시간 체크를 위한 임의의 타이머 변수
+    bool switching = true;                          // 상호작용 시, 레버를 당기는 것과 미는 것을 구분지어주는 변수
+    bool isRotate = false;                          // 플레이어가 상호작용을 통해서 true로 변환 시키면 필드 회전
+
     void Update() {
-        Rotating();
+        if (isRotate) {
+            PullStick();
+            if (stickTimer >= 1f)
+                Rotating();
+        }
+    }
+    private void PullStick() {
+        stickTimer += Time.deltaTime * stickSpeed;
+        if (switching)
+            stick.transform.rotation
+                = Quaternion.Slerp(Quaternion.Euler(-30f, 0f, 0f), Quaternion.Euler(30f, 0f, 0f), stickTimer);
+        else
+            stick.transform.rotation
+                = Quaternion.Slerp(Quaternion.Euler(-30f, 0f, 0f), Quaternion.Euler(30f, 0f, 0f), 1f - stickTimer);
     }
     private void Rotating() {
-        if (isRotate) {
-            timer += Time.deltaTime;
-            rotateField.transform.Rotate(rotating * rotateAngle * Time.deltaTime);
-            if (timer >= 1f) {
-                temp = Mathf.Round(rotateField.transform.eulerAngles.y);
-                if (temp > 270f) temp = 0f;
-                rotateField.transform.eulerAngles
-                    = new Vector3(0f, Mathf.Clamp(temp, 0f, 90f), 0f);
-                rotateAngle = -rotateAngle;
-                isRotate = false;
-                timer = 0f;
-            }
+        fieldTimer += Time.deltaTime * fieldSpeed;
+        if (switching)
+            rotateField.transform.rotation
+                = Quaternion.Slerp(Quaternion.Euler(0f, 0f, 0f), Quaternion.Euler(0f, 90f, 0f), fieldTimer);
+        else
+            rotateField.transform.rotation
+                = Quaternion.Slerp(Quaternion.Euler(0f, 0f, 0f), Quaternion.Euler(0f, 90f, 0f), 1 - fieldTimer);
+        if (fieldTimer >= 1f) {
+            isRotate = false;
+            fieldTimer = 0f;
+            stickTimer = 0f;
+            switching = !switching;
         }
     }
     public void Work() {

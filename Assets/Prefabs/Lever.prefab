@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateField: {fileID: 0}
+  stick: {fileID: 685687634586822262}
   rotateAngle: 90
 --- !u!1 &6854451360296488755
 GameObject:

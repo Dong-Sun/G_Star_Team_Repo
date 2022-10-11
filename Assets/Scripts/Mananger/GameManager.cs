@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Dir Game_Dir;
     [HideInInspector] public bool Game_Stop = false;
     [HideInInspector] public bool Get_Stage_Key = false;
+    [HideInInspector] public bool Can_Move = true;
 
     private void Awake()
     {
@@ -16,8 +17,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    {
-
+    { 
         Initialize_GameData();
     }
 

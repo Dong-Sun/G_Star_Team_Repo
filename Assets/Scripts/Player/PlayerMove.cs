@@ -5,25 +5,28 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
 
     private bool Start_Coroutine;
-    private Vector3 Target_Position;
+    public Vector3 Target_Position;
     private Transform Look_Dir;
     private CharacterController Player_Character_Controller;
+    private Vector3 Start_Moving_Target;
 
     [SerializeField] private int Moving_Speed = 3;
     // Start is called before the first frame update
 
 
     private void Start() {
-        PlayerManager.Player_Manager_Instance.Can_Move = true;
         Start_Coroutine = true;
-        Target_Position = this.transform.position;
         Look_Dir = transform.GetChild(1).transform;
+        Target_Position = this.transform.position;
         Player_Character_Controller = GetComponent<CharacterController>();
+        Invoke("Start_Moving", 3f);
         //StartCoroutine(Staying_Position());
+
     }
 
     // Update is called once per frame
     private void Update() {
+        if(GameManager.Game_Manager_Instance.Game_Stop==false)
         Change_Target_Position(Change_Dir_To_Position());//이동할 위치 지정함수와 게임 진행 방향에 따른 방향 변경 설정
         Player_Moving(); //실제 움직임 함수
         if (PlayerManager.Player_Manager_Instance.Can_Move == true)
@@ -60,12 +63,22 @@ public class PlayerMove : MonoBehaviour {
                     Target_Position += Moving_Dir;
                     PlayerManager.Player_Manager_Instance.Can_Move = false;
                 }
+                else
+                {
+                    PlayerManager.Player_Manager_Instance.player_animator_parameter = Player_Animator_Parameter.Idle;
+                    PlayerManager.Player_Manager_Instance.Player_animator.SetInteger("animator", (int)PlayerManager.Player_Manager_Instance.player_animator_parameter);
+                }
             }
             else if (Input.GetKey(KeyCode.LeftArrow)) {
                 Look_Dir.localPosition = -Moving_Dir+Vector3.down * 0.48f;
                 if (!Dont_Moving(-Moving_Dir)) {
                     Target_Position -= Moving_Dir;
                     PlayerManager.Player_Manager_Instance.Can_Move = false;
+                }
+                else
+                {
+                    PlayerManager.Player_Manager_Instance.player_animator_parameter = Player_Animator_Parameter.Idle;
+                    PlayerManager.Player_Manager_Instance.Player_animator.SetInteger("animator", (int)PlayerManager.Player_Manager_Instance.player_animator_parameter);
                 }
             }
         }
@@ -89,13 +102,18 @@ public class PlayerMove : MonoBehaviour {
                 Player_Character_Controller.enabled = true;
             }
 
-            if (Mathf.Sqrt(Mathf.Pow(Target_Position.x - this.transform.position.x, 2) + Mathf.Pow(Target_Position.z - this.transform.position.z, 2)) < 0.1f)
+            if (Mathf.Sqrt(Mathf.Pow(Target_Position.x - this.transform.position.x, 2) + Mathf.Pow(Target_Position.z - this.transform.position.z, 2)) < 0.05f)
             {
                 Target_Position = Target_Position - Vector3.up * (Target_Position.y - this.transform.position.y);
                 Player_Character_Controller.enabled = false;
                 this.transform.position = Target_Position;
                 Player_Character_Controller.enabled = true;
                 PlayerManager.Player_Manager_Instance.Can_Move = true;
+                if(!(Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.RightArrow)))
+                {
+                    PlayerManager.Player_Manager_Instance.player_animator_parameter = Player_Animator_Parameter.Idle;
+                    PlayerManager.Player_Manager_Instance.Player_animator.SetInteger("animator", (int)PlayerManager.Player_Manager_Instance.player_animator_parameter);
+                }
             }
             else
             {
@@ -105,6 +123,8 @@ public class PlayerMove : MonoBehaviour {
                     Start_Coroutine = true;
                 }
                 Player_Character_Controller.Move((Target_Position - this.transform.position).normalized * Time.deltaTime*Moving_Speed);
+                PlayerManager.Player_Manager_Instance.player_animator_parameter = Player_Animator_Parameter.Run;
+                PlayerManager.Player_Manager_Instance.Player_animator.SetInteger("animator", (int)PlayerManager.Player_Manager_Instance.player_animator_parameter);
             }
         }
         else
@@ -151,6 +171,13 @@ public class PlayerMove : MonoBehaviour {
         return Physics.Raycast(this.transform.position+Vector3.down*0.2f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3) ||
         !Physics.Raycast(this.transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
     }
+
+    void Start_Moving()
+    {
+        Target_Position += Vector3.right*2;
+        PlayerManager.Player_Manager_Instance.Can_Move = false;
+    }
+
 
     IEnumerator Staying_Position() {
 

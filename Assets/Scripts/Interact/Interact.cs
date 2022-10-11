@@ -1,5 +1,6 @@
 using System;
 
-interface Interact {
+interface Interact
+{
     void Work();
 }

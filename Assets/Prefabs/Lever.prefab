@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4264965602249430078}
   m_Layer: 0
   m_Name: Lever
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,7 +185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateField: {fileID: 0}
+  stick: {fileID: 685687634586822262}
   rotateAngle: 90
+  stickSpeed: 3
+  fieldSpeed: 3
 --- !u!1 &6854451360296488755
 GameObject:
   m_ObjectHideFlags: 0

@@ -6360,6 +6360,7 @@ GameObject:
   - component: {fileID: 515585238}
   - component: {fileID: 515585241}
   - component: {fileID: 515585242}
+  - component: {fileID: 515585243}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6478,6 +6479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee3180bcec1b8a41a0d9227e65a4969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
+  isRotate: 1
   center: {fileID: 389252391}
   walls:
   - {fileID: 877278997}
@@ -6485,6 +6488,22 @@ MonoBehaviour:
   - {fileID: 1567398646}
   - {fileID: 1273025103}
   aroundCycle: 3
+--- !u!114 &515585243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515585237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853b7649e866d114d81554e0acb138b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
+  isRotate: 1
+  shakeAmount: 0.1
+  isShake: 0
 --- !u!1001 &530070835
 PrefabInstance:
   m_ObjectHideFlags: 0

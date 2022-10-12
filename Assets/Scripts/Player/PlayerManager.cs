@@ -13,17 +13,15 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public int Block_Size = 1;
     [HideInInspector] public float Floor_Height = 0.5f;
     [HideInInspector] public bool Can_Move = false;
-    [HideInInspector] public Animator Player_animator;
-    [HideInInspector] public Player_Animator_Parameter player_animator_parameter;
+    [HideInInspector] public PlayerAnimatorController playeranimatorcontroller;
 
 
     public static PlayerManager Player_Manager_Instance;
     // Start is called before the first frame update
     void Start()
     {
+        playeranimatorcontroller = transform.GetChild(0).GetComponent<PlayerAnimatorController>();
         SingleTon();
-        Player_animator = this.transform.GetChild(0).GetComponent<Animator>();
-        player_animator_parameter = Player_Animator_Parameter.Idle;
     }
 
     // Update is called once per frame

@@ -9,11 +9,12 @@ using DataStruct;
 public class PlayerManager : MonoBehaviour
 {
 
-    [HideInInspector] public float Character_Height = 1f;
+    [HideInInspector] public float Character_Height = 1;
     [HideInInspector] public int Block_Size = 1;
     [HideInInspector] public float Floor_Height = 0.5f;
     [HideInInspector] public bool Can_Move = false;
     [HideInInspector] public PlayerAnimatorController playeranimatorcontroller;
+    [HideInInspector] public bool Player_Die = false;
 
 
     public static PlayerManager Player_Manager_Instance;

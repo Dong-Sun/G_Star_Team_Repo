@@ -17,10 +17,11 @@ public class PlayerMove : MonoBehaviour {
     static RaycastHit hit;
 
     private void Start() {
+
         Look_Dir = transform.GetChild(1).transform.position;
         Target_Position = this.transform.position;
         Player_Character_Controller = GetComponent<CharacterController>();
-        Invoke("Start_Moving", 3f);
+        //Invoke("Start_Moving", 3f);
     }
 
     // Update is called once per frame
@@ -145,7 +146,7 @@ public class PlayerMove : MonoBehaviour {
     private bool Target_Position_Change(Vector3 vec) //움직일 위치 움직이는 함수
     {
 
-        Target_Position += vec * 2;
+        Target_Position += vec;
         return false;
     }
 

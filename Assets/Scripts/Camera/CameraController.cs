@@ -18,30 +18,32 @@ public class CameraController : Camera {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.A) && isRotate) {      // 카메라 회전가능 상태 + A키 입력
-            isRotate = false;                               // 입력을 잠궈줌
-            lastDirection = direction;                      // 돌리기 전 방향을 저장해둠
-            if (direction < Dir.Right)                      // Enum범위를 벗어나는 것을 방지하기 위한 조건문
-                direction = direction + 1;
-            else
-                direction = Dir.ForWard;
-            Rotate(Dir.Left);                               // 사전준비 완료 후 Rotate함수 실행
-        }
-        else if (Input.GetKeyDown(KeyCode.D) && isRotate) { // D키 입력, 조건문 내부 설명은 위와 같음
-            isRotate = false;
-            lastDirection = direction;
-            if (direction > Dir.ForWard)
-                direction = direction - 1;
-            else
-                direction = Dir.Right;
-            Rotate(Dir.Right);
+        if (PlayerManager.Player_Manager_Instance.Can_Move == true) {   // 플레이어가 이동 중 일때는 카메라 회전에 제한을 둠
+            if (Input.GetKeyDown(KeyCode.A) && isRotate) {      // 카메라 회전가능 상태 + A키 입력
+                isRotate = false;                               // 입력을 잠궈줌
+                lastDirection = direction;                      // 돌리기 전 방향을 저장해둠
+                if (direction < Dir.Right)                      // Enum범위를 벗어나는 것을 방지하기 위한 조건문
+                    direction = direction + 1;
+                else
+                    direction = Dir.ForWard;
+                Rotate(Dir.Left);                               // 사전준비 완료 후 Rotate함수 실행
+            }
+            else if (Input.GetKeyDown(KeyCode.D) && isRotate) { // D키 입력, 조건문 내부 설명은 위와 같음
+                isRotate = false;
+                lastDirection = direction;
+                if (direction > Dir.ForWard)
+                    direction = direction - 1;
+                else
+                    direction = Dir.Right;
+                Rotate(Dir.Right);
+            }
         }
     }
 
     void Rotate(Dir dir) {
         Time.timeScale = 0f;                                        // 카메라 동작 중에는 시간이 멈춰있어야 함
         GameManager.Game_Manager_Instance.Game_Dir = direction;     // 방향값을 지정 (GameManager에도 방향지정 함수가 있기에 회의 필요)
-        StartCoroutine(RotateCamera(dir));                                // 카메라의 회전과 벽의 활성화 여부를 담당하는 코루틴
+        StartCoroutine(RotateCamera(dir));                          // 카메라의 회전과 벽의 활성화 여부를 담당하는 코루틴
     }
 
     IEnumerator RotateCamera(Dir dirAround) {     // dirAround = 돌아가는 방향

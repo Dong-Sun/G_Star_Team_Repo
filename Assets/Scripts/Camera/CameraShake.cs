@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraShake : Camera
-{
+public class CameraShake : Camera {
     [SerializeField] float shakeAmount;
     [SerializeField] bool isShake = false;
     CameraController cameraController;
@@ -12,9 +9,7 @@ public class CameraShake : Camera
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(cameraController.isRotate);
+    void Update() {
         if (cameraController.isRotate) {
             if (isShake) {
                 transform.localPosition = initVector[(int)cameraController.direction] + Random.insideUnitSphere * shakeAmount;

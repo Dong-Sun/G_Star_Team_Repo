@@ -20,6 +20,7 @@ public class Fade : MonoBehaviour{
     {
         time = animTime;
         Fade_out = true;
+        SceneLoadManager.scene_load_manager_instance.Fade_UI_Control = this;
     }
 
     private void Update()
@@ -39,7 +40,6 @@ public class Fade : MonoBehaviour{
     }
     private bool PlayFadeControl()
     {
-        Debug.Log(time / animTime);
         color.a = Mathf.Lerp(0, 1, time / animTime);
         if (Fade_out == true && time <0)
         {

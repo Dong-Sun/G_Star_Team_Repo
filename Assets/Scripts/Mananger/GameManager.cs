@@ -19,8 +19,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    { 
-        Initialize_GameData();
+    {
+        invoke_Initialize_GameData(0);
     }
 
 
@@ -43,19 +43,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Initialize_GameData()
+    public void Rapping_invoke(int time)
     {
-        Game_Dir = Dir.ForWard;
+        StartCoroutine(invoke_Initialize_GameData(time));
     }
 
-    public void Player_Die()
+    private IEnumerator invoke_Initialize_GameData(int time)
     {
-        
-        PlayerManager.Player_Manager_Instance.Player_Die = true;
-        Game_Stop = true;
-        PlayerManager.Player_Manager_Instance.playeranimatorcontroller.Player_Animator_Parameter_Control();
-        SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad();
+        yield return new WaitForSeconds(time);
+
+        Game_Dir = Dir.ForWard;
+        Game_Stop = false;
+        Get_Stage_Key = false;
+        PlayerManager.Player_Manager_Instance.Can_Move = true;
     }
+
 
 
    

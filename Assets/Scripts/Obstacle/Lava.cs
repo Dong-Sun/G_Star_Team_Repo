@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
-    GameObject g;
     private void OnTriggerEnter(Collider other) {
-        g = other.gameObject;
-        if (g.GetComponent<HoldingBlock>()) {
-            g.transform.SetParent(null);
+        if (other.TryGetComponent<HoldingBlock>(out HoldingBlock holdBlock)==true) {
+            holdBlock.transform.SetParent(null);
+            Destroy(this);
         }
-        else if (TryGetComponent<PlayerManager>(out PlayerManager playermanger) == true) {
-            GameManager.Game_Manager_Instance.Player_Die();
+        else if (other.TryGetComponent<PlayerManager>(out PlayerManager playermanger) == true) {
+            if (GameManager.Game_Manager_Instance.Game_Stop ==false)
+                playermanger.Player_Dying();
         }
     }
 }

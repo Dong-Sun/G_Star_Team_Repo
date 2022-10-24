@@ -17,11 +17,10 @@ public class PlayerMove : MonoBehaviour {
     static RaycastHit hit;
 
     private void Start() {
-
         Look_Dir = transform.GetChild(1).gameObject;
         Target_Position = this.transform.position;
         Player_Character_Controller = GetComponent<CharacterController>();
-        PlayerManager.Player_Manager_Instance.Can_Move = false;
+        GameManager.Game_Manager_Instance.Game_Stop = true;
         Invoke("Start_Moving", 2f);
         
     }
@@ -66,7 +65,7 @@ public class PlayerMove : MonoBehaviour {
         if (PlayerManager.Player_Manager_Instance.Can_Move == true) {
             PlayerManager.Player_Manager_Instance.input = Look_Dir_Arrow();
             if ((PlayerManager.Player_Manager_Instance.input != 0)) {
-                Look_Dir.transform.localPosition = PlayerManager.Player_Manager_Instance.input * Moving_Dir+Vector3.down*0.45f;
+                Look_Dir.transform.localPosition = PlayerManager.Player_Manager_Instance.input * Moving_Dir+Vector3.down*0.48f;
                 if (!Dont_Moving(PlayerManager.Player_Manager_Instance.input *Moving_Dir)) {
                     Target_Position += PlayerManager.Player_Manager_Instance.input * Moving_Dir;
                     Is_There_Stair(PlayerManager.Player_Manager_Instance.input * Moving_Dir);
@@ -116,6 +115,7 @@ public class PlayerMove : MonoBehaviour {
             else if(Look_Dir.transform.localPosition.z != 0)
                 Target_Position += (Vector3.forward * Look_Dir.transform.localPosition.z).normalized * 2;
             PlayerManager.Player_Manager_Instance.Can_Move = false;
+            GameManager.Game_Manager_Instance.Game_Stop = false;
             StartCoroutine(Fix_Player_Position());
         }
     }
@@ -135,6 +135,7 @@ public class PlayerMove : MonoBehaviour {
         this.transform.position = vec;
         Player_Character_Controller.enabled = true;
     }
+    
 
 
     private void Target_Position_Change(Vector3 vec) //움직일 위치 움직이는 함수
@@ -149,6 +150,7 @@ public class PlayerMove : MonoBehaviour {
             if (hit.collider.tag == "Stair") {
                 return true;
             }
+
         }
         return false;
     }

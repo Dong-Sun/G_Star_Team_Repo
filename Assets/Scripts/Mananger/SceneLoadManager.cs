@@ -23,18 +23,15 @@ public class SceneLoadManager :MonoBehaviour
 
     public void NextSceneLoad()
     {
-        Fade_UI_Control.Fade_out=true;
+        Fade_UI_Control.Fade_in=true;
         if (! (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCount-1))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void CurrentSceneLoad()
     {
-        Fade_UI_Control.Fade_out = true;
+        Fade_UI_Control.Fade_in = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void SceneStart()
-    {
-        Fade_UI_Control.Fade_in=true;
-    }
+
 }

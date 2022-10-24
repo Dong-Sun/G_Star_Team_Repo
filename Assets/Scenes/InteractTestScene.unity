@@ -13009,7 +13009,6 @@ MonoBehaviour:
   Game_Dir: 0
   Game_Stop: 0
   Get_Stage_Key: 0
-  Can_Move: 1
 --- !u!4 &1390436129
 Transform:
   m_ObjectHideFlags: 0
@@ -15469,7 +15468,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1603335762
 PrefabInstance:
@@ -16256,7 +16255,7 @@ PrefabInstance:
     - target: {fileID: 6922686994970610789, guid: 31290a2dd5e0eec4e830cfe3ec3f9a56,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6922686994970610789, guid: 31290a2dd5e0eec4e830cfe3ec3f9a56,
         type: 3}

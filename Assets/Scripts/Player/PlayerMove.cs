@@ -104,11 +104,23 @@ public class PlayerMove : MonoBehaviour {
     }
 
     private bool Dont_Moving(Vector3 Moving_Dir) { //계단이 있는지 , 2층에 있어서 움직일 수 없는지 ,높이에 관련된 레이캐스트, 높이 조절함수
-        if(PlayerManager.Player_Manager_Instance.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3) ||
+        if (Razer(transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f)) // 진행 방향쪽에 계단이 있는지 확인(위로 가느냐)
+            return Target_Position_Change(Vector3.up * (PlayerManager.Player_Manager_Instance.Floor_Height * 0.5f)); //이동할 위치를 변경하고 이동값 보내기
+        if (Razer(transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Block_Size + PlayerManager.Player_Manager_Instance.Character_Height * 0.5f)) //진행 방향쪽에 계단이 있는지 확인(아래로 가느냐)
+            return Target_Position_Change(Vector3.down * PlayerManager.Player_Manager_Instance.Floor_Height * 0.5f); //아래로 내려가기
+        if (Razer(transform.position, Vector3.down, PlayerManager.Player_Manager_Instance.Block_Size)) //내 아래로 레이저를 쏜다.(계단이 있는지 파악)
+        {
+            Physics.Raycast(transform.position + Moving_Dir, Vector3.down, out hit, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f); // 앞에 내 발까지만 레이를 쏴서(높이 파악)
+            if (hit.collider != null)
+                return Target_Position_Change(Vector3.up * (PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + hit.point.y - Target_Position.y)); // 위로
+            else
+                return Target_Position_Change(Vector3.up * (hit.point.y - Target_Position.y + PlayerManager.Player_Manager_Instance.Block_Size * 0.5f + PlayerManager.Player_Manager_Instance.Character_Height * 0.5f)); //아래로
+        }
+        if (PlayerManager.Player_Manager_Instance.Holding_Block)
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3|2) ||
             !Physics.Raycast(this.transform.position + Moving_Dir*2, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
         else
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3) ||
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3|2) ||
             !Physics.Raycast(this.transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
 
     }
@@ -143,9 +155,10 @@ public class PlayerMove : MonoBehaviour {
     
 
 
-    private void Target_Position_Change(Vector3 vec) //움직일 위치 움직이는 함수
+    private bool Target_Position_Change(Vector3 vec) //움직일 위치 움직이는 함수
     {
         Target_Position += vec;
+        return false;
     }
 
     private bool Razer(Vector3 origin, Vector3 TargetVec, float distance) //레이를 쐇을때  콜리더가 있는지 없는지 
@@ -178,17 +191,6 @@ public class PlayerMove : MonoBehaviour {
 
     void Is_There_Stair(Vector3 Moving_Dir) //계단의 위치와 방향에 따라 움직이는 방향 조절
     {
-        if (Razer(transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f)) // 진행 방향쪽에 계단이 있는지 확인(위로 가느냐)
-            Target_Position_Change(Vector3.up * (PlayerManager.Player_Manager_Instance.Floor_Height * 0.5f)); //이동할 위치를 변경하고 이동값 보내기
-        if (Razer(transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Block_Size + PlayerManager.Player_Manager_Instance.Character_Height * 0.5f)) //진행 방향쪽에 계단이 있는지 확인(아래로 가느냐)
-            Target_Position_Change(Vector3.down * PlayerManager.Player_Manager_Instance.Floor_Height * 0.5f); //아래로 내려가기
-        if (Razer(transform.position, Vector3.down, PlayerManager.Player_Manager_Instance.Block_Size)) //내 아래로 레이저를 쏜다.(계단이 있는지 파악)
-        {
-            Physics.Raycast(transform.position + Moving_Dir, Vector3.down, out hit, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f); // 앞에 내 발까지만 레이를 쏴서(높이 파악)
-            if (hit.collider != null)
-                Target_Position_Change(Vector3.up * (PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + hit.point.y - Target_Position.y)); // 위로
-            else
-                Target_Position_Change(Vector3.up * (hit.point.y - Target_Position.y + PlayerManager.Player_Manager_Instance.Block_Size * 0.5f + PlayerManager.Player_Manager_Instance.Character_Height * 0.5f)); //아래로
-        }
+        
     }
 }

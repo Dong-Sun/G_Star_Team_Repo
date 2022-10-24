@@ -25,7 +25,7 @@ public class SceneLoadManager :MonoBehaviour
     public void NextSceneLoad()
     {
         Fade_UI_Control.Fade_in=true;
-        if (! (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCount-1))
+        if (! (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1))
             StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1,3));
     }
     public void CurrentSceneLoad()

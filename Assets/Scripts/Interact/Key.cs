@@ -7,13 +7,18 @@ public class Key : MonoBehaviour, Interact {
     public bool GetKey {
         get {
             return getKey;
+
+           
         }
     }
+
+    
     public void Work() {
         if (!GameManager.Game_Manager_Instance.Get_Stage_Key) {
             GameManager.Game_Manager_Instance.Get_Stage_Key = true;
             getKey = true;
-            gameObject.SetActive(false);
+            this.gameObject.transform.position += Vector3.down * 2;
+            Destroy(this.gameObject, 3);
         }
     }
 }

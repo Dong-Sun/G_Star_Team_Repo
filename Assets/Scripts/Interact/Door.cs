@@ -8,6 +8,7 @@ public class Door : MonoBehaviour
     private void Start()
     {
         DoorAniamtor=GetComponent<Animator>();
+        DoorAniamtor.SetInteger("animator_parameter", 0);
     }
 
     public void Closed_Door_Animation()
@@ -18,7 +19,6 @@ public class Door : MonoBehaviour
     public void Open_Door_Aniamtion()
     {
         DoorAniamtor.SetInteger("animator_parameter", 1);
-        Invoke("Close_Door_Animation", 3);
     }
 
     public void Close_Door_Animation()

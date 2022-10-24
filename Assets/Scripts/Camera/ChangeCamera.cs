@@ -26,12 +26,14 @@ public class ChangeCamera : MonoBehaviour {
         main.SetActive(true);
         start.SetActive(false);
         end.SetActive(false);
+        GameManager.Game_Manager_Instance.Game_Stop = false;
     }
 
     public void ChangeToStart() {
         main.SetActive(false);
         start.SetActive(true);
         end.SetActive(false);
+        GameManager.Game_Manager_Instance.Game_Stop = true;
     }
 
     public void ChangeToEnd() {

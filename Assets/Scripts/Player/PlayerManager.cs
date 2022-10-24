@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public bool Player_Die = false;
     [HideInInspector] public bool Holding_Block;
     [HideInInspector] public int input;
+    [HideInInspector] public bool in_motion;
 
     public static PlayerManager Player_Manager_Instance;
     // Start is called before the first frame update

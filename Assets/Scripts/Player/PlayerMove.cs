@@ -23,7 +23,7 @@ public class PlayerMove : MonoBehaviour {
         Player_Character_Controller = GetComponent<CharacterController>();
         PlayerManager.Player_Manager_Instance.Can_Move = false;
         Invoke("Start_Moving", 2f);
-        StartCoroutine(Fix_Player_Position());
+        
     }
 
     // Update is called once per frame
@@ -73,6 +73,7 @@ public class PlayerMove : MonoBehaviour {
                     PlayerManager.Player_Manager_Instance.Can_Move = false;
                 }
                 else {
+                    PlayerManager.Player_Manager_Instance.in_motion = false;
                     PlayerManager.Player_Manager_Instance.playeranimatorcontroller.Player_Animator_Parameter_Control();
                 }
             }
@@ -88,13 +89,15 @@ public class PlayerMove : MonoBehaviour {
                 Target_Position = Target_Position - Vector3.up * (Target_Position.y - this.transform.position.y);
                 Enable_Player_Character_Controller_To_Fix_Player_Position(Target_Position);
                 if(GameManager.Game_Manager_Instance.Game_Stop ==false)
-                    PlayerManager.Player_Manager_Instance.Can_Move = true;  
+                    PlayerManager.Player_Manager_Instance.Can_Move = true;
                 if ((PlayerManager.Player_Manager_Instance.input=Look_Dir_Arrow()) == 0) {
+                    PlayerManager.Player_Manager_Instance.in_motion = false;
                     PlayerManager.Player_Manager_Instance.playeranimatorcontroller.Player_Animator_Parameter_Control();
                 }
             }
             else {
                 Player_Character_Controller.Move((Target_Position - this.transform.position).normalized * Time.deltaTime * Moving_Speed);
+                PlayerManager.Player_Manager_Instance.in_motion = true;
                 PlayerManager.Player_Manager_Instance.playeranimatorcontroller.Player_Animator_Parameter_Control();
             }
         }
@@ -113,6 +116,7 @@ public class PlayerMove : MonoBehaviour {
             else if(Look_Dir.transform.localPosition.z != 0)
                 Target_Position += (Vector3.forward * Look_Dir.transform.localPosition.z).normalized * 2;
             PlayerManager.Player_Manager_Instance.Can_Move = false;
+            StartCoroutine(Fix_Player_Position());
         }
     }
 
@@ -153,6 +157,7 @@ public class PlayerMove : MonoBehaviour {
     {
         while (true)
         {
+            yield return new WaitForSeconds(1f);
             if (GameManager.Game_Manager_Instance.Game_Dir == Dir.BackWard || GameManager.Game_Manager_Instance.Game_Dir == Dir.ForWard) //진행 방향이 앞뒤일때
             {
                 Enable_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.forward * (Target_Position.z - this.transform.position.z));
@@ -161,11 +166,10 @@ public class PlayerMove : MonoBehaviour {
             {
                 Enable_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.right * (Target_Position.x - this.transform.position.x));
             }
-            yield return new WaitForSeconds(1f);
         }
     }
 
-    void Is_There_Stair(Vector3 Moving_Dir) //계단의 위치와 방향에 따라 
+    void Is_There_Stair(Vector3 Moving_Dir) //계단의 위치와 방향에 따라 움직이는 방향 조절
     {
         if (Razer(transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f)) // 진행 방향쪽에 계단이 있는지 확인(위로 가느냐)
             Target_Position_Change(Vector3.up * (PlayerManager.Player_Manager_Instance.Floor_Height * 0.5f)); //이동할 위치를 변경하고 이동값 보내기

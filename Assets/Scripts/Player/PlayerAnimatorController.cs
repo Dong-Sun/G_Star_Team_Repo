@@ -31,20 +31,25 @@ public class PlayerAnimatorController : MonoBehaviour
         }
         else if (PlayerManager.Player_Manager_Instance.Holding_Block == true)
         {
-            switch (PlayerManager.Player_Manager_Instance.input)
+            if (PlayerManager.Player_Manager_Instance.in_motion)
             {
-                case -1:
-                    Set_And_Play_Animation(Player_Animator_Parameter.Pull);
-                    return;
-                case 0:
-                    Set_And_Play_Animation(Player_Animator_Parameter.Block);
-                    return;
-                case 1:
-                    Set_And_Play_Animation(Player_Animator_Parameter.Push);
-                    return;
+                switch (PlayerManager.Player_Manager_Instance.input)
+                {
+                    case -1:
+                        Set_And_Play_Animation(Player_Animator_Parameter.Pull);
+                        return;
+                    case 1:
+                        Set_And_Play_Animation(Player_Animator_Parameter.Push);
+                        return;
+                }
+            }
+            else
+            {
+                Set_And_Play_Animation(Player_Animator_Parameter.Block);
+                return;
             }
         }
-        else if (PlayerManager.Player_Manager_Instance.input != 0)
+        else if (PlayerManager.Player_Manager_Instance.in_motion)
             Set_And_Play_Animation(Player_Animator_Parameter.Run);
         else
             Set_And_Play_Animation(Player_Animator_Parameter.Idle);

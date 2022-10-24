@@ -23,10 +23,6 @@ public class KeyMaster : MonoBehaviour
                 }
                 myKey.gameObject.SetActive(isActive);
             }
-            else {
-                myKey.transform.Rotate(Vector3.up * 30f * Time.deltaTime);
-            }
         }
-        
     }
 }

@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Dir Game_Dir;
     [HideInInspector] public bool Game_Stop = false;
     [HideInInspector] public bool Get_Stage_Key = false;
-    [HideInInspector] public bool Can_Move = true;
+
+
 
     private void Awake()
     {
@@ -44,6 +45,16 @@ public class GameManager : MonoBehaviour
     private void Initialize_GameData()
     {
         Game_Dir = Dir.ForWard;
+        SceneLoadManager.scene_load_manager_instance.SceneStart();
+    }
+
+    public void Player_Die()
+    {
+        
+        PlayerManager.Player_Manager_Instance.Player_Die = true;
+        PlayerManager.Player_Manager_Instance.playeranimatorcontroller.Player_Animator_Parameter_Control();
+        Game_Stop = true;
+        SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad();
     }
 
 

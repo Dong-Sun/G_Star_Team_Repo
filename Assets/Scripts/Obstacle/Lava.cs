@@ -10,8 +10,8 @@ public class Lava : MonoBehaviour
         if (g.GetComponent<HoldingBlock>()) {
             g.transform.SetParent(null);
         }
-        else if (g.GetComponent<PlayerMove>()) {
-            Debug.Log("용암에 빠졌어용");
+        else if (TryGetComponent<PlayerManager>(out PlayerManager playermanger) == true) {
+            GameManager.Game_Manager_Instance.Player_Die();
         }
     }
 }

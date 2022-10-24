@@ -1,5 +1,5 @@
 namespace DataStruct
 {
     public enum Dir { ForWard, Left, BackWard, Right }
-    public enum Player_Animator_Parameter {Idle,Run,Lever,Block,Die}
+    public enum Player_Animator_Parameter {Idle,Run,Lever,Die, Block, Push,Pull}
 }

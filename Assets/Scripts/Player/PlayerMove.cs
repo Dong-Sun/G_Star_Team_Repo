@@ -104,8 +104,13 @@ public class PlayerMove : MonoBehaviour {
     }
 
     private bool Dont_Moving(Vector3 Moving_Dir) { //계단이 있는지 , 2층에 있어서 움직일 수 없는지 ,높이에 관련된 레이캐스트, 높이 조절함수
-        return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3) ||
-        !Physics.Raycast(this.transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
+        if(PlayerManager.Player_Manager_Instance.Holding_Block)
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3) ||
+            !Physics.Raycast(this.transform.position + Moving_Dir*2, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
+        else
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 3) ||
+            !Physics.Raycast(this.transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
+
     }
 
     void Start_Moving() { //처음 시작할때 움직임(문을 박차고 나간다 던지)등을 위한 함수

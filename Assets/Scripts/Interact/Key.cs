@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Key : MonoBehaviour, Interact {
     bool getKey = false;
+    private void Update() {
+        transform.Rotate(Vector3.up * 60f * Time.deltaTime);
+    }
     public bool GetKey {
         get {
             return getKey;

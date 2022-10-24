@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
-public class Door : MonoBehaviour, Interact 
+public class Door : MonoBehaviour
 {
-    public void Work()
+    Animator DoorAniamtor;
+    private void Start()
     {
-        if (GameManager.Game_Manager_Instance.Get_Stage_Key)
-        {
-            this.GetComponent<Animator>().SetBool("Open_The_Door", true);
-            Debug.Log("Stage Clear");
-
-            //스크립트 분리
-            //ui 검은색으로
-            // 다음신으로 넘기기
-        }
+        DoorAniamtor=GetComponent<Animator>();
     }
 
-    private void Update()
+    public void Closed_Door_Animation()
     {
+        DoorAniamtor.SetInteger("animator_parameter", 0);
     }
+
+    public void Open_Door_Aniamtion()
+    {
+        DoorAniamtor.SetInteger("animator_parameter", 1);
+        Invoke("Close_Door_Animation", 3);
+    }
+
+    public void Close_Door_Animation()
+    {
+        DoorAniamtor.SetInteger("animator_parameter", 2);
+        Invoke("Closed_Door_Animation", 1);
+    }
+
 }

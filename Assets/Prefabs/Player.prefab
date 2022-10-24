@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3202602000113715695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -0.45, z: 0}
+  m_LocalPosition: {x: 1, y: -0.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121,7 +121,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.96, z: 0.6}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.04, z: 0}
 --- !u!143 &3202602000167864857
 CharacterController:
   m_ObjectHideFlags: 0
@@ -172,6 +172,9 @@ MonoBehaviour:
   Can_Move: 0
   playeranimatorcontroller: {fileID: 0}
   Player_Die: 0
+  Holding_Block: 0
+  input: 0
+  in_motion: 0
 --- !u!1001 &3202602000084289549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4109714994798658, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45
+      value: -0.48
       objectReference: {fileID: 0}
     - target: {fileID: 4109714994798658, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
       propertyPath: m_LocalPosition.z
@@ -269,6 +272,18 @@ Rigidbody:
   m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!114 &390532504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203703801730487681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 570d01a22990a324a8882552aef89a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8741317407614009440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

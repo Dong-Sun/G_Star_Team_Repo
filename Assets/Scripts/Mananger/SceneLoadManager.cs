@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,18 +24,20 @@ public class SceneLoadManager :MonoBehaviour
 
     public void NextSceneLoad()
     {
-        Fade_UI_Control.PlayFadeIn();
+        Fade_UI_Control.Fade_in=true;
         if (! (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCount-1))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1,3));
     }
     public void CurrentSceneLoad()
     {
-        Fade_UI_Control.PlayFadeIn();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Fade_UI_Control.Fade_in = true;
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex,3));
     }
 
-    public void SceneStart()
+    IEnumerator LoadScene(int buildIndex,int Time)
     {
-        Fade_UI_Control.PlayFadeOut();
+        yield return new WaitForSeconds(Time);
+        SceneManager.LoadScene(buildIndex);
+
     }
 }

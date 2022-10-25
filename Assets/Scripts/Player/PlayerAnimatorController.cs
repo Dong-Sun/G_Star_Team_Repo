@@ -31,9 +31,9 @@ public class PlayerAnimatorController : MonoBehaviour
         }
         else if (PlayerManager.Player_Manager_Instance.Holding_Block == true)
         {
-            if (PlayerManager.Player_Manager_Instance.in_motion)
+            if (PlayerManager.Player_Manager_Instance.In_Motion)
             {
-                switch (PlayerManager.Player_Manager_Instance.input)
+                switch (PlayerManager.Player_Manager_Instance.Input)
                 {
                     case -1:
                         Set_And_Play_Animation(Player_Animator_Parameter.Pull);
@@ -50,7 +50,7 @@ public class PlayerAnimatorController : MonoBehaviour
                 return;
             }
         }
-        else if (PlayerManager.Player_Manager_Instance.in_motion)
+        else if (PlayerManager.Player_Manager_Instance.In_Motion)
             Set_And_Play_Animation(Player_Animator_Parameter.Run);
         else
             Set_And_Play_Animation(Player_Animator_Parameter.Idle);

@@ -12,18 +12,19 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public float Character_Height = 1;
     [HideInInspector] public int Block_Size = 1;
     [HideInInspector] public float Floor_Height = 0.5f;
-    public bool Can_Move = false;
-    [HideInInspector] public PlayerAnimatorController playeranimatorcontroller;
+    [HideInInspector] public PlayerAnimatorController Player_Animator_Controller;
     [HideInInspector] public bool Player_Die = false;
-    [HideInInspector] public bool Holding_Block;
-    [HideInInspector] public int input;
-    [HideInInspector] public bool in_motion;
+    [HideInInspector] public bool Can_Move = false;
+    [HideInInspector] public bool Holding_Block = false;
+    [HideInInspector] public int Input;
+    [HideInInspector] public bool In_Motion = false;
+    public bool Auto_Moving_Needed = true;
 
     public static PlayerManager Player_Manager_Instance;
     // Start is called before the first frame update
     void Start()
     {
-        playeranimatorcontroller = transform.GetChild(0).GetComponent<PlayerAnimatorController>();
+        Player_Animator_Controller = transform.GetChild(0).GetComponent<PlayerAnimatorController>();
         SingleTon();
     }
 
@@ -47,11 +48,10 @@ public class PlayerManager : MonoBehaviour
 
     public void Player_Dying()
     {
-
         Player_Die = true;
         GameManager.Game_Manager_Instance.Game_Stop = true;
-        playeranimatorcontroller.Player_Animator_Parameter_Control();
-        GameManager.Game_Manager_Instance.Rapping_invoke(3);
+        Player_Animator_Controller.Player_Animator_Parameter_Control();
+        GameManager.Game_Manager_Instance.Initialize_GameData_Coroutine_Rapping(3);
         SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad();
     }
 

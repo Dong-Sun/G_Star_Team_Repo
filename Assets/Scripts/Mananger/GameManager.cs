@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Dir Game_Dir;
     [HideInInspector] public bool Game_Stop = false;
     [HideInInspector] public bool Get_Stage_Key = false;
-    
+    public Door Entrance;//입구
+    public Door Exit;//출구
 
 
 
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        invoke_Initialize_GameData(0);
+        Rapping_invoke(0);
     }
 
 
@@ -51,11 +52,13 @@ public class GameManager : MonoBehaviour
     private IEnumerator invoke_Initialize_GameData(int time)
     {
         yield return new WaitForSeconds(time);
-
+        
         Game_Dir = Dir.ForWard;
         Game_Stop = false;
         Get_Stage_Key = false;
         PlayerManager.Player_Manager_Instance.Can_Move = true;
+        Entrance.Open_Door_Aniamtion();
+        
     }
 
 

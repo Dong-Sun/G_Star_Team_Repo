@@ -28,10 +28,14 @@ public class Bullet : MonoBehaviour
         timer = 0f;
         gameObject.SetActive(false);
     }
-    private void OnTriggerEnter(Collider other) {   // 醚舅 面倒 贸府
-        if (other.transform.tag == "Player") {
-            Debug.Log("Hit Player");
+    private void OnTriggerEnter(Collider other)
+    {   // 醚舅 面倒 贸府
+
+        if (other.TryGetComponent<PlayerManager>(out PlayerManager playermanger) == true)
+        {
+            if (GameManager.Game_Manager_Instance.Game_Stop == false)
+                playermanger.Player_Dying();
         }
-        Init();
+
     }
 }

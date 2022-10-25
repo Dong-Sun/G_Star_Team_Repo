@@ -5,12 +5,8 @@ using UnityEngine;
 public class Lava : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other) {
-        if (other.TryGetComponent<HoldingBlock>(out HoldingBlock holdBlock)==true) {
-            holdBlock.transform.SetParent(null);
-            Destroy(this);
-        }
-        else if (other.TryGetComponent<PlayerManager>(out PlayerManager playermanger) == true) {
-            if (GameManager.Game_Manager_Instance.Game_Stop ==false)
+        if (other.TryGetComponent<PlayerManager>(out PlayerManager playermanger)) {
+            if (!GameManager.Game_Manager_Instance.Game_Stop)
                 playermanger.Player_Dying();
         }
     }

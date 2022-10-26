@@ -20,6 +20,7 @@ public class HoldingBlock : MonoBehaviour, Interact {
         PlayerManager.Player_Manager_Instance.Holding_Block = true;
         transform.SetParent(playerTarget);
         switching = false;
+
     }
     private void UnHoldBlock() {
         Debug.Log("UnHoldBlock");

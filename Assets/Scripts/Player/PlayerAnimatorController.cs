@@ -47,8 +47,7 @@ public class PlayerAnimatorController : MonoBehaviour
                 }
             }
             else
-            {
-                SceneLoadManager.scene_load_manager_instance.NextSceneLoad();
+            { 
                 Set_And_Play_Animation(Player_Animator_Parameter.Block);
                 return;
             }

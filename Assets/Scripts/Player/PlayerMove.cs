@@ -43,7 +43,10 @@ public class PlayerMove : MonoBehaviour
             {
                 if (PlayerManager.Player_Manager_Instance.Input != 0) //좌우 방향키 입력이 있다면
                 {
-                    Look_Dir.localPosition = PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position(); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
+                    if (!PlayerManager.Player_Manager_Instance.Holding_Block)
+                    {
+                        Look_Dir.localPosition = PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position(); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
+                    }
                     if (Is_There_Wall() || Is_There_Cliff())
                     {
                         PlayerManager.Player_Manager_Instance.In_Motion = false;

@@ -36,6 +36,6 @@ public class Bullet : MonoBehaviour
             if (GameManager.Game_Manager_Instance.Game_Stop == false)
                 playermanger.Player_Dying();
         }
-
+        Init();
     }
 }

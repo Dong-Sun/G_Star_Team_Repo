@@ -30,10 +30,10 @@ public class Lever : MonoBehaviour, Interact {
     private void PullStick() {
         stickTimer += Time.deltaTime * stickSpeed;
         if (!switching)
-            stick.transform.rotation
+            stick.transform.localRotation
                 = Quaternion.Slerp(Quaternion.Euler(-30f, 0f, 0f), Quaternion.Euler(30f, 0f, 0f), stickTimer);
         else
-            stick.transform.rotation
+            stick.transform.localRotation
                 = Quaternion.Slerp(Quaternion.Euler(-30f, 0f, 0f), Quaternion.Euler(30f, 0f, 0f), 1f - stickTimer);
     }
     public void Work() {

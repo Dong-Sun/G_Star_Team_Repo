@@ -6,13 +6,18 @@ public class KeyHole : MonoBehaviour,Interact
 {
     public Door door;
     public GameObject KeyObj;
+    public ChangeCamera Change_Camera;
+
 
     public void Work()
     {
         if (GameManager.Game_Manager_Instance.Get_Stage_Key)
         {
+            
+
             door.Open_Door_Aniamtion();
             KeyObj.SetActive(true);
+
         }
     }
 }

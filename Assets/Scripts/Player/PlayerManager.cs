@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public int Block_Size = 1;
     [HideInInspector] public float Floor_Height = 0.5f;
     [HideInInspector] public PlayerAnimatorController Player_Animator_Controller;
+    [HideInInspector] public PlayerMove Player_Move;
     [HideInInspector] public bool Player_Die = false;
     [HideInInspector] public bool Can_Move = false; //한칸 움직임이 다 되어야 Can_Move가 활성되면서 다음 움직임을 구현
     [HideInInspector] public bool Holding_Block = false;
@@ -25,6 +26,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         Player_Animator_Controller = transform.GetChild(0).GetComponent<PlayerAnimatorController>();
+        Player_Move = GetComponent<PlayerMove>();
         SingleTon();
     }
 

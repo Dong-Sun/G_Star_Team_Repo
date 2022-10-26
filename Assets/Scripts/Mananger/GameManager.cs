@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool Get_Stage_Key = false;
     [HideInInspector] public bool Auto_Moving = false;
     public bool Auto_Moving_Needed = true;
-
+    public ChangeCamera Change_Camera;
 
 
     private void Awake()
@@ -51,9 +51,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         
         Game_Dir = Dir.ForWard;
-        Game_Stop = true;
+        Game_Stop = false;
         Get_Stage_Key = false;
         PlayerManager.Player_Manager_Instance.Can_Move = true;
+        StartCoroutine(Start_Animation_Coroutine());
         //Entrance.Open_Door_Aniamtion();
     }
 
@@ -77,6 +78,14 @@ public class GameManager : MonoBehaviour
 
             Func();
         }
+    }
+
+    private IEnumerator Start_Animation_Coroutine()
+    {
+
+        PlayerManager.Player_Manager_Instance.Player_Move.Start_Moving();
+        yield return new WaitForSeconds(1);
+        Change_Camera.ChangeToMain();
     }
 
 

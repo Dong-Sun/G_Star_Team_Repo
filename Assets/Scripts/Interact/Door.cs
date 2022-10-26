@@ -19,7 +19,6 @@ public class Door : MonoBehaviour
     public void Open_Door_Aniamtion()
     {
         DoorAniamtor.SetInteger("animator_parameter", 1);
-        Invoke("Close_Door_Animation", 7);
     }
 
     public void Close_Door_Animation()

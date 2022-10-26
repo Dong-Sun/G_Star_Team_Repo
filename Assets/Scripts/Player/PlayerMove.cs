@@ -9,25 +9,24 @@ public class PlayerMove : MonoBehaviour
 
 
     public Vector3 Target_Position;
-    private GameObject Look_Dir;
+    private Transform Look_Dir;
     private CharacterController Player_Character_Controller;
-    private bool Running_Coroutine = false;
     private int Moving_Speed = 3;
     static RaycastHit hit;
+    IEnumerator Fix_Player_Position_Coroutine;
 
 
     private void Start()
     {
-        Look_Dir = transform.GetChild(1).gameObject;
+        Look_Dir = transform.GetChild(1).gameObject.transform;
         Target_Position = this.transform.position;
         Player_Character_Controller = GetComponent<CharacterController>();
-        Invoke("Start_Moving", 2f);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (GameManager.Game_Manager_Instance.Game_Stop||PlayerManager.Player_Manager_Instance.Player_Die) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
+        if (GameManager.Game_Manager_Instance.Game_Stop || PlayerManager.Player_Manager_Instance.Player_Die) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
         {
             return;
         }
@@ -35,7 +34,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool) //충돌이나 계단등에 의해 좌우 이동이 아닌 앞 이동이 발생하는 경우가 있어 그것을 제한하는 코루틴이 여러번 호출되는 것을 방지 하기 위함
             {
-               StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0,1));
+                StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));
                 PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool = false;
             }
 
@@ -44,7 +43,7 @@ public class PlayerMove : MonoBehaviour
             {
                 if (PlayerManager.Player_Manager_Instance.Input != 0) //좌우 방향키 입력이 있다면
                 {
-                    Look_Dir.transform.localPosition = PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position(); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
+                    Look_Dir.localPosition = PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position(); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
                     if (Is_There_Wall() || Is_There_Cliff())
                     {
                         PlayerManager.Player_Manager_Instance.In_Motion = false;
@@ -54,7 +53,7 @@ public class PlayerMove : MonoBehaviour
                     else
                     {
                         Target_Position += PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position();
-                        switch (Is_There_Stair()) 
+                        switch (Is_There_Stair())
                         {
                             case -2:
                                 Target_Position -= Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.3f;
@@ -80,18 +79,18 @@ public class PlayerMove : MonoBehaviour
         {
             if (!PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool)
             {
-                StopCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));//좌우 방향이 아닌 방향으로 이동되는 것을 제한하는 코루틴을 끈다.(자동이동시에 여러 방향으로 이동하는 경우가 있어서)
+                StopCoroutine(Fix_Player_Position_Coroutine);//좌우 방향이 아닌 방향으로 이동되는 것을 제한하는 코루틴을 끈다.(자동이동시에 여러 방향으로 이동하는 경우가 있어서)
                 PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool = true;
             }
         }
-        transform.GetChild(0).LookAt(Look_Dir.transform.position + Vector3.down * 0.48f); 
+        transform.GetChild(0).LookAt(Look_Dir.position + Vector3.down * 0.48f);
         Real_Player_Moving();
     }
     /// <summary>
     /// 게임 진행 방향에 따른 이동 될 위치 변경 함수
     /// </summary>
     /// <returns></returns>
-    private Vector3 Change_Dir_To_Position() 
+    private Vector3 Change_Dir_To_Position()
     {
         switch (GameManager.Game_Manager_Instance.Game_Dir) //카메라가 보는 방향(카메라에서 변경)
         {
@@ -107,48 +106,7 @@ public class PlayerMove : MonoBehaviour
                 return Vector3.zero;
         }
     }
-    /// <summary>
-    /// 계단이 있을때 좌표에 따른 값을 반환 -2 내 앞에 계단이 있는데 내려가야된다. -1 내 밑에 계단이 있는데 아래로 움직여야된다. 0 계단이 없다. 1 내 밑에 계단이 있는데 위로 움직여야된다. 2 내 앞에 계단이 있는데 올라가야된다.
-    /// </summary>
-    /// <returns></returns>
-    private int Is_There_Stair()
-    { //계단이 있는지 , 2층에 있어서 움직일 수 없는지 ,높이에 관련된 레이캐스트, 높이 조절함수
-        float length = PlayerManager.Player_Manager_Instance.Character_Height * 0.5f;
-        if (Razer(transform.position + Look_Dir.transform.localPosition, Vector3.down, length)) // 진행 방향쪽에 계단이 있는지 확인(위로 가느냐)
-            return 2;
 
-        length = PlayerManager.Player_Manager_Instance.Block_Size + PlayerManager.Player_Manager_Instance.Character_Height * 0.5f;
-        if (Razer(transform.position + Look_Dir.transform.localPosition, Vector3.down, length)) //진행 방향쪽에 계단이 있는지 확인(아래로 가느냐)
-            return -2;
-
-        if (Razer(transform.position, Vector3.down, PlayerManager.Player_Manager_Instance.Block_Size)) //내 아래로 레이저를 쏜다.(계단이 있는지 파악)
-        {
-            Physics.Raycast(transform.position + Look_Dir.transform.localPosition, Vector3.down, out hit, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f); // 앞에 내 발까지만 레이를 쏴서(높이 파악)
-            if (hit.collider != null)
-                return 1;
-            else
-                return -1;
-        }
-        return 0;
-    }
-    /// <summary>
-    /// 벽이 있는지 확인 하기 위한 함수
-    /// </summary>
-    /// <returns> 블럭을 잡고있을때와 블럭이 없을때 쏴야는 지점이 다르기에 return을 도출하기 위한 raycast는 다르다.</returns>
-    private bool Is_There_Wall()
-    {
-        if (PlayerManager.Player_Manager_Instance.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Look_Dir.transform.localPosition, Look_Dir.transform.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
-        else
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Look_Dir.transform.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
-    }
-    /// <summary>
-    /// 다음 이동 지점이 플레이어에게 절벽인지 확인하기 위한 함수
-    /// </summary>
-    private bool Is_There_Cliff()
-    {
-        return !Physics.Raycast(this.transform.position + Look_Dir.transform.localPosition, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
-    }
     /// <summary>
     /// 플레이어에게 필요한 입력값(애니메이션 또는 보는 방향 등을 설정하기 위한)을 변형하기 위한 함수
     /// </summary>
@@ -162,6 +120,87 @@ public class PlayerMove : MonoBehaviour
         else
             return 0;
     }
+
+
+
+
+    /// <summary>
+    /// 계단이 있을때 좌표에 따른 값을 반환 -2 내 앞에 계단이 있는데 내려가야된다. -1 내 밑에 계단이 있는데 아래로 움직여야된다. 0 계단이 없다. 1 내 밑에 계단이 있는데 위로 움직여야된다. 2 내 앞에 계단이 있는데 올라가야된다.
+    /// </summary>
+    /// <returns></returns>
+    private int Is_There_Stair()
+    { //계단이 있는지 , 2층에 있어서 움직일 수 없는지 ,높이에 관련된 레이캐스트, 높이 조절함수
+        float length = PlayerManager.Player_Manager_Instance.Character_Height * 0.5f;
+        if (Razer(transform.position + Look_Dir.localPosition, Vector3.down, length)) // 진행 방향쪽에 계단이 있는지 확인(위로 가느냐)
+            return 2;
+
+        length = PlayerManager.Player_Manager_Instance.Block_Size + PlayerManager.Player_Manager_Instance.Character_Height * 0.5f;
+        if (Razer(transform.position + Look_Dir.localPosition, Vector3.down, length)) //진행 방향쪽에 계단이 있는지 확인(아래로 가느냐)
+            return -2;
+
+        if (Razer(transform.position, Vector3.down, PlayerManager.Player_Manager_Instance.Block_Size)) //내 아래로 레이저를 쏜다.(계단이 있는지 파악)
+        {
+            Physics.Raycast(transform.position + Look_Dir.localPosition, Vector3.down, out hit, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f); // 앞에 내 발까지만 레이를 쏴서(높이 파악)
+            if (hit.collider != null)
+                return 1;
+            else
+                return -1;
+        }
+        return 0;
+    }
+
+
+
+
+    /// <summary>
+    /// 벽이 있는지 확인 하기 위한 함수
+    /// </summary>
+    /// <returns> 블럭을 잡고있을때와 블럭이 없을때 쏴야는 지점이 다르기에 return을 도출하기 위한 raycast는 다르다.</returns>
+    private bool Is_There_Wall()
+    {
+        if (PlayerManager.Player_Manager_Instance.Holding_Block)
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Look_Dir.localPosition, Look_Dir.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
+        else
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Look_Dir.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
+    }
+
+
+
+
+    /// <summary>
+    /// 다음 이동 지점이 플레이어에게 절벽인지 확인하기 위한 함수
+    /// </summary>
+    private bool Is_There_Cliff()
+    {
+        return !Physics.Raycast(this.transform.position + Look_Dir.localPosition, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
+    }
+
+
+    /// <summary>
+    /// 계단이 있는지 확인하는 함수
+    /// </summary>
+    /// <param name="origin">쏘는 지점</param>
+    /// <param name="TargetVec"> 쏘는 방향 </param>
+    /// <param name="distance">쏘는 거리</param>
+    /// <returns></returns>
+    private bool Razer(Vector3 origin, Vector3 TargetVec, float distance)
+    {
+        Physics.Raycast(origin, TargetVec, out hit, distance, 2 | 3); //2와3 레이어 마스크를 무시한다(포탈 등 있어도 가는곳),interact을 위한 콜라이더(Look Dir,잡고있는 블럭등)
+        if (hit.collider != null)
+        {
+            if (hit.collider.tag == "Stair")
+            {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+
+
+
+
     /// <summary>
     /// 실제 움직임을 구현하는 함수(Character Controller 움직임을 구현
     /// </summary>
@@ -187,6 +226,11 @@ public class PlayerMove : MonoBehaviour
         }
         Player_Character_Controller.Move(Vector3.down * Time.deltaTime * 0.8f);
     }
+
+
+
+
+
     /// <summary>
     /// Character Controller에 의해 이동되고 좌우 좌표의 차이를 방지하기 위해 이동시는 함수
     /// </summary>
@@ -197,71 +241,39 @@ public class PlayerMove : MonoBehaviour
         this.transform.position = vec;
         Player_Character_Controller.enabled = true;
     }
-    /// <summary>
-    /// 계단이 있는지 확인하는 함수
-    /// </summary>
-    /// <param name="origin">쏘는 지점</param>
-    /// <param name="TargetVec"> 쏘는 방향 </param>
-    /// <param name="distance">쏘는 거리</param>
-    /// <returns></returns>
-    private bool Razer(Vector3 origin, Vector3 TargetVec, float distance)
-    {
-        Physics.Raycast(origin, TargetVec, out hit, distance, 2 | 3); //2와3 레이어 마스크를 무시한다(포탈 등 있어도 가는곳),interact을 위한 콜라이더(Look Dir,잡고있는 블럭등)
-        if (hit.collider != null)
-        {
-            if (hit.collider.tag == "Stair")
-            {
-                return true;
-            }
 
-        }
-        return false;
-    }
+
+
+
     /// <summary>
     /// 계단이나 충돌에 의해 이동시에 좌표가 이상하게 변경되는 것을 방지하기 위한 함수
     /// </summary>
     /// <returns></returns>
-
-
     void Fix_Player_Position_To_Dir()
     {
-         if (GameManager.Game_Manager_Instance.Game_Dir == Dir.BackWard || GameManager.Game_Manager_Instance.Game_Dir == Dir.ForWard) //진행 방향이 앞뒤일때
+        if (GameManager.Game_Manager_Instance.Game_Dir == Dir.BackWard || GameManager.Game_Manager_Instance.Game_Dir == Dir.ForWard) //진행 방향이 앞뒤일때
         {
-             Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.forward * (Target_Position.z - this.transform.position.z));
-         }
-         else if (GameManager.Game_Manager_Instance.Game_Dir == Dir.Right || GameManager.Game_Manager_Instance.Game_Dir == Dir.Left) //진행 방향이 양옆일때
+            Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.forward * (Target_Position.z - this.transform.position.z));
+        }
+        else if (GameManager.Game_Manager_Instance.Game_Dir == Dir.Right || GameManager.Game_Manager_Instance.Game_Dir == Dir.Left) //진행 방향이 양옆일때
         {
-             Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.right * (Target_Position.x - this.transform.position.x));
-         }
-     }
-
-    /// <summary> 처음 시작할때 움직임(문을 박차고 나간다 던지)등을 위한 함수 </summary>
-    void Start_Moving()
-    {
-        if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
-        {
-            Target_Position += (Look_Dir.transform.localPosition).normalized * 2; // 수식이 복잡한데 캐릭터를 0,0에 두면 높아지는것때문에 lookdir이 좌표가 개같음...
-            GameManager.Game_Manager_Instance.Auto_Moving = false;
-            StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir,0,1));
+            Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.right * (Target_Position.x - this.transform.position.x));
         }
     }
 
-    //교체 내역
-    //private void Change_Target_Position(Vector3 Moving_Dir) //이동할 위치 변경 함수
-    //{
-    //    if (PlayerManager.Player_Manager_Instance.Can_Move == true)
-    //    {
-    //        {
-    //            Target_Position += PlayerManager.Player_Manager_Instance.input * Moving_Dir;
-    //            PlayerManager.Player_Manager_Instance.Can_Move = false;
-    //        }
-    //            else
-    //        {
-    //            PlayerManager.Player_Manager_Instance.in_motion = false;
-    //            PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
-    //        }
-    //    }
 
-    //}
+
+
+    /// <summary> 처음 시작할때 움직임(문을 박차고 나간다 던지)등을 위한 함수 </summary>
+    public void Start_Moving()
+    {
+        if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
+        {
+            Target_Position += (Look_Dir.localPosition).normalized * 2; // 수식이 복잡한데 캐릭터를 0,0에 두면 높아지는것때문에 lookdir이 좌표가 개같음...
+            GameManager.Game_Manager_Instance.Auto_Moving = false;
+            StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 3));
+
+        }
+    }
 }
 

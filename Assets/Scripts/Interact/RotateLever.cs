@@ -6,7 +6,6 @@ using UnityEngine;
 public class RotateLever : MonoBehaviour, Interact {
     [SerializeField] GameObject rotateField;        // 돌려줄 오브젝트
     [SerializeField] GameObject stick;              // 레버 스틱
-    [SerializeField] float rotateAngle = 90f;       // 한번에 돌아가게 될 각도
     [SerializeField] float stickSpeed = 3f;         // 스틱 당기는 속도
     [SerializeField] float fieldSpeed = 3f;         // 필드 돌리는 속도
     float stickTimer = 0f;                          // stick 오브젝트 돌리는 시간 체크를 위한 임의의 타이머 변수

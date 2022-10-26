@@ -9,7 +9,6 @@ public class ChangeCamera : MonoBehaviour {
 
     private void Start() {
         ChangeToStart();    // 처음 시작할 대는 start 카메라를 켜주고
-        StartCoroutine(DelayToChangeMain(delay));   // 일정 시간 지나면 메인 카메라로 전환 시켜준다
     }
 
     private void Update() {
@@ -40,10 +39,5 @@ public class ChangeCamera : MonoBehaviour {
         main.SetActive(false);
         start.SetActive(false);
         end.SetActive(true);
-    }
-
-    IEnumerator DelayToChangeMain(float timer) {
-        yield return new WaitForSeconds(timer);
-        ChangeToMain();
     }
 }

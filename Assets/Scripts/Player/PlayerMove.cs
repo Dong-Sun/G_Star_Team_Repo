@@ -1,9 +1,7 @@
 using DataStruct;
 using UnityEngine;
 using System.Collections;
-
-
-
+using System;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -29,105 +27,90 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameManager.Game_Manager_Instance.Game_Stop) //게임이 진행 상태일때
+        if (GameManager.Game_Manager_Instance.Game_Stop||PlayerManager.Player_Manager_Instance.Player_Die) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
         {
             return;
         }
         if (!GameManager.Game_Manager_Instance.Auto_Moving) //자동 움직임이 되는 중이 아닐때만
         {
+            if (PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool) //충돌이나 계단등에 의해 좌우 이동이 아닌 앞 이동이 발생하는 경우가 있어 그것을 제한하는 코루틴이 여러번 호출되는 것을 방지 하기 위함
+            {
+               StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0,1));
+                PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool = false;
+            }
+
             PlayerManager.Player_Manager_Instance.Input = Transform_input(); //좌우 방향키를 변형한 값을 input에 저장
-            if (PlayerManager.Player_Manager_Instance.Can_Move) //움직 일수 있는 상태라면(한칸 단위로 잘 이동 되었다면)
+            if (PlayerManager.Player_Manager_Instance.Can_Move) //움직 일수 있는 상태라면(한칸 단위에 잘 있다면)
             {
                 if (PlayerManager.Player_Manager_Instance.Input != 0) //좌우 방향키 입력이 있다면
                 {
-                    if (!PlayerManager.Player_Manager_Instance.In_Motion) //지금 움직이는 중이 아니라면
+                    Look_Dir.transform.localPosition = PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position(); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
+                    if (Is_There_Wall() || Is_There_Cliff())
                     {
-                        Look_Dir.transform.localPosition = PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position() + Vector3.down * 0.48f; //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
-                        transform.GetChild(0).LookAt(Look_Dir.transform);
-                        if (Is_There_Wall() || Is_There_Cliff())// 절벽이 있는지 벽이 있는지 파악
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            Target_Position += Look_Dir.transform.localPosition;
-                            switch (Is_There_Stair()) // -2 내 앞에 계단이 있는데 내려가야된다. -1 내 밑에 계단이 있는데 아래로 움직여야된다. 0 계단이 없다. 1 내 밑에 계단이 있는데 위로 움직여야된다. 2 내 앞에 계단이 있는데 올라가야된다.
-                            {
-                                case -2:
-                                    Target_Position -= Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.3f;
-                                    break;
-                                case -1:
-                                    Target_Position -= Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.7f;
-                                    break;
-                                case 0:
-                                    break;
-                                case 1:
-                                    Target_Position += Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.7f;
-                                    break;
-                                case 2:
-                                    Target_Position += Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.3f;
-                                    break;
-                            }
-                        }
+                        PlayerManager.Player_Manager_Instance.In_Motion = false;
+                        PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
+                        return;
                     }
-                    else //
-                    {
-                        PlayerManager.Player_Manager_Instance.Can_Move = false;
-                    }
-                }//
-                else
-                {
-                    if (!PlayerManager.Player_Manager_Instance.In_Motion)
-                        PlayerManager.Player_Manager_Instance.Can_Move = true;
                     else
-                        PlayerManager.Player_Manager_Instance.Can_Move = false;
+                    {
+                        Target_Position += PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position();
+                        switch (Is_There_Stair()) 
+                        {
+                            case -2:
+                                Target_Position -= Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.3f;
+                                break;
+                            case -1:
+                                Target_Position -= Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.7f;
+                                break;
+                            case 0:
+                                break;
+                            case 1:
+                                Target_Position += Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.7f;
+                                break;
+                            case 2:
+                                Target_Position += Vector3.up * PlayerManager.Player_Manager_Instance.Floor_Height * 0.3f;
+                                break;
+                        }
+                    }
                 }
             }
-            else
-            {
-                PlayerManager.Player_Manager_Instance.In_Motion = true;
-            }
-        }
-        if (Mathf.Sqrt(Mathf.Pow(Target_Position.x - this.transform.position.x, 2) + Mathf.Pow(Target_Position.z - this.transform.position.z, 2)) < 0.05f)
-        {
-            Target_Position = Target_Position - Vector3.up * (Target_Position.y - this.transform.position.y);
-            Enabling_Player_Character_Controller_To_Fix_Player_Position(Target_Position);
-            if (PlayerManager.Player_Manager_Instance.Input == 0)
-            {
-                PlayerManager.Player_Manager_Instance.In_Motion = false;
-                PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
-            }
-        }
-        else
-        {
-            Player_Character_Controller.Move((Target_Position - this.transform.position).normalized * Time.deltaTime * Moving_Speed);
-            PlayerManager.Player_Manager_Instance.In_Motion = true;
-            PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
-        }
-        Player_Character_Controller.Move(Vector3.down * Time.deltaTime * 0.8f);
-    }
-    private Vector3 Change_Dir_To_Position() //게임 진행 방향에 따른 이동 될 위치 지정 함수
-    {
-        if (PlayerManager.Player_Manager_Instance.Can_Move == true)
-        {
-            switch (GameManager.Game_Manager_Instance.Game_Dir)
-            {
-                case Dir.ForWard:
-                    return Vector3.right;
-                case Dir.BackWard:
-                    return Vector3.left;
-                case Dir.Right:
-                    return Vector3.forward;
-                case Dir.Left:
-                    return Vector3.back;
-                default:
-                    return Vector3.zero;
-            }
-        }
-        else
-            return Vector3.zero;
-    }
 
+        }//자동 움직임이 돌아는 동안
+        else
+        {
+            if (!PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool)
+            {
+                StopCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));//좌우 방향이 아닌 방향으로 이동되는 것을 제한하는 코루틴을 끈다.(자동이동시에 여러 방향으로 이동하는 경우가 있어서)
+                PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool = true;
+            }
+        }
+        transform.GetChild(0).LookAt(Look_Dir.transform.position + Vector3.down * 0.48f); 
+        Real_Player_Moving();
+    }
+    /// <summary>
+    /// 게임 진행 방향에 따른 이동 될 위치 변경 함수
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 Change_Dir_To_Position() 
+    {
+        switch (GameManager.Game_Manager_Instance.Game_Dir) //카메라가 보는 방향(카메라에서 변경)
+        {
+            case Dir.ForWard:
+                return Vector3.right;
+            case Dir.BackWard:
+                return Vector3.left;
+            case Dir.Right:
+                return Vector3.forward;
+            case Dir.Left:
+                return Vector3.back;
+            default:
+                return Vector3.zero;
+        }
+    }
+    /// <summary>
+    /// 계단이 있을때 좌표에 따른 값을 반환 -2 내 앞에 계단이 있는데 내려가야된다. -1 내 밑에 계단이 있는데 아래로 움직여야된다. 0 계단이 없다. 1 내 밑에 계단이 있는데 위로 움직여야된다. 2 내 앞에 계단이 있는데 올라가야된다.
+    /// </summary>
+    /// <returns></returns>
     private int Is_There_Stair()
     { //계단이 있는지 , 2층에 있어서 움직일 수 없는지 ,높이에 관련된 레이캐스트, 높이 조절함수
         float length = PlayerManager.Player_Manager_Instance.Character_Height * 0.5f;
@@ -148,20 +131,28 @@ public class PlayerMove : MonoBehaviour
         }
         return 0;
     }
-
+    /// <summary>
+    /// 벽이 있는지 확인 하기 위한 함수
+    /// </summary>
+    /// <returns> 블럭을 잡고있을때와 블럭이 없을때 쏴야는 지점이 다르기에 return을 도출하기 위한 raycast는 다르다.</returns>
     private bool Is_There_Wall()
     {
         if (PlayerManager.Player_Manager_Instance.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Look_Dir.transform.localPosition, Look_Dir.transform.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 3 | 2);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Look_Dir.transform.localPosition, Look_Dir.transform.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
         else
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Look_Dir.transform.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 3 | 2);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Look_Dir.transform.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
     }
-
+    /// <summary>
+    /// 다음 이동 지점이 플레이어에게 절벽인지 확인하기 위한 함수
+    /// </summary>
     private bool Is_There_Cliff()
     {
         return !Physics.Raycast(this.transform.position + Look_Dir.transform.localPosition, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
     }
-
+    /// <summary>
+    /// 플레이어에게 필요한 입력값(애니메이션 또는 보는 방향 등을 설정하기 위한)을 변형하기 위한 함수
+    /// </summary>
+    /// <returns></returns>
     int Transform_input() //움직임을 관리하는 벡터의 부호를 관리 하기 위한 함수(또한 키 인풋값을 얻어오기 위한 함수)
     {
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -171,17 +162,51 @@ public class PlayerMove : MonoBehaviour
         else
             return 0;
     }
-
+    /// <summary>
+    /// 실제 움직임을 구현하는 함수(Character Controller 움직임을 구현
+    /// </summary>
+    private void Real_Player_Moving()
+    {
+        if (Mathf.Sqrt(Mathf.Pow(Target_Position.x - this.transform.position.x, 2) + Mathf.Pow(Target_Position.z - this.transform.position.z, 2)) < 0.05f)
+        {
+            Target_Position = Target_Position - Vector3.up * (Target_Position.y - this.transform.position.y); //Target좌표 높이를 현재 높이로 이동시킨다.(없어지면 밑으로 팅기거나 위로 이동할려고 발악 하는 경우 발생)
+            Enabling_Player_Character_Controller_To_Fix_Player_Position(Target_Position); //x,z좌표를 Target지점으로 재 변경하는 함수(Controller.Move 함수는 완벽한 한칸 이동이 구현되지 않기에 이렇게 좌표 고정)
+            PlayerManager.Player_Manager_Instance.Can_Move = true; //다음칸으로 이동할수 있게 변경
+            if (PlayerManager.Player_Manager_Instance.Input == 0) //다음 칸으로 바로 이동하는 경우 Idle로 변경되지 않고 Run 상태를 유지
+            {
+                PlayerManager.Player_Manager_Instance.In_Motion = false;
+                PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
+            }
+        }
+        else
+        {
+            Player_Character_Controller.Move((Target_Position - this.transform.position).normalized * Time.deltaTime * Moving_Speed);
+            PlayerManager.Player_Manager_Instance.Can_Move = false;
+            PlayerManager.Player_Manager_Instance.In_Motion = true;
+            PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
+        }
+        Player_Character_Controller.Move(Vector3.down * Time.deltaTime * 0.8f);
+    }
+    /// <summary>
+    /// Character Controller에 의해 이동되고 좌우 좌표의 차이를 방지하기 위해 이동시는 함수
+    /// </summary>
+    /// <param name="vec">원하는 지점의 좌표</param>
     private void Enabling_Player_Character_Controller_To_Fix_Player_Position(Vector3 vec)
     {
         Player_Character_Controller.enabled = false;
         this.transform.position = vec;
         Player_Character_Controller.enabled = true;
     }
-
-    private bool Razer(Vector3 origin, Vector3 TargetVec, float distance) //레이를 쐇을때  콜리더가 있는지 없는지 
+    /// <summary>
+    /// 계단이 있는지 확인하는 함수
+    /// </summary>
+    /// <param name="origin">쏘는 지점</param>
+    /// <param name="TargetVec"> 쏘는 방향 </param>
+    /// <param name="distance">쏘는 거리</param>
+    /// <returns></returns>
+    private bool Razer(Vector3 origin, Vector3 TargetVec, float distance)
     {
-        Physics.Raycast(origin, TargetVec, out hit, distance);
+        Physics.Raycast(origin, TargetVec, out hit, distance, 2 | 3); //2와3 레이어 마스크를 무시한다(포탈 등 있어도 가는곳),interact을 위한 콜라이더(Look Dir,잡고있는 블럭등)
         if (hit.collider != null)
         {
             if (hit.collider.tag == "Stair")
@@ -192,34 +217,32 @@ public class PlayerMove : MonoBehaviour
         }
         return false;
     }
+    /// <summary>
+    /// 계단이나 충돌에 의해 이동시에 좌표가 이상하게 변경되는 것을 방지하기 위한 함수
+    /// </summary>
+    /// <returns></returns>
 
-    IEnumerator Fix_Player_Position() // 계단이나 충돌에 의해 좌표가 이상하게 변경되는 것을 방지하기 위한 함수
+
+    void Fix_Player_Position_To_Dir()
     {
-        yield return new WaitForSeconds(2f);
-
-        while (true)
+         if (GameManager.Game_Manager_Instance.Game_Dir == Dir.BackWard || GameManager.Game_Manager_Instance.Game_Dir == Dir.ForWard) //진행 방향이 앞뒤일때
         {
-            yield return new WaitForSeconds(1f);
-            if (GameManager.Game_Manager_Instance.Game_Dir == Dir.BackWard || GameManager.Game_Manager_Instance.Game_Dir == Dir.ForWard) //진행 방향이 앞뒤일때
-            {
-                Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.forward * (Target_Position.z - this.transform.position.z));
-            }
-            else if (GameManager.Game_Manager_Instance.Game_Dir == Dir.Right || GameManager.Game_Manager_Instance.Game_Dir == Dir.Left) //진행 방향이 양옆일때
-            {
-                Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.right * (Target_Position.x - this.transform.position.x));
-            }
-        }
-    }
+             Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.forward * (Target_Position.z - this.transform.position.z));
+         }
+         else if (GameManager.Game_Manager_Instance.Game_Dir == Dir.Right || GameManager.Game_Manager_Instance.Game_Dir == Dir.Left) //진행 방향이 양옆일때
+        {
+             Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.right * (Target_Position.x - this.transform.position.x));
+         }
+     }
 
     /// <summary> 처음 시작할때 움직임(문을 박차고 나간다 던지)등을 위한 함수 </summary>
     void Start_Moving()
-    { 
-        if (PlayerManager.Player_Manager_Instance.Auto_Moving_Needed == true)
+    {
+        if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
         {
-            Target_Position += Look_Dir.transform.localPosition.normalized * 2;
-            PlayerManager.Player_Manager_Instance.In_Motion = false;
+            Target_Position += (Look_Dir.transform.localPosition).normalized * 2; // 수식이 복잡한데 캐릭터를 0,0에 두면 높아지는것때문에 lookdir이 좌표가 개같음...
             GameManager.Game_Manager_Instance.Auto_Moving = false;
-            StartCoroutine(Fix_Player_Position());
+            StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir,0,1));
         }
     }
 

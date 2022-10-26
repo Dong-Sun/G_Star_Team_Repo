@@ -14,11 +14,11 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public float Floor_Height = 0.5f;
     [HideInInspector] public PlayerAnimatorController Player_Animator_Controller;
     [HideInInspector] public bool Player_Die = false;
-    [HideInInspector] public bool Can_Move = false;
+    [HideInInspector] public bool Can_Move = false; //한칸 움직임이 다 되어야 Can_Move가 활성되면서 다음 움직임을 구현
     [HideInInspector] public bool Holding_Block = false;
     [HideInInspector] public int Input;
-    [HideInInspector] public bool In_Motion = false;
-    public bool Auto_Moving_Needed = true;
+    [HideInInspector] public bool In_Motion = false; //플레이어 애니메이션중 Run과 Idle을 구분짓기 위한 변수
+    [HideInInspector] public bool Fixed_Position_Control_Bool = false;
 
     public static PlayerManager Player_Manager_Instance;
     // Start is called before the first frame update

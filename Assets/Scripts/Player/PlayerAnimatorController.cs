@@ -38,6 +38,9 @@ public class PlayerAnimatorController : MonoBehaviour
                     case -1:
                         Set_And_Play_Animation(Player_Animator_Parameter.Pull);
                         return;
+                    case 0:
+
+                        return;
                     case 1:
                         Set_And_Play_Animation(Player_Animator_Parameter.Push);
                         return;

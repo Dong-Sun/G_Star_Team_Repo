@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DataStruct;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool Game_Stop = false;
     [HideInInspector] public bool Get_Stage_Key = false;
     [HideInInspector] public bool Auto_Moving = false;
+    public bool Auto_Moving_Needed = true;
 
 
 
@@ -58,6 +60,23 @@ public class GameManager : MonoBehaviour
     public void Initialize_GameData_Coroutine_Rapping(int time)
     {
         StartCoroutine(Initialize_GameData_Coroutine(time));
+    }
+    /// <summary>
+    /// 딜레이 시간과 쿨타임을 가진 함수 호출용 corotine
+    /// </summary>
+    /// <param name="Func">여러번 호출할 함수</param>
+    /// <param name="delay_time">딜레이 타임</param>
+    /// <param name="cool_time">쿨 타임</param>
+    public IEnumerator Delay_And_Cool_Func(Action Func, int delay_time, int cool_time)
+    {
+        yield return new WaitForSeconds(delay_time);
+
+        while (true)
+        {
+            yield return new WaitForSeconds(cool_time);
+
+            Func();
+        }
     }
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 카메라를 조작하는데 있어서 필요한 정보들을 담는 클래스 입니다.
 /// </summary>
-public class Camera : MonoBehaviour {
+public class CameraState : MonoBehaviour {
     [HideInInspector] public Dir direction = Dir.ForWard;              // 돌린 후 보고있는 면을 담는 변수
     [HideInInspector] public bool isRotate = true;                     // 한번씩만 돌아갈 수 있게 제어 해주는 변수
     protected Dir lastDirection;                        // 돌리기 직전 방향을 담는 변수

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 카메라 조작에 대한 구현이 담겨져 있습니다.
 /// </summary>
-public class CameraController : Camera {
+public class CameraController : CameraState {
     [SerializeField] protected Transform center;        // 카메라가 돌아가게 되는 중심
     [SerializeField] protected GameObject[] walls;      // 4방향의 벽을 컨트롤 하기 위해 받음
     [SerializeField] protected float aroundCycle = 1f;  // 한 바퀴 돌리는데 걸리는 시간

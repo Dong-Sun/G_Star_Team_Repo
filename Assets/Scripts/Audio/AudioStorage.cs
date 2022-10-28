@@ -1,53 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-public class AudioManager : MonoBehaviour
-{
-    static private AudioManager instance;
+public class AudioStorage {
     private string soundPath = @"Assets/Sound/";    // 사운드를 모아둘 폴더 경로
-    public AudioManager Instance {
-        get { return instance; }
-    }
 
     // 각 층 배경 소리
-    [SerializeField] AudioClip fourthFloor;
-    [SerializeField] AudioClip fifthFloor;
-    [SerializeField] AudioClip sixthFloor;
+    private AudioClip fourthFloor;
+    private AudioClip fifthFloor;
+    private AudioClip sixthFloor;
 
     // 문 여닫는 소리
-    [SerializeField] AudioClip openDoor;
-    [SerializeField] AudioClip closeDoor;
+    private AudioClip openDoor;
+    private AudioClip closeDoor;
 
     // spike 총알 발사 소리
-    [SerializeField] AudioClip bulletFire;
+    private AudioClip bulletFire;
 
     // 플레이어 움직이는 소리
-    [SerializeField] AudioClip walk;
+    private AudioClip walk;
 
     // 돌 끄는 소리, 떨어지는 소리(용암, 땅)
-    [SerializeField] AudioClip dragRock;
-    [SerializeField] AudioClip fallRockLava;
-    [SerializeField] AudioClip fallRockFloor;
+    private AudioClip dragRock;
+    private AudioClip fallRockLava;
+    private AudioClip fallRockFloor;
 
     // 레버 조작 소리, 맵 돌아가는 소리
-    [SerializeField] AudioClip switchingLever;
-    [SerializeField] AudioClip rotateField;
+    private AudioClip switchingLever;
+    private AudioClip rotateField;
 
     // 스테이지 클리어 소리, 플레이어가 죽는 소리
-    [SerializeField] AudioClip stageClear;
-    [SerializeField] AudioClip playerDie;
+    private AudioClip stageClear;
+    private AudioClip playerDie;
 
+    // Property ReadOnly
+    public AudioClip FourFloor { get => fourthFloor; }
+    public AudioClip FifthFloor { get => fifthFloor; }
+    public AudioClip SixthFloor { get => sixthFloor; }
+    public AudioClip OpenDoor { get => openDoor; }
+    public AudioClip CloseDoor { get => closeDoor; }
+    public AudioClip BulletFire { get => bulletFire; }
+    public AudioClip Walk { get => walk; }
+    public AudioClip DragRock { get => dragRock; }
+    public AudioClip FallRockLava { get => fallRockLava; }
+    public AudioClip FallRockFloor { get => fallRockFloor; }
+    public AudioClip SwitchingLever { get => switchingLever; }
+    public AudioClip RotateField { get => rotateField; }
+    public AudioClip StageClear { get => stageClear; }
+    public AudioClip PlayerDie { get => playerDie; }
 
-    private void Awake() {
-        if (instance == null) {
-            instance = this;
-            LoadAudioClips();
-            DontDestroyOnLoad(instance);
-        }
-        else
-            Destroy(this);
+    public AudioStorage() {
+        LoadAudioClips();
     }
 
     /// <summary>

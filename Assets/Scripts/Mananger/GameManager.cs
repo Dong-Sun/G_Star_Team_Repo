@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-            Debug.Log("¹ÙºÎ");
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(1);
             
     }
 
@@ -93,15 +93,17 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Start_Animation_Coroutine()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         if (Entrance != null)
         {
             Entrance.Open_Door_Aniamtion();
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         PlayerManager.Player_Manager_Instance.Player_Move.Start_Moving();
         yield return new WaitForSeconds(1);
         Change_Camera.ChangeToMain();
+        yield return new WaitForSeconds(1.5f);
+        Auto_Moving = false;
     }
     public IEnumerator End_Animation_Coroutine()
     {
@@ -109,6 +111,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         Auto_Moving = true;
         PlayerManager.Player_Manager_Instance.Player_Move.End_Moving();
-        GameManager.Game_Manager_Instance.Game_Stop = true;
+        
     }
 }

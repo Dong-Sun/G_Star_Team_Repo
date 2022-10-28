@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     private int Moving_Speed = 3;
     static RaycastHit hit;
     Coroutine Fix_Player_Position_Coroutine;
+    private Vector3 Moving_Dir;
 
 
     private void Start()
@@ -43,6 +44,7 @@ public class PlayerMove : MonoBehaviour
             {
                 if (PlayerManager.Player_Manager_Instance.Input != 0) //좌우 방향키 입력이 있다면
                 {
+                    Moving_Dir = PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position();
                     if (!PlayerManager.Player_Manager_Instance.Holding_Block)
                     {
                         Look_Dir.localPosition = PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position(); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
@@ -55,7 +57,7 @@ public class PlayerMove : MonoBehaviour
                     }
                     else
                     {
-                        Target_Position += PlayerManager.Player_Manager_Instance.Input * Change_Dir_To_Position();
+                        Target_Position += Moving_Dir;
                         switch (Is_There_Stair())
                         {
                             case -2:
@@ -162,12 +164,16 @@ public class PlayerMove : MonoBehaviour
     /// 벽이 있는지 확인 하기 위한 함수
     /// </summary>
     /// <returns> 블럭을 잡고있을때와 블럭이 없을때 쏴야는 지점이 다르기에 return을 도출하기 위한 raycast는 다르다.</returns>
+    //총 3개의 경우 블럭을 잡고있을때 없을때 블럭을 잡고있을때 뒤로는 한칸 앞으로는 두칸
     private bool Is_There_Wall()
     {
-        if (PlayerManager.Player_Manager_Instance.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Look_Dir.localPosition, Look_Dir.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
-        else
+        if (!PlayerManager.Player_Manager_Instance.Holding_Block)
             return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Look_Dir.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
+        else if (Moving_Dir == Look_Dir.localPosition)
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
+        else
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, PlayerManager.Player_Manager_Instance.Block_Size, 2 | 3);
+
     }
 
 
@@ -178,7 +184,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private bool Is_There_Cliff()
     {
-        return !Physics.Raycast(this.transform.position + Look_Dir.localPosition, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
+        return !Physics.Raycast(this.transform.position + Moving_Dir, Vector3.down, PlayerManager.Player_Manager_Instance.Character_Height * 0.5f + 0.3f * PlayerManager.Player_Manager_Instance.Block_Size);
     }
 
 
@@ -276,7 +282,7 @@ public class PlayerMove : MonoBehaviour
         if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
         {
             Target_Position += (Look_Dir.localPosition).normalized * 2; // 수식이 복잡한데 캐릭터를 0,0에 두면 높아지는것때문에 lookdir이 좌표가 개같음...
-            GameManager.Game_Manager_Instance.Auto_Moving = false;
+            
             Fix_Player_Position_Coroutine = StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 3));
 
         }

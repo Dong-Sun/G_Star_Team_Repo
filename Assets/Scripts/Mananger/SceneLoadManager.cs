@@ -9,6 +9,8 @@ public class SceneLoadManager :MonoBehaviour
     public static SceneLoadManager scene_load_manager_instance;
     public Fade Fade_UI_Control;
 
+    [SerializeField] AudioSource testAudio;
+
     private void Start()
     {
         if(scene_load_manager_instance == null)

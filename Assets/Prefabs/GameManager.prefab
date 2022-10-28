@@ -48,6 +48,11 @@ MonoBehaviour:
   Game_Dir: 0
   Game_Stop: 0
   Get_Stage_Key: 0
+  Auto_Moving: 0
+  Auto_Moving_Needed: 1
+  Change_Camera: {fileID: 0}
+  Entrance: {fileID: 0}
+  Exit: {fileID: 0}
 --- !u!114 &5804748934501093822
 MonoBehaviour:
   m_ObjectHideFlags: 0

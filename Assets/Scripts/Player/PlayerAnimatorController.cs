@@ -35,13 +35,13 @@ public class PlayerAnimatorController : MonoBehaviour
             {
                 switch (PlayerManager.Player_Manager_Instance.Input)
                 {
-                    case -1:
+                    case 1:
                         Set_And_Play_Animation(Player_Animator_Parameter.Pull);
                         return;
                     case 0:
-
+                      
                         return;
-                    case 1:
+                    case -1:
                         Set_And_Play_Animation(Player_Animator_Parameter.Push);
                         return;
                 }

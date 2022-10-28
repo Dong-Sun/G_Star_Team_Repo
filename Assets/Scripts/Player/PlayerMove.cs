@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     public Vector3 Target_Position;
     private Transform Look_Dir;
     private CharacterController Player_Character_Controller;
-    private int Moving_Speed = 3;
+    private int Moving_Speed = 2;
     static RaycastHit hit;
     Coroutine Fix_Player_Position_Coroutine;
     private Vector3 Moving_Dir;

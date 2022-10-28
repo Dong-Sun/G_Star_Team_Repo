@@ -12434,6 +12434,11 @@ PrefabInstance:
       propertyPath: walls.Array.data[3]
       value: 
       objectReference: {fileID: 935086321}
+    - target: {fileID: 8022474400911964442, guid: be0bc0e5f2818b041ac69109b81d4b01,
+        type: 3}
+      propertyPath: orthographic size
+      value: 1.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be0bc0e5f2818b041ac69109b81d4b01, type: 3}
 --- !u!4 &414368460 stripped
@@ -27092,6 +27097,11 @@ PrefabInstance:
       propertyPath: Entrance
       value: 
       objectReference: {fileID: 1262801744}
+    - target: {fileID: 5804748934501093820, guid: 7caa8cb4019947746b73ae9f490a29f6,
+        type: 3}
+      propertyPath: Change_Camera
+      value: 
+      objectReference: {fileID: 1698717644}
     - target: {fileID: 5804748934501093821, guid: 7caa8cb4019947746b73ae9f490a29f6,
         type: 3}
       propertyPath: m_RootOrder
@@ -53570,6 +53580,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1698221401}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1698717644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8022474399511744296, guid: be0bc0e5f2818b041ac69109b81d4b01,
+    type: 3}
+  m_PrefabInstance: {fileID: 413040166}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a54eb8ed6da8624f9ba899feed3bfb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1700631522
 PrefabInstance:
   m_ObjectHideFlags: 0

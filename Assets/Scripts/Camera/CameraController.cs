@@ -18,8 +18,7 @@ public class CameraController : Camera {
     }
 
     private void Update() {
-        if (PlayerManager.Player_Manager_Instance.Can_Move              // 플레이어가 이동 중 일때, 블럭을 잡고 있을 때
-            && !PlayerManager.Player_Manager_Instance.Holding_Block) {   // 카메라 회전에 제한을 둠
+        if (RotateActivate()) {   // 카메라 회전에 제한을 둠
             if (Input.GetKeyDown(KeyCode.A) && isRotate) {      // 카메라 회전가능 상태 + A키 입력
                 isRotate = false;                               // 입력을 잠궈줌
                 lastDirection = direction;                      // 돌리기 전 방향을 저장해둠
@@ -39,6 +38,12 @@ public class CameraController : Camera {
                 Rotate(Dir.Right);
             }
         }
+    }
+
+    private bool RotateActivate() {
+        return !GameManager.Game_Manager_Instance.Game_Stop             // 게임 시작되었을 때
+            && PlayerManager.Player_Manager_Instance.Can_Move           // 플레이어가 이동 중 일때
+            && !PlayerManager.Player_Manager_Instance.Holding_Block;    // 블럭을 잡지 않았을 때
     }
 
     void Rotate(Dir dir) {

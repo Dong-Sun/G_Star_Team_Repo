@@ -53,8 +53,7 @@ public class PlayerManager : MonoBehaviour
         Player_Die = true;
         GameManager.Game_Manager_Instance.Game_Stop = true;
         Player_Animator_Controller.Player_Animator_Parameter_Control();
-        GameManager.Game_Manager_Instance.Initialize_GameData_Coroutine_Rapping(3);
-        SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad();
+        SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);
     }
 
 }

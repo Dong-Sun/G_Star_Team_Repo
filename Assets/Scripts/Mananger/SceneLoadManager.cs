@@ -22,22 +22,29 @@ public class SceneLoadManager :MonoBehaviour
     }
 
 
-    public void NextSceneLoad()
+    public void NextSceneLoad(int time)
     {
         Fade_UI_Control.Fade_in=true;
-        if (! (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1))
-            StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1,3));
+        if (!(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1))
+        {
+            StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, time));
+
+        }
+
     }
-    public void CurrentSceneLoad()
+    public void CurrentSceneLoad(int time)
     {
         Fade_UI_Control.Fade_in = true;
-        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex,3));
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex,time));
     }
 
-    IEnumerator LoadScene(int buildIndex,int Time)
+    IEnumerator LoadScene(int buildIndex,float Time)
     {
         yield return new WaitForSeconds(Time);
         SceneManager.LoadScene(buildIndex);
+        GameManager.Game_Manager_Instance.Initialize_GameData();
 
     }
+
+
 }

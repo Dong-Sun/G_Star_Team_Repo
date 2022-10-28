@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DataStruct;
 using System;
+using System.Collections;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [HideInInspector] public static GameManager Game_Manager_Instance;
-    [HideInInspector] public Dir Game_Dir;
-    [HideInInspector] public bool Game_Stop = false;
-    [HideInInspector] public bool Get_Stage_Key = false;
-    [HideInInspector] public bool Auto_Moving = false;
+    public static GameManager Game_Manager_Instance;
+    public Dir Game_Dir;
+    public bool Game_Stop = false;
+    public bool Get_Stage_Key = false;
+    public bool Auto_Moving = false;
     public bool Auto_Moving_Needed = true;
     public ChangeCamera Change_Camera;
+    public Door Entrance;
+    public Door Exit;
 
 
     private void Awake()
@@ -22,14 +23,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Initialize_GameData_Coroutine_Rapping(0);
+        Initialize_GameData();
     }
 
 
     // Update is called once per frame
     private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.E))
+            Debug.Log("바부");
+            
     }
 
     private void SingleTon()
@@ -44,24 +47,32 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    /// <summary>
+    /// 게임이 재시작 또는 다음 씬이 로드 될때 호출되는 함수
+    /// </summary>
 
-
-    private IEnumerator Initialize_GameData_Coroutine(int time)
+    public void Initialize_GameData()
     {
-        yield return new WaitForSeconds(time);
-        
+        GameObject g = GameObject.FindWithTag("Entrance");
+        if (g != null)
+            g.TryGetComponent<Door>(out Entrance);
+        g = GameObject.FindGameObjectWithTag("Exit");
+        if (g != null)
+            g.TryGetComponent<Door>(out Exit);
+        Change_Camera = GameObject.FindObjectOfType<ChangeCamera>();
         Game_Dir = Dir.ForWard;
         Game_Stop = false;
         Get_Stage_Key = false;
-        PlayerManager.Player_Manager_Instance.Can_Move = true;
+        if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
+        {
+            Auto_Moving = true;
+        }
         StartCoroutine(Start_Animation_Coroutine());
-        //Entrance.Open_Door_Aniamtion();
+
     }
 
-    public void Initialize_GameData_Coroutine_Rapping(int time)
-    {
-        StartCoroutine(Initialize_GameData_Coroutine(time));
-    }
+
+
     /// <summary>
     /// 딜레이 시간과 쿨타임을 가진 함수 호출용 corotine
     /// </summary>
@@ -82,11 +93,22 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Start_Animation_Coroutine()
     {
-
+        yield return new WaitForSeconds(1);
+        if (Entrance != null)
+        {
+            Entrance.Open_Door_Aniamtion();
+        }
+        yield return new WaitForSeconds(1);
         PlayerManager.Player_Manager_Instance.Player_Move.Start_Moving();
         yield return new WaitForSeconds(1);
         Change_Camera.ChangeToMain();
     }
-
-
+    public IEnumerator End_Animation_Coroutine()
+    {
+        Exit.Close_Door_Animation();
+        yield return new WaitForSeconds(1);
+        Auto_Moving = true;
+        PlayerManager.Player_Manager_Instance.Player_Move.End_Moving();
+        GameManager.Game_Manager_Instance.Game_Stop = true;
+    }
 }

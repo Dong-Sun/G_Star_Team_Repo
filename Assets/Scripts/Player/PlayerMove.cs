@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     private CharacterController Player_Character_Controller;
     private int Moving_Speed = 3;
     static RaycastHit hit;
-    IEnumerator Fix_Player_Position_Coroutine;
+    Coroutine Fix_Player_Position_Coroutine;
 
 
     private void Start()
@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool) //충돌이나 계단등에 의해 좌우 이동이 아닌 앞 이동이 발생하는 경우가 있어 그것을 제한하는 코루틴이 여러번 호출되는 것을 방지 하기 위함
             {
-                StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));
+                Fix_Player_Position_Coroutine = StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));
                 PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool = false;
             }
 
@@ -82,8 +82,11 @@ public class PlayerMove : MonoBehaviour
         {
             if (!PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool)
             {
-                StopCoroutine(Fix_Player_Position_Coroutine);//좌우 방향이 아닌 방향으로 이동되는 것을 제한하는 코루틴을 끈다.(자동이동시에 여러 방향으로 이동하는 경우가 있어서)
-                PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool = true;
+                if (Fix_Player_Position_Coroutine != null)
+                {
+                    StopCoroutine(Fix_Player_Position_Coroutine);//좌우 방향이 아닌 방향으로 이동되는 것을 제한하는 코루틴을 끈다.(자동이동시에 여러 방향으로 이동하는 경우가 있어서)
+                    PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool = true;
+                }
             }
         }
         transform.GetChild(0).LookAt(Look_Dir.position + Vector3.down * 0.48f);
@@ -274,9 +277,14 @@ public class PlayerMove : MonoBehaviour
         {
             Target_Position += (Look_Dir.localPosition).normalized * 2; // 수식이 복잡한데 캐릭터를 0,0에 두면 높아지는것때문에 lookdir이 좌표가 개같음...
             GameManager.Game_Manager_Instance.Auto_Moving = false;
-            StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 3));
+            Fix_Player_Position_Coroutine = StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 3));
 
         }
+    }
+
+    public void End_Moving()
+    {
+
     }
 }
 

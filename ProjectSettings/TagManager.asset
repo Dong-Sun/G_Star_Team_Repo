@@ -8,6 +8,8 @@ TagManager:
   - Object
   - Door
   - Lava
+  - Entrance
+  - Exit
   layers:
   - Default
   - TransparentFX

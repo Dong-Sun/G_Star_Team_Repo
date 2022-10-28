@@ -655,7 +655,6 @@ MonoBehaviour:
   main: {fileID: 1957723150}
   start: {fileID: 229719838}
   end: {fileID: 362396918}
-  delay: 2.5
 --- !u!1 &8022474400911964440
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,8 +667,6 @@ GameObject:
   - component: {fileID: 8022474400911964442}
   - component: {fileID: 8022474400911964443}
   - component: {fileID: 8022474400911964436}
-  - component: {fileID: 8022474400911964439}
-  - component: {fileID: 8022474400911964438}
   - component: {fileID: 2147193519}
   m_Layer: 0
   m_Name: Main Camera
@@ -778,43 +775,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &8022474400911964439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8022474400911964440}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee3180bcec1b8a41a0d9227e65a4969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: 0
-  isRotate: 1
-  center: {fileID: 0}
-  walls:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  aroundCycle: 3
---- !u!114 &8022474400911964438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8022474400911964440}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 853b7649e866d114d81554e0acb138b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: 0
-  isRotate: 1
-  shakeAmount: 0.1
-  isShake: 0
 --- !u!114 &2147193519
 MonoBehaviour:
   m_ObjectHideFlags: 0

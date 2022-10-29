@@ -62,17 +62,17 @@ public class AudioStorage {
         sixthFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
 
         // 문 여닫는 소리
-        openDoor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
-        closeDoor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
+        openDoor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "openDoor.wav", typeof(AudioClip));
+        closeDoor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "closeDoor.wav", typeof(AudioClip));
 
         // spike 총알 발사 소리
         bulletFire = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
 
         // 플레이어 움직이는 소리
-        walk = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
+        walk = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "walk.mp3", typeof(AudioClip));
 
         // 돌 끄는 소리, 떨어지는 소리(용암, 땅)
-        dragRock = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
+        dragRock = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "dragRock.mp3", typeof(AudioClip));
         fallRockLava = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
         fallRockFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
 

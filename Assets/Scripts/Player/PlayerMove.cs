@@ -293,9 +293,15 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void End_Moving()
+    public IEnumerator End_Moving()
     {
-
+        Look_Dir.localPosition = Quaternion.Euler(0, -90, 0) * Look_Dir.localPosition;
+        Target_Position += Look_Dir.localPosition;
+        yield return new WaitForSeconds(0.5f);
+        Look_Dir.localPosition = Quaternion.Euler(0, 90, 0) * Look_Dir.localPosition;
+        Target_Position += Look_Dir.localPosition;
+        yield return new WaitForSeconds(1f);
+        GameManager.Game_Manager_Instance.Auto_Moving = false;
     }
     private void Audio_Control()
     {
@@ -303,6 +309,7 @@ public class PlayerMove : MonoBehaviour
         {
             if(PlayerManager.Player_Manager_Instance.Holding_Block)
                 AudioManager.instance.DragRock();
+                
             else
                 AudioManager.instance.Walk();
         }

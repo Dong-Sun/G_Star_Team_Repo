@@ -107,10 +107,12 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator End_Animation_Coroutine()
     {
-        Exit.Close_Door_Animation();
-        yield return new WaitForSeconds(1);
         Auto_Moving = true;
-        PlayerManager.Player_Manager_Instance.Player_Move.End_Moving();
+        Change_Camera.ChangeToEnd();
+        yield return new WaitForSeconds(1.5f);
+        Exit.Open_Door_Aniamtion();
+        yield return new WaitForSeconds(1);
+        StartCoroutine(PlayerManager.Player_Manager_Instance.Player_Move.End_Moving());
         
     }
 }

@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour {
             DontDestroyOnLoad(instance);
         }
         else
-            Destroy(this);
+            Destroy(gameObject);
     }
 
     private void Start() {

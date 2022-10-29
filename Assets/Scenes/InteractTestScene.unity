@@ -21552,6 +21552,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 397289848335477020, guid: 1b2b4e27d59aa6e4c9f11d6e48990416,
+        type: 3}
+      propertyPath: volume
+      value: 0.208
+      objectReference: {fileID: 0}
     - target: {fileID: 397289848335477021, guid: 1b2b4e27d59aa6e4c9f11d6e48990416,
         type: 3}
       propertyPath: m_RootOrder
@@ -21898,7 +21903,7 @@ PrefabInstance:
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
@@ -21908,17 +21913,17 @@ PrefabInstance:
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964439, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}

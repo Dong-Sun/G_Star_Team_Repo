@@ -61,10 +61,21 @@ public class AudioManager : MonoBehaviour {
     }
     public void DragRock() {
         Debug.Log(audioStorage.DragRock);
-        audioSource.PlayOneShot(audioStorage.DragRock);
+        audioSource.clip = audioStorage.Walk;
+        audioSource.Play();
     }
     public void Walk() {
         Debug.Log(audioStorage.Walk);
-        audioSource.PlayOneShot(audioStorage.Walk);
+        audioSource.clip = audioStorage.Walk;
+        audioSource.Play();
+    }
+    public void Stop()
+    {
+        audioSource.Stop();
+    }
+    
+    public bool Is_Playing()
+    {
+        return audioSource.isPlaying;
     }
 }

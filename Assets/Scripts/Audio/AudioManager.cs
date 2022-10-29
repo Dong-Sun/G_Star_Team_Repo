@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour {
     }
     public void DragRock() {
         Debug.Log(audioStorage.DragRock);
-        audioSource.clip = audioStorage.Walk;
+        audioSource.clip = audioStorage.DragRock;
         audioSource.Play();
     }
     public void Walk() {

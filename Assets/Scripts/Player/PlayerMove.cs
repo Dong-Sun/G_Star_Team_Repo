@@ -52,6 +52,7 @@ public class PlayerMove : MonoBehaviour
                     }
                     if (Is_There_Wall() || Is_There_Cliff())
                     {
+                        Audio_Control();
                         PlayerManager.Player_Manager_Instance.In_Motion = false;
                         PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
                         return;

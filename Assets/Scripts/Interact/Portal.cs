@@ -10,6 +10,7 @@ public class Portal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
+            GameManager.Game_Manager_Instance.Game_Stop = true;
             GameManager.Game_Manager_Instance.Exit.Close_Door_Animation();
         }
     }

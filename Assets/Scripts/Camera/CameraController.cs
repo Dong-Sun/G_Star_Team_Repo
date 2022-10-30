@@ -27,6 +27,7 @@ public class CameraController : CameraState {
                 else
                     direction = Dir.ForWard;
                 Rotate(Dir.Left);                               // 사전준비 완료 후 Rotate함수 실행
+                
             }
             else if (Input.GetKeyDown(KeyCode.D) && isRotate) { // D키 입력, 조건문 내부 설명은 위와 같음
                 isRotate = false;
@@ -36,6 +37,7 @@ public class CameraController : CameraState {
                 else
                     direction = Dir.Right;
                 Rotate(Dir.Right);
+                
             }
         }
     }

@@ -8,8 +8,8 @@ public class PlayerMove : MonoBehaviour
 
 
 
-    public Vector3 Target_Position;
-    private Transform Look_Dir;
+    private Vector3 Target_Position;
+    public Transform Look_Dir;
     private CharacterController Player_Character_Controller;
     private int Moving_Speed = 2;
     static RaycastHit hit;

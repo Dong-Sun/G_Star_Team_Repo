@@ -26,12 +26,13 @@ public class HoldingBlock : MonoBehaviour, Interact {
         Debug.Log("UnHoldBlock");
         PlayerManager.Player_Manager_Instance.Holding_Block = false;
         transform.SetParent(floor);
-        switching = true;   
+        switching = true;
     }
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<Lava>() != null) {
             UnHoldBlock();
-            Destroy(other);
+            AudioManager.instance.FallRockLava();
+            Destroy(other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other) {

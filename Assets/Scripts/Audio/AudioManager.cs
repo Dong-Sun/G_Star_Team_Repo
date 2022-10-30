@@ -48,6 +48,10 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+
+    public void FallRockLava() {
+        audioSource.PlayOneShot(audioStorage.FallRockFloor);
+    }
     public void SwitchingLever() {
         audioSource.PlayOneShot(audioStorage.SwitchingLever);
     }

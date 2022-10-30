@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour {
     public AudioManager Instance {
         get { return instance; }
     }
+    
 
     [Range(0f, 1f)] public float volume;
 
@@ -65,12 +66,14 @@ public class AudioManager : MonoBehaviour {
         audioSource.PlayOneShot(audioStorage.BulletFire);
     }
     public void DragRock() {
-        audioSource.clip = audioStorage.DragRock;
-        audioSource.Play();
+        //audioSource.clip = audioStorage.DragRock;
+        //audioSource.Play();
+        audioSource.PlayOneShot(audioStorage.DragRock);
     }
     public void Walk() {
-        audioSource.clip = audioStorage.Walk;
-        audioSource.Play();
+        //audioSource.clip = audioStorage.Walk;
+        //audioSource.Play();
+        audioSource.PlayOneShot(audioStorage.Walk);
     }
     public void Stop() {
         audioSource.Stop();

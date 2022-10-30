@@ -306,18 +306,17 @@ public class PlayerMove : MonoBehaviour
     }
     private void Audio_Control()
     {
-        if(PlayerManager.Player_Manager_Instance.In_Motion ==true&&!AudioManager.instance.Is_Playing())
+        if (PlayerManager.Player_Manager_Instance.In_Motion == true && PlayerManager.Player_Manager_Instance.Can_Move == true)
         {
             if(PlayerManager.Player_Manager_Instance.Holding_Block)
                 AudioManager.instance.DragRock();
-                
             else
                 AudioManager.instance.Walk();
         }
-        if (PlayerManager.Player_Manager_Instance.In_Motion == false & AudioManager.instance.Is_Playing())
-        {
-            AudioManager.instance.Stop();
-        }
+        //if (PlayerManager.Player_Manager_Instance.In_Motion == false)
+        //{
+        //    AudioManager.instance.Stop();
+        //}
     }
 }
 

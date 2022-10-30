@@ -6,9 +6,7 @@ public class SceneLoadManager : MonoBehaviour {
     public static SceneLoadManager scene_load_manager_instance;
     public Fade Fade_UI_Control;
 
-    [SerializeField] AudioSource testAudio;
-
-    private void Start() {
+    private void Awake() {
         if (scene_load_manager_instance == null) {
             scene_load_manager_instance = this;
         }
@@ -32,7 +30,8 @@ public class SceneLoadManager : MonoBehaviour {
     IEnumerator LoadScene(int buildIndex, float Time) {
         yield return new WaitForSeconds(Time);
         SceneManager.LoadScene(buildIndex);
-        GameManager.Game_Manager_Instance.Initialize_GameData();
         AudioManager.instance.ChangeBackSound(buildIndex);
+        yield return new WaitForSeconds(1);
+        GameManager.Game_Manager_Instance.Initialize_GameData();
     }
 }

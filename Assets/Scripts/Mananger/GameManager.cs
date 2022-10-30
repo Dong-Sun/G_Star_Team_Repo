@@ -53,16 +53,19 @@ public class GameManager : MonoBehaviour
 
     public void Initialize_GameData()
     {
+        
+        
+        Change_Camera = GameObject.FindObjectOfType<ChangeCamera>();
+        Game_Dir = Dir.ForWard;
+        Game_Stop = false;
+        Get_Stage_Key = false;
+
         GameObject g = GameObject.FindWithTag("Entrance");
         if (g != null)
             g.TryGetComponent<Door>(out Entrance);
         g = GameObject.FindGameObjectWithTag("Exit");
         if (g != null)
             g.TryGetComponent<Door>(out Exit);
-        Change_Camera = GameObject.FindObjectOfType<ChangeCamera>();
-        Game_Dir = Dir.ForWard;
-        Game_Stop = false;
-        Get_Stage_Key = false;
         if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
         {
             Auto_Moving = true;

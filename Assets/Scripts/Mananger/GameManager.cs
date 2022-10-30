@@ -53,16 +53,19 @@ public class GameManager : MonoBehaviour
 
     public void Initialize_GameData()
     {
+        
+        
+        Change_Camera = GameObject.FindObjectOfType<ChangeCamera>();
+        Game_Dir = Dir.ForWard;
+        Game_Stop = false;
+        Get_Stage_Key = false;
+
         GameObject g = GameObject.FindWithTag("Entrance");
         if (g != null)
             g.TryGetComponent<Door>(out Entrance);
         g = GameObject.FindGameObjectWithTag("Exit");
         if (g != null)
             g.TryGetComponent<Door>(out Exit);
-        Change_Camera = GameObject.FindObjectOfType<ChangeCamera>();
-        Game_Dir = Dir.ForWard;
-        Game_Stop = false;
-        Get_Stage_Key = false;
         if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
         {
             Auto_Moving = true;
@@ -101,16 +104,22 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         PlayerManager.Player_Manager_Instance.Player_Move.Start_Moving();
         yield return new WaitForSeconds(1);
+        if (Entrance != null)
+        {
+            Entrance.Close_Door_Animation();
+        }
         Change_Camera.ChangeToMain();
         yield return new WaitForSeconds(1.5f);
         Auto_Moving = false;
     }
     public IEnumerator End_Animation_Coroutine()
     {
-        Exit.Close_Door_Animation();
-        yield return new WaitForSeconds(1);
         Auto_Moving = true;
-        PlayerManager.Player_Manager_Instance.Player_Move.End_Moving();
+        Change_Camera.ChangeToEnd();
+        yield return new WaitForSeconds(1.5f);
+        Exit.Open_Door_Aniamtion();
+        yield return new WaitForSeconds(1);
+        StartCoroutine(PlayerManager.Player_Manager_Instance.Player_Move.End_Moving());
         
     }
 }

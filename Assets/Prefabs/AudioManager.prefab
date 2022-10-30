@@ -45,20 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415d08b2185ff33458e85727548721a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fourthFloor: {fileID: 0}
-  fifthFloor: {fileID: 0}
-  sixthFloor: {fileID: 0}
-  openDoor: {fileID: 0}
-  closeDoor: {fileID: 0}
-  bulletFire: {fileID: 0}
-  walk: {fileID: 0}
-  dragRock: {fileID: 0}
-  fallRockLava: {fileID: 0}
-  fallRockFloor: {fileID: 0}
-  switchingLever: {fileID: 0}
-  rotateField: {fileID: 0}
-  stageClear: {fileID: 0}
-  playerDie: {fileID: 0}
+  volume: 0.5
 --- !u!82 &397289848335477022
 AudioSource:
   m_ObjectHideFlags: 0
@@ -73,7 +60,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

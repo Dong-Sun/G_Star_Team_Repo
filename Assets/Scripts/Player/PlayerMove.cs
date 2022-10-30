@@ -8,8 +8,8 @@ public class PlayerMove : MonoBehaviour
 
 
 
-    public Vector3 Target_Position;
-    private Transform Look_Dir;
+    private Vector3 Target_Position;
+    public Transform Look_Dir;
     private CharacterController Player_Character_Controller;
     private int Moving_Speed = 2;
     static RaycastHit hit;
@@ -37,6 +37,7 @@ public class PlayerMove : MonoBehaviour
             {
                 Fix_Player_Position_Coroutine = StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));
                 PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool = false;
+                
             }
 
             PlayerManager.Player_Manager_Instance.Input = Transform_input(); //좌우 방향키를 변형한 값을 input에 저장
@@ -51,6 +52,7 @@ public class PlayerMove : MonoBehaviour
                     }
                     if (Is_There_Wall() || Is_There_Cliff())
                     {
+                        Audio_Control();
                         PlayerManager.Player_Manager_Instance.In_Motion = false;
                         PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
                         return;
@@ -225,16 +227,20 @@ public class PlayerMove : MonoBehaviour
             PlayerManager.Player_Manager_Instance.Can_Move = true; //다음칸으로 이동할수 있게 변경
             if (PlayerManager.Player_Manager_Instance.Input == 0) //다음 칸으로 바로 이동하는 경우 Idle로 변경되지 않고 Run 상태를 유지
             {
+                Audio_Control();
                 PlayerManager.Player_Manager_Instance.In_Motion = false;
                 PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
+                
             }
         }
         else
         {
+            Audio_Control();
             Player_Character_Controller.Move((Target_Position - this.transform.position).normalized * Time.deltaTime * Moving_Speed);
             PlayerManager.Player_Manager_Instance.Can_Move = false;
             PlayerManager.Player_Manager_Instance.In_Motion = true;
             PlayerManager.Player_Manager_Instance.Player_Animator_Controller.Player_Animator_Parameter_Control();
+            
         }
         Player_Character_Controller.Move(Vector3.down * Time.deltaTime * 0.8f);
     }
@@ -288,9 +294,29 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void End_Moving()
+    public IEnumerator End_Moving()
     {
-        
+        Look_Dir.localPosition = Quaternion.Euler(0, -90, 0) * Look_Dir.localPosition;
+        Target_Position += Look_Dir.localPosition;
+        yield return new WaitForSeconds(0.5f);
+        Look_Dir.localPosition = Quaternion.Euler(0, 90, 0) * Look_Dir.localPosition;
+        Target_Position += Look_Dir.localPosition*2f;
+        yield return new WaitForSeconds(1f);
+        GameManager.Game_Manager_Instance.Auto_Moving = false;
+    }
+    private void Audio_Control()
+    {
+        if (PlayerManager.Player_Manager_Instance.In_Motion == true && PlayerManager.Player_Manager_Instance.Can_Move == true)
+        {
+            if(PlayerManager.Player_Manager_Instance.Holding_Block)
+                AudioManager.instance.DragRock();
+            else
+                AudioManager.instance.Walk();
+        }
+        //if (PlayerManager.Player_Manager_Instance.In_Motion == false)
+        //{
+        //    AudioManager.instance.Stop();
+        //}
     }
 }
 

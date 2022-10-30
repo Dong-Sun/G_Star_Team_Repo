@@ -183,13 +183,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3202602000167864852}
     m_Modifications:
+    - target: {fileID: 1044417649634624, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1189874255011212, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
       propertyPath: m_Name
       value: Player_Model
       objectReference: {fileID: 0}
     - target: {fileID: 1667923054877654, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4109714994798658, guid: 007f5bdc3fac8f543b83ae60517cd050, type: 3}
       propertyPath: m_RootOrder
@@ -243,6 +247,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.038
       objectReference: {fileID: 0}
+    - target: {fileID: 95815683639923230, guid: 007f5bdc3fac8f543b83ae60517cd050,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 4822b9a1e53393447bc4f7aea016d100, type: 2}
     - target: {fileID: 95815683639923230, guid: 007f5bdc3fac8f543b83ae60517cd050,
         type: 3}
       propertyPath: m_Controller

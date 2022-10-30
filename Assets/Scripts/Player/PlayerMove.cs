@@ -300,7 +300,7 @@ public class PlayerMove : MonoBehaviour
         Target_Position += Look_Dir.localPosition;
         yield return new WaitForSeconds(0.5f);
         Look_Dir.localPosition = Quaternion.Euler(0, 90, 0) * Look_Dir.localPosition;
-        Target_Position += Look_Dir.localPosition;
+        Target_Position += Look_Dir.localPosition*2f;
         yield return new WaitForSeconds(1f);
         GameManager.Game_Manager_Instance.Auto_Moving = false;
     }

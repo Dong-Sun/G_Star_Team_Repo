@@ -101,6 +101,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         PlayerManager.Player_Manager_Instance.Player_Move.Start_Moving();
         yield return new WaitForSeconds(1);
+        if (Entrance != null)
+        {
+            Entrance.Close_Door_Animation();
+        }
         Change_Camera.ChangeToMain();
         yield return new WaitForSeconds(1.5f);
         Auto_Moving = false;

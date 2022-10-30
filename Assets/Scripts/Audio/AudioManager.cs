@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour {
     public AudioManager Instance {
         get { return instance; }
     }
-    
+
 
     [Range(0f, 1f)] public float volume;
 
@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour {
     private void Start() {
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = audioStorage.SixthFloor;
+        audioSource.Play();
     }
 
     private void Update() {
@@ -35,13 +36,19 @@ public class AudioManager : MonoBehaviour {
     public void ChangeBackSound(int currentScene) {
         switch (currentScene) {
             case 0:
+                audioSource.clip = null;
                 audioSource.clip = audioStorage.SixthFloor;
+                audioSource.Play();
                 break;
             case 1:
+                audioSource.clip = null;
                 audioSource.clip = audioStorage.FourFloor;
+                audioSource.Play();
                 break;
             case 2:
+                audioSource.clip = null;
                 audioSource.clip = audioStorage.FifthFloor;
+                audioSource.Play();
                 break;
             default:
                 Debug.LogError("Not Found SceneIndex");
@@ -66,13 +73,9 @@ public class AudioManager : MonoBehaviour {
         audioSource.PlayOneShot(audioStorage.BulletFire);
     }
     public void DragRock() {
-        //audioSource.clip = audioStorage.DragRock;
-        //audioSource.Play();
         audioSource.PlayOneShot(audioStorage.DragRock);
     }
     public void Walk() {
-        //audioSource.clip = audioStorage.Walk;
-        //audioSource.Play();
         audioSource.PlayOneShot(audioStorage.Walk);
     }
     public void Stop() {

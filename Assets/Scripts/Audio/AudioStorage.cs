@@ -57,31 +57,31 @@ public class AudioStorage {
     /// </summary>
     private void LoadAudioClips() {
         // 각 층 배경 소리
-        fourthFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
-        fifthFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
-        sixthFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
+        fourthFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "fourthFloor.mp3", typeof(AudioClip));
+        fifthFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "fifthFloor.mp3", typeof(AudioClip));
+        sixthFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "sixthFloor.mp3", typeof(AudioClip));
 
         // 문 여닫는 소리
         openDoor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "openDoor.wav", typeof(AudioClip));
         closeDoor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "closeDoor.wav", typeof(AudioClip));
 
         // spike 총알 발사 소리
-        bulletFire = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
+        bulletFire = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "bulletFire.wav", typeof(AudioClip));
 
         // 플레이어 움직이는 소리
         walk = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "walk.mp3", typeof(AudioClip));
 
-        // 돌 끄는 소리, 떨어지는 소리(용암, 땅)
+        // 돌 끄는 소리, 떨어뜨리는 소리(용암, 땅)
         dragRock = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "dragRock.mp3", typeof(AudioClip));
-        fallRockLava = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
-        fallRockFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
+        fallRockLava = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "fallRockLava.mp3", typeof(AudioClip));
+        fallRockFloor = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "fallRockFloor.mp3", typeof(AudioClip));
 
         // 레버 조작 소리, 맵 돌아가는 소리
-        switchingLever = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
-        rotateField = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
+        switchingLever = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "switchingLever.mp3", typeof(AudioClip));
+        rotateField = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "rotateField.mp3", typeof(AudioClip));
 
         // 스테이지 클리어 소리, 플레이어가 죽는 소리
-        stageClear = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
-        playerDie = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "testAudio.wav", typeof(AudioClip));
+        stageClear = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "stageClear.mp3", typeof(AudioClip));
+        playerDie = (AudioClip)AssetDatabase.LoadAssetAtPath(soundPath + "playerDie.mp3", typeof(AudioClip));
     }
 }

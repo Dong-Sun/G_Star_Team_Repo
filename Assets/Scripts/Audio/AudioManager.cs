@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour {
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = audioStorage.SixthFloor;
     }
 
     private void Update() {
@@ -47,35 +48,31 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    public void SwitchingLever() {
+        audioSource.PlayOneShot(audioStorage.SwitchingLever);
+    }
     public void OpenDoor() {
-        Debug.Log(audioStorage.OpenDoor);
         audioSource.PlayOneShot(audioStorage.OpenDoor);
     }
     public void CloseDoor() {
-        Debug.Log(audioStorage.CloseDoor);
         audioSource.PlayOneShot(audioStorage.CloseDoor);
     }
     public void BulletFire() {
-        Debug.Log(audioStorage.BulletFire);
         audioSource.PlayOneShot(audioStorage.BulletFire);
     }
     public void DragRock() {
-        Debug.Log(audioStorage.DragRock);
         audioSource.clip = audioStorage.DragRock;
         audioSource.Play();
     }
     public void Walk() {
-        Debug.Log(audioStorage.Walk);
         audioSource.clip = audioStorage.Walk;
         audioSource.Play();
     }
-    public void Stop()
-    {
+    public void Stop() {
         audioSource.Stop();
     }
-    
-    public bool Is_Playing()
-    {
+
+    public bool Is_Playing() {
         return audioSource.isPlaying;
     }
 }

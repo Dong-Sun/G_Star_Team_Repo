@@ -16,11 +16,12 @@ public class Lever : MonoBehaviour, Interact {
     }
 
     void Update() {
-        if(oneShot) {
+        if (oneShot) {
             if (isRotate) {
                 PullStick();
             }
             if (stickTimer >= 1f) {
+                AudioManager.instance.SwitchingLever();
                 stickTimer = 0f;
                 switching = true;
                 oneShot = false;

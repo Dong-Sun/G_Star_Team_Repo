@@ -38,7 +38,7 @@ AnimatorController:
   - m_Name: animation
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 32
+    m_DefaultInt: 15
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   m_AnimatorLayers:

@@ -17,7 +17,8 @@ public class PapyrusControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+     
+     //2Á¶_Escape The Tower
     }
 
     private void Papyrus_Action()

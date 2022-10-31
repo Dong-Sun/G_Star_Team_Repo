@@ -11,7 +11,7 @@ public class CameraController : CameraState {
     [SerializeField] protected float aroundCycle = 1f;  // 한 바퀴 돌리는데 걸리는 시간
     protected float myDeletaTime = 0.004f;              // 카메라 돌릴 때 반복하는 횟수를 조절
 
-    private void Start() {
+    private void Awake() {
         walls[(int)Dir.ForWard].SetActive(false);           // 정면 벽 비활성화
         transform.rotation = Quaternion.Euler(new Vector3(8, initAngle[(int)direction], 0));
         transform.localPosition = initVector[(int)direction];

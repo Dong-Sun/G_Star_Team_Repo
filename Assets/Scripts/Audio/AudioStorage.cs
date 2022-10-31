@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class AudioStorage {
-    private string soundPath = @"Sound/";    // 사운드를 모아둘 폴더 경로
+    private string soundPath = @"Audio/";    // 사운드를 모아둘 폴더 경로
 
     // 각 층 배경 소리
     private AudioClip fourthFloor;
@@ -56,31 +56,31 @@ public class AudioStorage {
     /// </summary>
     private void LoadAudioClips() {
         // 각 층 배경 소리
-        fourthFloor = Resources.Load<AudioClip>(soundPath + "fourthFloor.mp3");
-        fifthFloor = Resources.Load<AudioClip>(soundPath + "fifthFloor.mp3");
-        sixthFloor = Resources.Load<AudioClip>(soundPath + "sixthFloor.mp3");
+        fourthFloor = Resources.Load<AudioClip>(soundPath + "fourthFloor");
+        fifthFloor = Resources.Load<AudioClip>(soundPath + "fifthFloor");
+        sixthFloor = Resources.Load<AudioClip>(soundPath + "sixthFloor");
 
         // 문 여닫는 소리 
-        openDoor = Resources.Load<AudioClip>(soundPath + "openDoor.wav");
-        closeDoor = Resources.Load<AudioClip>(soundPath + "closeDoor.wav");
+        openDoor = Resources.Load<AudioClip>(soundPath + "openDoor");
+        closeDoor = Resources.Load<AudioClip>(soundPath + "closeDoor");
 
         // spike 총알 발사 소리
-        bulletFire = Resources.Load<AudioClip>(soundPath + "bulletFire.wav");
+        bulletFire = Resources.Load<AudioClip>(soundPath + "bulletFire");
 
         // 플레이어 움직이는 소리
-        walk = Resources.Load<AudioClip>(soundPath + "walk.mp3");
+        walk = Resources.Load<AudioClip>(soundPath + "walk");
 
         // 돌 끄는 소리, 떨어뜨리는 소리(용암, 땅)
-        dragRock = Resources.Load<AudioClip>(soundPath + "dragRock.mp3");
-        fallRockLava = Resources.Load<AudioClip>(soundPath + "fallRockLava.mp3");
-        fallRockFloor = Resources.Load<AudioClip>(soundPath + "fallRockFloor.mp3");
+        dragRock = Resources.Load<AudioClip>(soundPath + "dragRock");
+        fallRockLava = Resources.Load<AudioClip>(soundPath + "fallRockLava");
+        fallRockFloor = Resources.Load<AudioClip>(soundPath + "fallRockFloor");
 
         // 레버 조작 소리, 맵 돌아가는 소리
-        switchingLever = Resources.Load<AudioClip>(soundPath + "switchingLever.mp3");
-        rotateField = Resources.Load<AudioClip>(soundPath + "rotateField.mp3");
+        switchingLever = Resources.Load<AudioClip>(soundPath + "switchingLever");
+        rotateField = Resources.Load<AudioClip>(soundPath + "rotateField");
 
         // 스테이지 클리어 소리, 플레이어가 죽는 소리
-        stageClear = Resources.Load<AudioClip>(soundPath + "stageClear.mp3");
-        playerDie = Resources.Load<AudioClip>(soundPath + "playerDie.mp3");
+        stageClear = Resources.Load<AudioClip>(soundPath + "stageClear");
+        playerDie = Resources.Load<AudioClip>(soundPath + "playerDie");
     }
 }

@@ -59322,6 +59322,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6849261000760482523, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}
+      propertyPath: levers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6849261000760482523, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
       propertyPath: levers.Array.data[0]
       value: 
       objectReference: {fileID: 1930761614}

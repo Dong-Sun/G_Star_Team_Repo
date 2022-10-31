@@ -52323,6 +52323,7 @@ GameObject:
   - component: {fileID: 1178145579}
   - component: {fileID: 1178145581}
   - component: {fileID: 1178145580}
+  - component: {fileID: 1178145582}
   m_Layer: 5
   m_Name: papyrus
   m_TagString: Untagged
@@ -52391,6 +52392,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178145578}
   m_CullTransparentMesh: 1
+--- !u!114 &1178145582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178145578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b32c27b01f624a409d5fc5b7334ceae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Papyrus_Disable: 0
 --- !u!1 &1178675262
 GameObject:
   m_ObjectHideFlags: 0
@@ -58310,7 +58324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1299952473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78736,7 +78750,7 @@ PrefabInstance:
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
@@ -78746,17 +78760,17 @@ PrefabInstance:
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964442, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}

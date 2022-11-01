@@ -45,11 +45,13 @@ public class Fade : MonoBehaviour
         color.a = Mathf.Lerp(0, 1, time / animTime);
         if (Fade_out == true && time < 0)
         {
+            color.a = 0;
             Fade_out = false;
             return true;
         }
         if ((Fade_in == true && time > animTime))
         {
+            color.a = 1;
             Fade_in = false;
             return true;
         }

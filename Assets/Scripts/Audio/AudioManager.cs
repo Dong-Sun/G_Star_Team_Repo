@@ -36,6 +36,9 @@ public class AudioManager : MonoBehaviour {
 
     public void ChangeBackSound(int currentScene) {
         switch (currentScene) {
+            case 1:
+                audioSource.clip = null;
+                break;
             case 2:
                 audioSource.clip = null;
                 audioSource.clip = audioStorage.SixthFloor;
@@ -56,7 +59,6 @@ public class AudioManager : MonoBehaviour {
                 break;
         }
     }
-
 
     public void FallRockLava() {
         audioSource.PlayOneShot(audioStorage.FallRockFloor);
@@ -82,7 +84,6 @@ public class AudioManager : MonoBehaviour {
     public void Stop() {
         audioSource.Stop();
     }
-
     public bool Is_Playing() {
         return audioSource.isPlaying;
     }

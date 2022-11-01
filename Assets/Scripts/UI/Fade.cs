@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Fade : MonoBehaviour
 {
 
-    public float animTime = 2f; //Fade 애니메이션 재생시간
+    public float animTime = 1.5f; //Fade 애니메이션 재생시간
     private Image image;
     public float time = 0f;// Mathf.Lerp 메소드의 시간 값.  
     public bool Fade_out = false;

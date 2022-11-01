@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
             g.TryGetComponent<Door>(out Exit);
         if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
         {
-            Auto_Moving = true;
+            Auto_Moving = false;
         }
         StartCoroutine(Start_Animation_Coroutine());
 

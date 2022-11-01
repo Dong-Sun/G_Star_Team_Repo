@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour {
     public static AudioManager instance;
@@ -25,7 +26,7 @@ public class AudioManager : MonoBehaviour {
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = audioStorage.SixthFloor;
+        ChangeBackSound(SceneManager.GetActiveScene().buildIndex);
         audioSource.Play();
     }
 

@@ -36,17 +36,17 @@ public class AudioManager : MonoBehaviour {
 
     public void ChangeBackSound(int currentScene) {
         switch (currentScene) {
-            case 0:
+            case 2:
                 audioSource.clip = null;
                 audioSource.clip = audioStorage.SixthFloor;
                 audioSource.Play();
                 break;
-            case 1:
+            case 3:
                 audioSource.clip = null;
                 audioSource.clip = audioStorage.FourFloor;
                 audioSource.Play();
                 break;
-            case 2:
+            case 4:
                 audioSource.clip = null;
                 audioSource.clip = audioStorage.FifthFloor;
                 audioSource.Play();

@@ -64,13 +64,13 @@ public class GameManager : MonoBehaviour
         Get_Stage_Key = false;
         StopAllCoroutines();
         GameObject g = GameObject.FindGameObjectWithTag("Player");
-        if (g != null)
+        if (g != null && Player_Manager == null)
         {
             Player_Manager = g.GetComponent<PlayerManager>();
-            if (Player_Manager.Auto_Moving_Needed == true)
-            {
-                Player_Manager.Auto_Moving = true;
-            }
+        }
+        if (Player_Manager != null && Player_Manager.Auto_Moving_Needed == true)
+        {
+            Player_Manager.Auto_Moving = true;
         }
         g = GameObject.FindWithTag("Entrance");
         if (g != null)
@@ -84,19 +84,26 @@ public class GameManager : MonoBehaviour
 
     private void Rewind_To_Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 1)
         {
-            SceneChanging = true;
-            SceneLoadManager.scene_load_manager_instance.Start_Scene_Load(2);
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneChanging = true;
+                SceneLoadManager.scene_load_manager_instance.Start_Scene_Load(2);
+            }
         }
     }
 
+
     private void Rewind_To_Current()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 2)
         {
-            SceneChanging = true;
-            SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneChanging = true;
+                SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);
+            }
         }
     }
 

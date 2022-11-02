@@ -99,7 +99,8 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 22e99065eac69a44ca4dbcd5ed72d499,
     type: 2}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 486331fbd014c144d9ce565b62aec97d,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7497,6 +7498,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973230016145430109, guid: ba535e4d74bf94f11a8a71788c16286d,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba535e4d74bf94f11a8a71788c16286d, type: 3}
@@ -96603,6 +96609,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ColorTemperature
       value: 17000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328494196032136600, guid: c74348d465afd3e4093400bdcb4bbba4,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 4.2336e-41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328494196032136600, guid: c74348d465afd3e4093400bdcb4bbba4,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328494196032136600, guid: c74348d465afd3e4093400bdcb4bbba4,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 7e-44
       objectReference: {fileID: 0}
     - target: {fileID: 6328494196032136601, guid: c74348d465afd3e4093400bdcb4bbba4,
         type: 3}

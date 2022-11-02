@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartUI : MonoBehaviour
+public class SpaceUI : MonoBehaviour
 {
     private Text text;
     private Color color;
     private float time = 0.8f;
+    private float Active_Time=0;
     private float cooltime=0.8f;
-    private bool Start_text_Control_Bool=true;
+    private bool Start_text_Control_Bool=false;
 
     private void Start()
     {
@@ -19,10 +20,20 @@ public class StartUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Blinking();
 
+    }
+
+    private void Blinking()
+    {
+        if(Active_Time<4)
+        {
+            Active_Time+=Time.deltaTime;
+            return;
+        }
         if (Start_text_Control_Bool)
         {
-            if(cooltime<=time)
+            if (cooltime <= time)
             {
                 color.a = 1;
                 Start_text_Control_Bool = false;
@@ -40,15 +51,8 @@ public class StartUI : MonoBehaviour
             }
             time -= Time.deltaTime;
         }
-        color.a = time/cooltime;
+        color.a = time / cooltime;
         text.color = color;
-        if (Input.GetKeyDown(KeyCode.Space)&& !GameManager.Game_Manager_Instance.SceneChanging)
-        {
-            
-            GameManager.Game_Manager_Instance.SceneChanging = true;
-            SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
-        }
-        
     }
 
 }

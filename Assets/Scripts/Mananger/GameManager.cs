@@ -2,6 +2,7 @@ using DataStruct;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class GameManager : MonoBehaviour
     public Dir Game_Dir;
     public bool Game_Stop = false;
     public bool Get_Stage_Key = false;
-    public bool SceneChanging = false;
 
     public ChangeCamera Change_Camera;
     public Door Entrance;
@@ -24,18 +24,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Initialize_GameData();
+        Game_Dir = Dir.ForWard;
+        Game_Stop = false;
     }
 
 
     // Update is called once per frame
     private void Update()
     {
-        if (!SceneChanging)
-        {
-            Rewind_To_Start();
-            Rewind_To_Current();
-        }
+        
     }
 
     private void SingleTon()
@@ -82,31 +79,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void Rewind_To_Start()
-    {
-        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 1)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                SceneChanging = true;
-                SceneLoadManager.scene_load_manager_instance.Start_Scene_Load(2);
-            }
-        }
-    }
-
-
-    private void Rewind_To_Current()
-    {
-        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 2)
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                SceneChanging = true;
-                SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);
-            }
-        }
-    }
-
 
 
     /// <summary>
@@ -151,8 +123,7 @@ public class GameManager : MonoBehaviour
         {
             Player_Manager.Auto_Moving = false;
         }
-
-        SceneChanging = false;
+        SceneLoadManager.scene_load_manager_instance.SceneChanging = false;
     }
     public IEnumerator End_Animation_Coroutine()
     {

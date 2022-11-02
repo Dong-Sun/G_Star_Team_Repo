@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 public class SceneLoadManager : MonoBehaviour {
     public static SceneLoadManager scene_load_manager_instance;
     public Fade Fade_UI_Control;
+    public bool SceneChanging = false;
+    public float holdingTimer;
+
 
     private void Awake() {
         if (scene_load_manager_instance == null) {
@@ -12,6 +15,89 @@ public class SceneLoadManager : MonoBehaviour {
         }
         else {
             Destroy(this);
+        }
+    }
+
+    private void Update()
+    {
+        if (!SceneChanging)
+        {
+            Rewind_To_Start();
+            Rewind_To_Current();
+            ToIntro();
+            Skip_Intro();
+        }
+    }
+
+
+    private void Rewind_To_Start()
+    {
+        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 1)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneChanging = true;
+                SceneLoadManager.scene_load_manager_instance.Start_Scene_Load(2);
+            }
+        }
+    }
+
+
+    private void Rewind_To_Current()
+    {
+
+        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 2)
+        {
+            if (Input.GetKey(KeyCode.R))
+            {
+                holdingTimer += Time.deltaTime;
+
+            }
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                holdingTimer = 0;
+            }
+            if (holdingTimer > 2f)
+            {
+                holdingTimer = 0;
+                SceneChanging = true;
+                SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);
+            }
+        }
+    }
+
+
+    private void Skip_Intro()
+    {
+        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() == 1)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                holdingTimer += Time.deltaTime;
+
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                holdingTimer = 0;
+            }
+            if (holdingTimer > 2f)
+            {
+                SceneChanging = true;
+                holdingTimer = 0;
+                SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
+                
+            }
+        }
+    }
+    private void ToIntro()
+    {
+        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneChanging = true;
+                SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
+            }
         }
     }
 
@@ -35,7 +121,7 @@ public class SceneLoadManager : MonoBehaviour {
         yield return new WaitForSeconds(Time);
         SceneManager.LoadScene(buildIndex);
         AudioManager.instance.ChangeBackSound(buildIndex);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         GameManager.Game_Manager_Instance.Initialize_GameData();
     }
 

@@ -7,7 +7,8 @@ public class PapyrusController : MonoBehaviour
 {
     [SerializeField] Animator tutorial;
     private void Update() {
-        transform.rotation = (Camera.main.transform.rotation * Quaternion.Euler(0, 1f, 0));
+        transform.rotation = Camera.main.transform.rotation;
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<PlayerManager>() != null)

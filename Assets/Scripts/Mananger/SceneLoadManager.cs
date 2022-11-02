@@ -35,7 +35,12 @@ public class SceneLoadManager : MonoBehaviour {
         yield return new WaitForSeconds(Time);
         SceneManager.LoadScene(buildIndex);
         AudioManager.instance.ChangeBackSound(buildIndex);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         GameManager.Game_Manager_Instance.Initialize_GameData();
+    }
+
+    public int CurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 }

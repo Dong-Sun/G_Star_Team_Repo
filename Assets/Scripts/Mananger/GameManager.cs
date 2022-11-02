@@ -24,8 +24,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Game_Dir = Dir.ForWard;
-        Game_Stop = false;
+        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() < 2)
+        {
+            Game_Dir = Dir.ForWard;
+            Game_Stop = false;
+        }
+        else
+        {
+            Initialize_GameData();  
+        }
+
     }
 
 

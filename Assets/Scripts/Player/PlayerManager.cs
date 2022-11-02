@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public bool Auto_Moving = false;
     public bool Auto_Moving_Needed = true;
 
-    public static PlayerManager Player_Manager_Instance;
+    public PlayerManager Player_Manager_Instance;
     // Start is called before the first frame update
     private void Awake()
     {

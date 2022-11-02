@@ -17,14 +17,14 @@ public class HoldingBlock : MonoBehaviour, Interact {
     }
     private void HoldBlock() {
         Debug.Log("HoldBlock");
-        PlayerManager.Player_Manager_Instance.Holding_Block = true;
+        GameManager.Game_Manager_Instance.Player_Manager.Holding_Block = true;
         transform.SetParent(playerTarget);
         switching = false;
 
     }
     private void UnHoldBlock() {
         Debug.Log("UnHoldBlock");
-        PlayerManager.Player_Manager_Instance.Holding_Block = false;
+        GameManager.Game_Manager_Instance.Player_Manager.Holding_Block = false;
         transform.SetParent(floor);
         switching = true;
     }

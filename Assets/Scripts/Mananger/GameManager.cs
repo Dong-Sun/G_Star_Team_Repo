@@ -6,9 +6,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Game_Manager_Instance;
+    public PlayerManager Player_Manager;
     public Dir Game_Dir;
     public bool Game_Stop = false;
     public bool Get_Stage_Key = false;
+    public bool SceneChanging = false;
+
     public ChangeCamera Change_Camera;
     public Door Entrance;
     public Door Exit;
@@ -28,9 +31,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(1);
-            
+        if (!SceneChanging)
+        {
+            Rewind_To_Start();
+            Rewind_To_Current();
+        }
     }
 
     private void SingleTon()
@@ -51,25 +56,48 @@ public class GameManager : MonoBehaviour
 
     public void Initialize_GameData()
     {
-        
-        
+
+
         Change_Camera = GameObject.FindObjectOfType<ChangeCamera>();
         Game_Dir = Dir.ForWard;
         Game_Stop = false;
         Get_Stage_Key = false;
-
-        GameObject g = GameObject.FindWithTag("Entrance");
+        StopAllCoroutines();
+        GameObject g = GameObject.FindGameObjectWithTag("Player");
+        if (g != null)
+        {
+            Player_Manager = g.GetComponent<PlayerManager>();
+            if (Player_Manager.Auto_Moving_Needed == true)
+            {
+                Player_Manager.Auto_Moving = true;
+            }
+        }
+        g = GameObject.FindWithTag("Entrance");
         if (g != null)
             g.TryGetComponent<Door>(out Entrance);
         g = GameObject.FindGameObjectWithTag("Exit");
         if (g != null)
             g.TryGetComponent<Door>(out Exit);
-        if (PlayerManager.Player_Manager_Instance.Auto_Moving_Needed == true)
-        {
-            PlayerManager.Player_Manager_Instance.Auto_Moving = true;
-        }
         StartCoroutine(Start_Animation_Coroutine());
 
+    }
+
+    private void Rewind_To_Start()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneChanging = true;
+            SceneLoadManager.scene_load_manager_instance.Start_Scene_Load(2);
+        }
+    }
+
+    private void Rewind_To_Current()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneChanging = true;
+            SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);
+        }
     }
 
 
@@ -100,24 +128,34 @@ public class GameManager : MonoBehaviour
             Entrance.Open_Door_Aniamtion();
         }
         yield return new WaitForSeconds(0.5f);
-        PlayerManager.Player_Manager_Instance.Player_Move.Start_Moving();
+        if (Player_Manager != null)
+        {
+            Player_Manager.Player_Move.Start_Moving();
+        }
         yield return new WaitForSeconds(1);
         if (Entrance != null)
         {
             Entrance.Close_Door_Animation();
         }
-        Change_Camera.ChangeToMain();
+        if (Change_Camera != null)
+            Change_Camera.ChangeToMain();
         yield return new WaitForSeconds(1.5f);
-        PlayerManager.Player_Manager_Instance.Auto_Moving = false;
+        if (Player_Manager != null)
+        {
+            Player_Manager.Auto_Moving = false;
+        }
+
+        SceneChanging = false;
     }
     public IEnumerator End_Animation_Coroutine()
     {
-        PlayerManager.Player_Manager_Instance.Auto_Moving = true;
-        Change_Camera.ChangeToEnd();
+        Player_Manager.Auto_Moving = true;
+        if (Change_Camera != null)
+            Change_Camera.ChangeToEnd();
         yield return new WaitForSeconds(1.5f);
         Exit.Open_Door_Aniamtion();
         yield return new WaitForSeconds(1);
-        StartCoroutine(PlayerManager.Player_Manager_Instance.Player_Move.End_Moving());
-        
+        StartCoroutine(Player_Manager.Player_Move.End_Moving());
+
     }
 }

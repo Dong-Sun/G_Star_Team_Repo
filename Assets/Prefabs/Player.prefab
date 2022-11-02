@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46eb04de6dbc90247a4f2a8a9b6ea3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target_Position: {x: 0, y: 0, z: 0}
+  Look_Dir: {fileID: 0}
 --- !u!114 &3202602000167864853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +176,9 @@ MonoBehaviour:
   Input: 0
   In_Motion: 0
   Fixed_Position_Control_Bool: 0
+  Auto_Moving: 0
+  Auto_Moving_Needed: 1
+  Player_Manager_Instance: {fileID: 0}
 --- !u!1001 &3202602000084289549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282,18 +285,6 @@ Rigidbody:
   m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!114 &390532504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3203703801730487681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 570d01a22990a324a8882552aef89a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8741317407614009440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -42,8 +42,10 @@ public class StartUI : MonoBehaviour
         }
         color.a = time/cooltime;
         text.color = color;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&& !GameManager.Game_Manager_Instance.SceneChanging)
         {
+            
+            GameManager.Game_Manager_Instance.SceneChanging = true;
             SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
         }
         

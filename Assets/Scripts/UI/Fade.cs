@@ -46,12 +46,14 @@ public class Fade : MonoBehaviour
         if (Fade_out == true && time < 0)
         {
             color.a = 0;
+            image.color = color;
             Fade_out = false;
             return true;
         }
         if ((Fade_in == true && time > animTime))
         {
             color.a = 1;
+            image.color = color;
             Fade_in = false;
             return true;
         }

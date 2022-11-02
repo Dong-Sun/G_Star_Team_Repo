@@ -20,14 +20,21 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public int Input;
     [HideInInspector] public bool In_Motion = false; //플레이어 애니메이션중 Run과 Idle을 구분짓기 위한 변수
     [HideInInspector] public bool Fixed_Position_Control_Bool = false;
+    [HideInInspector] public bool Auto_Moving = false;
+    public bool Auto_Moving_Needed = true;
 
     public static PlayerManager Player_Manager_Instance;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        SingleTon();
+    }
+
     void Start()
     {
         Player_Animator_Controller = transform.GetChild(0).GetComponent<PlayerAnimatorController>();
         Player_Move = GetComponent<PlayerMove>();
-        SingleTon();
+        
     }
 
     // Update is called once per frame

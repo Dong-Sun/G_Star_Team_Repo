@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         {
             return;
         }
-        if (!GameManager.Game_Manager_Instance.Auto_Moving) //자동 움직임이 되는 중이 아닐때만
+        if (!PlayerManager.Player_Manager_Instance.Auto_Moving) //자동 움직임이 되는 중이 아닐때만
         {
             if (PlayerManager.Player_Manager_Instance.Fixed_Position_Control_Bool) //충돌이나 계단등에 의해 좌우 이동이 아닌 앞 이동이 발생하는 경우가 있어 그것을 제한하는 코루틴이 여러번 호출되는 것을 방지 하기 위함
             {
@@ -285,7 +285,7 @@ public class PlayerMove : MonoBehaviour
     /// <summary> 처음 시작할때 움직임(문을 박차고 나간다 던지)등을 위한 함수 </summary>
     public void Start_Moving()
     {
-        if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
+        if (PlayerManager.Player_Manager_Instance.Auto_Moving_Needed == true)
         {
             Target_Position += (Look_Dir.localPosition).normalized * 2; // 수식이 복잡한데 캐릭터를 0,0에 두면 높아지는것때문에 lookdir이 좌표가 개같음...
             
@@ -300,9 +300,9 @@ public class PlayerMove : MonoBehaviour
         Target_Position += Look_Dir.localPosition;
         yield return new WaitForSeconds(0.5f);
         Look_Dir.localPosition = Quaternion.Euler(0, 90, 0) * Look_Dir.localPosition;
-        Target_Position += Look_Dir.localPosition*2f;
+        Target_Position += Look_Dir.localPosition*2;
         yield return new WaitForSeconds(1f);
-        GameManager.Game_Manager_Instance.Auto_Moving = false;
+        PlayerManager.Player_Manager_Instance.Auto_Moving = false;
     }
     private void Audio_Control()
     {

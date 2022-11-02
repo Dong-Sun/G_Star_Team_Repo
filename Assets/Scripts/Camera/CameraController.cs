@@ -46,7 +46,7 @@ public class CameraController : CameraState {
         return !GameManager.Game_Manager_Instance.Game_Stop             // 게임 시작되었을 때
             && PlayerManager.Player_Manager_Instance.Can_Move           // 플레이어가 이동 중 일때
             && !PlayerManager.Player_Manager_Instance.Holding_Block   // 블럭을 잡지 않았을 때
-            && !GameManager.Game_Manager_Instance.Auto_Moving;    //자동 움직임일때
+            && !PlayerManager.Player_Manager_Instance.Auto_Moving;    //자동 움직임일때
     }
 
     void Rotate(Dir dir) {

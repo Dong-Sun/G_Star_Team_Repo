@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     public Dir Game_Dir;
     public bool Game_Stop = false;
     public bool Get_Stage_Key = false;
-    public bool Auto_Moving = false;
-    public bool Auto_Moving_Needed = true;
     public ChangeCamera Change_Camera;
     public Door Entrance;
     public Door Exit;
@@ -66,9 +64,9 @@ public class GameManager : MonoBehaviour
         g = GameObject.FindGameObjectWithTag("Exit");
         if (g != null)
             g.TryGetComponent<Door>(out Exit);
-        if (GameManager.Game_Manager_Instance.Auto_Moving_Needed == true)
+        if (PlayerManager.Player_Manager_Instance.Auto_Moving_Needed == true)
         {
-            Auto_Moving = false;
+            PlayerManager.Player_Manager_Instance.Auto_Moving = true;
         }
         StartCoroutine(Start_Animation_Coroutine());
 
@@ -110,11 +108,11 @@ public class GameManager : MonoBehaviour
         }
         Change_Camera.ChangeToMain();
         yield return new WaitForSeconds(1.5f);
-        Auto_Moving = false;
+        PlayerManager.Player_Manager_Instance.Auto_Moving = false;
     }
     public IEnumerator End_Animation_Coroutine()
     {
-        Auto_Moving = true;
+        PlayerManager.Player_Manager_Instance.Auto_Moving = true;
         Change_Camera.ChangeToEnd();
         yield return new WaitForSeconds(1.5f);
         Exit.Open_Door_Aniamtion();

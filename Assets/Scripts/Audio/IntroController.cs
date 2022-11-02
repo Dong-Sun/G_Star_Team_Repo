@@ -1,12 +1,15 @@
 using UnityEngine;
+using UnityEngine.Playables;
+using Cinemachine;
 
 public class IntroController : MonoBehaviour {
     float timer = 0;
+    [SerializeField] PlayableDirector director;
+    
 
-    // Update is called once per frame
     void Update() {
         timer += Time.deltaTime;
-        if (timer > 24f) {
+        if (timer > director.duration) {
             SceneLoadManager.scene_load_manager_instance.NextSceneLoad(0);
             timer = 0;
         }

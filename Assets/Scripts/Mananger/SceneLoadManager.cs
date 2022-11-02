@@ -16,22 +16,31 @@ public class SceneLoadManager : MonoBehaviour {
     }
 
     public void NextSceneLoad(int time) {
-        Fade_UI_Control.Fade_in = true;
         if (!(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)) {
             StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, time));
         }
     }
 
     public void CurrentSceneLoad(int time) {
-        Fade_UI_Control.Fade_in = true;
+
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex, time));
     }
-
+    public void Start_Scene_Load(int time)
+    {
+        StartCoroutine(LoadScene(0, time));
+    }
+    
     IEnumerator LoadScene(int buildIndex, float Time) {
+        Fade_UI_Control.Fade_in = true;
         yield return new WaitForSeconds(Time);
         SceneManager.LoadScene(buildIndex);
         AudioManager.instance.ChangeBackSound(buildIndex);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         GameManager.Game_Manager_Instance.Initialize_GameData();
+    }
+
+    public int CurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 }

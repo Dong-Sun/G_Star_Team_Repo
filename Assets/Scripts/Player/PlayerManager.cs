@@ -23,8 +23,7 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public bool Auto_Moving = false;
     public bool Auto_Moving_Needed = true;
 
-    public static PlayerManager Player_Manager_Instance;
-    // Start is called before the first frame update
+  // Start is called before the first frame update
     private void Awake()
     {
         SingleTon();
@@ -32,6 +31,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        GameManager.Game_Manager_Instance.Player_Manager = this;
         Player_Animator_Controller = transform.GetChild(0).GetComponent<PlayerAnimatorController>();
         Player_Move = GetComponent<PlayerMove>();
         
@@ -45,14 +45,6 @@ public class PlayerManager : MonoBehaviour
 
     private void SingleTon()
     {
-        if (Player_Manager_Instance == null)
-        {
-            Player_Manager_Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
     }
 
     public void Player_Dying()

@@ -4,7 +4,7 @@ public class PlayerInteraction : MonoBehaviour {
     Interact interact;
 
     void Update() {
-        if (PlayerManager.Player_Manager_Instance.Can_Move == true)
+        if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move == true)
             Interacting();
     }
 

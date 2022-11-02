@@ -24,16 +24,16 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void Player_Animator_Parameter_Control()
     {
-        if (PlayerManager.Player_Manager_Instance.Player_Die == true)
+        if (GameManager.Game_Manager_Instance.Player_Manager.Player_Die == true)
         {
             Set_And_Play_Animation(Player_Animator_Parameter.Die);
             return;
         }
-        else if (PlayerManager.Player_Manager_Instance.Holding_Block == true)
+        else if (GameManager.Game_Manager_Instance.Player_Manager.Holding_Block == true)
         {
-            if (PlayerManager.Player_Manager_Instance.In_Motion)
+            if (GameManager.Game_Manager_Instance.Player_Manager.In_Motion)
             {
-                switch (PlayerManager.Player_Manager_Instance.Input)
+                switch (GameManager.Game_Manager_Instance.Player_Manager.Input)
                 {
                     case 1:
                         Set_And_Play_Animation(Player_Animator_Parameter.Pull);
@@ -52,7 +52,7 @@ public class PlayerAnimatorController : MonoBehaviour
                 return;
             }
         }
-        else if (PlayerManager.Player_Manager_Instance.In_Motion)
+        else if (GameManager.Game_Manager_Instance.Player_Manager.In_Motion)
             Set_And_Play_Animation(Player_Animator_Parameter.Run);
         else
             Set_And_Play_Animation(Player_Animator_Parameter.Idle);

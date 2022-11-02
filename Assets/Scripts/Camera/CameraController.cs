@@ -27,7 +27,7 @@ public class CameraController : CameraState {
                 else
                     direction = Dir.ForWard;
                 Rotate(Dir.Left);                               // 사전준비 완료 후 Rotate함수 실행
-                PlayerManager.Player_Manager_Instance.Player_Move.Look_Dir.localPosition = Vector3.zero;
+                GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Look_Dir.localPosition = Vector3.zero;
             }
             else if (Input.GetKeyDown(KeyCode.D) && isRotate) { // D키 입력, 조건문 내부 설명은 위와 같음
                 isRotate = false;
@@ -37,16 +37,16 @@ public class CameraController : CameraState {
                 else
                     direction = Dir.Right;
                 Rotate(Dir.Right);
-                PlayerManager.Player_Manager_Instance.Player_Move.Look_Dir.localPosition = Vector3.zero;
+                GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Look_Dir.localPosition = Vector3.zero;
             }
         }
     }
 
     private bool RotateActivate() {
         return !GameManager.Game_Manager_Instance.Game_Stop             // 게임 시작되었을 때
-            && PlayerManager.Player_Manager_Instance.Can_Move           // 플레이어가 이동 중 일때
-            && !PlayerManager.Player_Manager_Instance.Holding_Block   // 블럭을 잡지 않았을 때
-            && !PlayerManager.Player_Manager_Instance.Auto_Moving;    //자동 움직임일때
+            && GameManager.Game_Manager_Instance.Player_Manager.Can_Move           // 플레이어가 이동 중 일때
+            && !GameManager.Game_Manager_Instance.Player_Manager.Holding_Block   // 블럭을 잡지 않았을 때
+            && !GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving;    //자동 움직임일때
     }
 
     void Rotate(Dir dir) {

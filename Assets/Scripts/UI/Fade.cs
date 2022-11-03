@@ -20,6 +20,8 @@ public class Fade : MonoBehaviour
 
     private void Start()
     {
+        color.a = 1;
+        image.color = color;
         time = animTime;
         Fade_out = true;
         SceneLoadManager.scene_load_manager_instance.Fade_UI_Control = this;

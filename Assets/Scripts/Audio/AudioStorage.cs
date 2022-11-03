@@ -4,6 +4,8 @@ public class AudioStorage {
     private string soundPath = @"Audio/";    // 사운드를 모아둘 폴더 경로
 
     // 각 층 배경 소리
+    private AudioClip startSceneBGM;
+    private AudioClip thirdFloor;
     private AudioClip fourthFloor;
     private AudioClip fifthFloor;
     private AudioClip sixthFloor;
@@ -27,11 +29,24 @@ public class AudioStorage {
     private AudioClip switchingLever;
     private AudioClip rotateField;
 
+    // 열쇠 생성 소리, 열쇠 먹는 소리
+    private AudioClip createKey;
+    private AudioClip getKey;
+
     // 스테이지 클리어 소리, 플레이어가 죽는 소리
     private AudioClip stageClear;
     private AudioClip playerDie;
 
+    // 종이 펼치는 소리, 종이 접히는 소리
+    private AudioClip paperOpen;
+    private AudioClip paperClose;
+
+    // 포탈 소리
+    private AudioClip portal;
+
     // Property ReadOnly
+    public AudioClip StartSceneBGM { get => startSceneBGM; }
+    public AudioClip ThirdFloor { get => thirdFloor; }
     public AudioClip FourFloor { get => fourthFloor; }
     public AudioClip FifthFloor { get => fifthFloor; }
     public AudioClip SixthFloor { get => sixthFloor; }
@@ -44,8 +59,13 @@ public class AudioStorage {
     public AudioClip FallRockFloor { get => fallRockFloor; }
     public AudioClip SwitchingLever { get => switchingLever; }
     public AudioClip RotateField { get => rotateField; }
+    public AudioClip CreateKey { get => createKey; }
+    public AudioClip GetKey { get => getKey; }
     public AudioClip StageClear { get => stageClear; }
     public AudioClip PlayerDie { get => playerDie; }
+    public AudioClip PaperOpen { get => paperOpen; }
+    public AudioClip PaperClose { get => paperClose; }
+    public AudioClip Portal { get => portal; }
 
     public AudioStorage() {
         LoadAudioClips();
@@ -56,6 +76,8 @@ public class AudioStorage {
     /// </summary>
     private void LoadAudioClips() {
         // 각 층 배경 소리
+        startSceneBGM = Resources.Load<AudioClip>(soundPath + "startSceneBGM");
+        thirdFloor = Resources.Load<AudioClip>(soundPath + "thirdFloor");
         fourthFloor = Resources.Load<AudioClip>(soundPath + "fourthFloor");
         fifthFloor = Resources.Load<AudioClip>(soundPath + "fifthFloor");
         sixthFloor = Resources.Load<AudioClip>(soundPath + "sixthFloor");
@@ -79,8 +101,19 @@ public class AudioStorage {
         switchingLever = Resources.Load<AudioClip>(soundPath + "switchingLever");
         rotateField = Resources.Load<AudioClip>(soundPath + "rotateField");
 
+        // 열쇠 생성 소리, 열쇠 먹는 소리
+        createKey = Resources.Load<AudioClip>(soundPath + "createKey");
+        getKey = Resources.Load<AudioClip>(soundPath + "getKey");
+
         // 스테이지 클리어 소리, 플레이어가 죽는 소리
         stageClear = Resources.Load<AudioClip>(soundPath + "stageClear");
         playerDie = Resources.Load<AudioClip>(soundPath + "playerDie");
+
+        // 종이 펼치는 소리, 종이 접히는 소리
+        paperOpen = Resources.Load<AudioClip>(soundPath + "paperOpen");
+        paperClose = Resources.Load<AudioClip>(soundPath + "paperClose");
+
+        // 포탈 소리
+        portal = Resources.Load<AudioClip>(soundPath + "portal");
     }
 }

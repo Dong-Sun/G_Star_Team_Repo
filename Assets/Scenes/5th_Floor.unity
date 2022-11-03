@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b32c27b01f624a409d5fc5b7334ceae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Papyrus_Disable: 0
+  tutorial: {fileID: 0}
 --- !u!114 &41537343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39687,7 +39687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b32c27b01f624a409d5fc5b7334ceae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Papyrus_Disable: 0
+  tutorial: {fileID: 0}
 --- !u!114 &1014566538
 MonoBehaviour:
   m_ObjectHideFlags: 0

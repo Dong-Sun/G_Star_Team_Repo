@@ -36,6 +36,11 @@ public class AudioManager : MonoBehaviour {
 
     public void ChangeBackSound(int currentScene) {
         switch (currentScene) {
+            case 0:
+                audioSource.clip = null;
+                audioSource.clip = audioStorage.StartSceneBGM;
+                audioSource.Play();
+                break;
             case 1:
                 audioSource.clip = null;
                 break;
@@ -52,6 +57,11 @@ public class AudioManager : MonoBehaviour {
             case 4:
                 audioSource.clip = null;
                 audioSource.clip = audioStorage.FifthFloor;
+                audioSource.Play();
+                break;
+            case 5:
+                audioSource.clip = null;
+                audioSource.clip = audioStorage.ThirdFloor;
                 audioSource.Play();
                 break;
             default:
@@ -81,10 +91,16 @@ public class AudioManager : MonoBehaviour {
     public void Walk() {
         audioSource.PlayOneShot(audioStorage.Walk);
     }
-    public void Stop() {
-        audioSource.Stop();
+    public void PaperOpen() {
+        audioSource.PlayOneShot(audioStorage.PaperOpen);
     }
-    public bool Is_Playing() {
-        return audioSource.isPlaying;
+    public void PaperClose() {
+        audioSource.PlayOneShot(audioStorage.PaperClose);
+    }
+    public void CreateKey() {
+        audioSource.PlayOneShot(audioStorage.CreateKey);
+    }
+    public void GetKey() {
+        audioSource.PlayOneShot(audioStorage.GetKey);
     }
 }

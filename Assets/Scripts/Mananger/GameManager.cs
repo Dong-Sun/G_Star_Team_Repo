@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
             Change_Camera.ChangeToEnd();
         yield return new WaitForSeconds(1.5f);
         Exit.Open_Door_Aniamtion();
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.5f);
         StartCoroutine(Player_Manager.Player_Move.End_Moving());
 
     }

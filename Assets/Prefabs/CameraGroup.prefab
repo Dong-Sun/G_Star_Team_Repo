@@ -603,7 +603,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  aroundCycle: 3
+  aroundCycle: 5
 --- !u!1 &107144068325883130
 GameObject:
   m_ObjectHideFlags: 0

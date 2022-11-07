@@ -33,22 +33,27 @@ public class PlayerMove : MonoBehaviour
         }
         if (!GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving) //자동 움직임이 되는 중이 아닐때만
         {
-            if (GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool) //충돌이나 계단등에 의해 좌우 이동이 아닌 앞 이동이 발생하는 경우가 있어 그것을 제한하는 코루틴이 여러번 호출되는 것을 방지 하기 위함
-            {
-                Fix_Player_Position_Coroutine = StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));
-                GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool = false;
-                
-            }
+            //if (GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool) //충돌이나 계단등에 의해 좌우 이동이 아닌 앞 이동이 발생하는 경우가 있어 그것을 제한하는 코루틴이 여러번 호출되는 것을 방지 하기 위함
+            //{
+            //    Fix_Player_Position_Coroutine = StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));
+            //    GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool = false;
+
+            //}
 
             GameManager.Game_Manager_Instance.Player_Manager.Input = Transform_input(); //좌우 방향키를 변형한 값을 input에 저장
             if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move) //움직 일수 있는 상태라면(한칸 단위에 잘 있다면)
             {
-                if (GameManager.Game_Manager_Instance.Player_Manager.Input != 0) //좌우 방향키 입력이 있다면
+                if (GameManager.Game_Manager_Instance.Player_Manager.Input != 0) //상하좌우 방향키 입력이 있다면
                 {
-                    Moving_Dir = GameManager.Game_Manager_Instance.Player_Manager.Input * Change_Dir_To_Position();
+                    Moving_Dir =  Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input);
                     if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
                     {
-                        Look_Dir.localPosition = GameManager.Game_Manager_Instance.Player_Manager.Input * Change_Dir_To_Position(); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
+                        Look_Dir.localPosition = Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
+                    }
+                    else
+                    {
+                        if (!(Moving_Dir == -Look_Dir.localPosition || Moving_Dir == Look_Dir.localPosition))
+                            return;
                     }
                     if (Is_There_Wall() || Is_There_Cliff())
                     {
@@ -86,32 +91,34 @@ public class PlayerMove : MonoBehaviour
         {
             if (!GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool)
             {
-                if (Fix_Player_Position_Coroutine != null)
-                {
-                    StopCoroutine(Fix_Player_Position_Coroutine);//좌우 방향이 아닌 방향으로 이동되는 것을 제한하는 코루틴을 끈다.(자동이동시에 여러 방향으로 이동하는 경우가 있어서)
-                    GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool = true;
-                }
+                //if (Fix_Player_Position_Coroutine != null)
+                //{
+                //    StopCoroutine(Fix_Player_Position_Coroutine);//좌우 방향이 아닌 방향으로 이동되는 것을 제한하는 코루틴을 끈다.(자동이동시에 여러 방향으로 이동하는 경우가 있어서)
+                //    GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool = true;
+                //}
             }
         }
         transform.GetChild(0).LookAt(Look_Dir.position + Vector3.down * 0.48f);
         Real_Player_Moving();
     }
+
     /// <summary>
     /// 게임 진행 방향에 따른 이동 될 위치 변경 함수
     /// </summary>
     /// <returns></returns>
-    private Vector3 Change_Dir_To_Position()
+    private Vector3 Change_Dir_To_Position(int input)
     {
-        switch (GameManager.Game_Manager_Instance.Game_Dir) //카메라가 보는 방향(카메라에서 변경)
+        int sum = (int)GameManager.Game_Manager_Instance.Game_Dir + input;
+        switch (sum%4) //카메라가 보는 방향(카메라에서 변경)
         {
-            case Dir.ForWard:
-                return Vector3.right;
-            case Dir.BackWard:
-                return Vector3.left;
-            case Dir.Right:
-                return Vector3.forward;
-            case Dir.Left:
+            case 1:
                 return Vector3.back;
+            case 2:
+                return Vector3.left;
+            case 3:
+                return Vector3.forward;
+            case 0:
+                return Vector3.right;
             default:
                 return Vector3.zero;
         }
@@ -123,10 +130,15 @@ public class PlayerMove : MonoBehaviour
     /// <returns></returns>
     int Transform_input() //움직임을 관리하는 벡터의 부호를 관리 하기 위한 함수(또한 키 인풋값을 얻어오기 위한 함수)
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-            return -1;
-        else if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
             return 1;
+        else if (Input.GetKey(KeyCode.UpArrow))
+            return 3;
+        else if (Input.GetKey(KeyCode.LeftArrow))
+            return 2;
+        
+        else if (Input.GetKey(KeyCode.RightArrow))
+            return 4;
         else
             return 0;
     }
@@ -141,16 +153,16 @@ public class PlayerMove : MonoBehaviour
     private int Is_There_Stair()
     { //계단이 있는지 , 2층에 있어서 움직일 수 없는지 ,높이에 관련된 레이캐스트, 높이 조절함수
         float length = GameManager.Game_Manager_Instance.Player_Manager.Character_Height * 0.5f;
-        if (Razer(transform.position + Look_Dir.localPosition, Vector3.down, length)) // 진행 방향쪽에 계단이 있는지 확인(위로 가느냐)
+        if (Razer(transform.position + Moving_Dir, Vector3.down, length)) // 진행 방향쪽에 계단이 있는지 확인(위로 가느냐)
             return 2;
 
         length = GameManager.Game_Manager_Instance.Player_Manager.Block_Size + GameManager.Game_Manager_Instance.Player_Manager.Character_Height * 0.5f;
-        if (Razer(transform.position + Look_Dir.localPosition, Vector3.down, length)) //진행 방향쪽에 계단이 있는지 확인(아래로 가느냐)
+        if (Razer(transform.position + Moving_Dir, Vector3.down, length)) //진행 방향쪽에 계단이 있는지 확인(아래로 가느냐)
             return -2;
 
         if (Razer(transform.position, Vector3.down, GameManager.Game_Manager_Instance.Player_Manager.Block_Size)) //내 아래로 레이저를 쏜다.(계단이 있는지 파악)
         {
-            Physics.Raycast(transform.position + Look_Dir.localPosition, Vector3.down, out hit, GameManager.Game_Manager_Instance.Player_Manager.Character_Height * 0.5f); // 앞에 내 발까지만 레이를 쏴서(높이 파악)
+            Physics.Raycast(transform.position + Moving_Dir, Vector3.down, out hit, GameManager.Game_Manager_Instance.Player_Manager.Character_Height * 0.5f); // 앞에 내 발까지만 레이를 쏴서(높이 파악)
             if (hit.collider != null)
                 return 1;
             else
@@ -170,11 +182,15 @@ public class PlayerMove : MonoBehaviour
     private bool Is_There_Wall()
     {
         if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
         else if (Moving_Dir == Look_Dir.localPosition)
             return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
-        else
+        else if (Moving_Dir == -Look_Dir.localPosition)
             return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
+        else
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3)|| 
+                Physics.Raycast(this.transform.position + Vector3.down * 0.4f+Look_Dir.localPosition, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
+
 
     }
 
@@ -230,7 +246,7 @@ public class PlayerMove : MonoBehaviour
                 Audio_Control();
                 GameManager.Game_Manager_Instance.Player_Manager.In_Motion = false;
                 GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
-                
+
             }
         }
         else
@@ -240,7 +256,7 @@ public class PlayerMove : MonoBehaviour
             GameManager.Game_Manager_Instance.Player_Manager.Can_Move = false;
             GameManager.Game_Manager_Instance.Player_Manager.In_Motion = true;
             GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
-            
+
         }
         Player_Character_Controller.Move(Vector3.down * Time.deltaTime * 0.8f);
     }
@@ -288,7 +304,7 @@ public class PlayerMove : MonoBehaviour
         if (GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving_Needed == true)
         {
             Target_Position += (Look_Dir.localPosition).normalized * 2; // 수식이 복잡한데 캐릭터를 0,0에 두면 높아지는것때문에 lookdir이 좌표가 개같음...
-            
+
             Fix_Player_Position_Coroutine = StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 3));
 
         }
@@ -300,7 +316,7 @@ public class PlayerMove : MonoBehaviour
         Target_Position += Look_Dir.localPosition;
         yield return new WaitForSeconds(0.5f);
         Look_Dir.localPosition = Quaternion.Euler(0, 90, 0) * Look_Dir.localPosition;
-        Target_Position += Look_Dir.localPosition*2;
+        Target_Position += Look_Dir.localPosition * 2;
         yield return new WaitForSeconds(1f);
         GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving = false;
     }
@@ -308,7 +324,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (GameManager.Game_Manager_Instance.Player_Manager.In_Motion == true && GameManager.Game_Manager_Instance.Player_Manager.Can_Move == true)
         {
-            if(GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
+            if (GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
                 AudioManager.instance.DragRock();
             else
                 AudioManager.instance.Walk();

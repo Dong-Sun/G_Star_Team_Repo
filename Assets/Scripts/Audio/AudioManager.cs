@@ -3,9 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour {
     public static AudioManager instance;
-    public AudioManager Instance {
-        get { return instance; }
-    }
+    public AudioManager Instance { get => instance; }
 
 
     [Range(0f, 1f)] public float volume;

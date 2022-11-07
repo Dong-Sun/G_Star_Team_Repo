@@ -8,7 +8,7 @@ public class PapyrusController : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
     private void OnTriggerEnter(Collider other) {
-        if (other.tag == "Player" && !isActive) {
+        if (other.tag == "Player" && !isActive && !SceneLoadManager.scene_load_manager_instance.SceneChanging) {
             tutorial.SetBool("Active", true);
             AudioManager.instance.PaperOpen();
             isActive = true;

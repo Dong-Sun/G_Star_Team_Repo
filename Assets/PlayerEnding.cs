@@ -19,7 +19,7 @@ public class PlayerEnding : MonoBehaviour
         }
         else
         {
-            this.transform.position -= Vector3.right * Time.deltaTime * 0.3f;
+            this.transform.position -= Vector3.right * Time.deltaTime * 0.7f;
         }
     }
 }

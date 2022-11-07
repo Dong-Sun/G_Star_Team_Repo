@@ -33,18 +33,10 @@ public class PlayerAnimatorController : MonoBehaviour
         {
             if (GameManager.Game_Manager_Instance.Player_Manager.In_Motion)
             {
-                switch (GameManager.Game_Manager_Instance.Player_Manager.Input)
-                {
-                    case 1:
-                        Set_And_Play_Animation(Player_Animator_Parameter.Pull);
-                        return;
-                    case 0:
-                      
-                        return;
-                    case -1:
-                        Set_And_Play_Animation(Player_Animator_Parameter.Push);
-                        return;
-                }
+                if (GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Moving_Dir == GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Look_Dir.localPosition)
+                    Set_And_Play_Animation(Player_Animator_Parameter.Push);
+                else
+                    Set_And_Play_Animation(Player_Animator_Parameter.Pull);
             }
             else
             { 

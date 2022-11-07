@@ -96,6 +96,7 @@ public class SceneLoadManager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneChanging = true;
+                GameObject.FindWithTag("Player").GetComponent<Animator>().SetBool("Start", true);
                 SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
             }
         }

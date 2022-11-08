@@ -199,17 +199,13 @@ public class PlayerMove : MonoBehaviour
     //총 3개의 경우 블럭을 잡고있을때 없을때 블럭을 잡고있을때 뒤로는 한칸 앞으로는 두칸
     private bool Is_There_Wall()
     {
+        
         if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
             return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
         else if (Moving_Dir == Look_Dir.localPosition)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
-        else if (Moving_Dir == -Look_Dir.localPosition)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
-        else
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6) ||
-                Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Look_Dir.localPosition, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
-
-
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 );
+        else 
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
     }
 
 

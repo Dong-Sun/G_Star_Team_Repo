@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameManager.Game_Manager_Instance.Game_Stop || GameManager.Game_Manager_Instance.Player_Manager.Player_Die||Time.timeScale==0) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
+        if (GameManager.Game_Manager_Instance.Game_Stop || GameManager.Game_Manager_Instance.Player_Manager.Player_Die || Time.timeScale == 0) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
         {
             return;
         }
@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
             {
                 if (GameManager.Game_Manager_Instance.Player_Manager.Input != 0) //상하좌우 방향키 입력이 있다면
                 {
-                    Moving_Dir =  Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input);
+                    Moving_Dir = Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input);
                     if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
                     {
                         Look_Dir.localPosition = Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
@@ -67,6 +67,9 @@ public class PlayerMove : MonoBehaviour
                         Target_Position += Moving_Dir;
                         switch (Is_There_Stair())
                         {
+                            case -3:
+                                Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 1;
+                                break;
                             case -2:
                                 Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.3f;
                                 break;
@@ -80,6 +83,9 @@ public class PlayerMove : MonoBehaviour
                                 break;
                             case 2:
                                 Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.3f;
+                                break;
+                            case 3:
+                                Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 1;
                                 break;
                         }
                     }
@@ -109,7 +115,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 Change_Dir_To_Position(int input)
     {
         int sum = (int)GameManager.Game_Manager_Instance.Game_Dir + input;
-        switch (sum%4) //카메라가 보는 방향(카메라에서 변경)
+        switch (sum % 4) //카메라가 보는 방향(카메라에서 변경)
         {
             case 1:
                 return Vector3.back;
@@ -136,7 +142,7 @@ public class PlayerMove : MonoBehaviour
             return 3;
         else if (Input.GetKey(KeyCode.LeftArrow))
             return 2;
-        
+
         else if (Input.GetKey(KeyCode.RightArrow))
             return 4;
         else
@@ -154,11 +160,22 @@ public class PlayerMove : MonoBehaviour
     { //계단이 있는지 , 2층에 있어서 움직일 수 없는지 ,높이에 관련된 레이캐스트, 높이 조절함수
         float length = GameManager.Game_Manager_Instance.Player_Manager.Character_Height * 0.5f;
         if (Razer(transform.position + Moving_Dir, Vector3.down, length)) // 진행 방향쪽에 계단이 있는지 확인(위로 가느냐)
-            return 2;
+        {
+            if (Razer(transform.position, Vector3.down, GameManager.Game_Manager_Instance.Player_Manager.Block_Size)) // 내 밑에 계단이 있는지 확인
+                return 3;
+            else
+                return 2;
+        }
+
 
         length = GameManager.Game_Manager_Instance.Player_Manager.Block_Size + GameManager.Game_Manager_Instance.Player_Manager.Character_Height * 0.5f;
         if (Razer(transform.position + Moving_Dir, Vector3.down, length)) //진행 방향쪽에 계단이 있는지 확인(아래로 가느냐)
-            return -2;
+        {
+            if (Razer(transform.position, Vector3.down, GameManager.Game_Manager_Instance.Player_Manager.Block_Size)) // 내 밑에에 계단이 있는지 확인
+                return -3;
+            else
+                return -2;
+        }
 
         if (Razer(transform.position, Vector3.down, GameManager.Game_Manager_Instance.Player_Manager.Block_Size)) //내 아래로 레이저를 쏜다.(계단이 있는지 파악)
         {
@@ -168,6 +185,7 @@ public class PlayerMove : MonoBehaviour
             else
                 return -1;
         }
+
         return 0;
     }
 
@@ -182,14 +200,14 @@ public class PlayerMove : MonoBehaviour
     private bool Is_There_Wall()
     {
         if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
         else if (Moving_Dir == Look_Dir.localPosition)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
         else if (Moving_Dir == -Look_Dir.localPosition)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
         else
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3)|| 
-                Physics.Raycast(this.transform.position + Vector3.down * 0.4f+Look_Dir.localPosition, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6) ||
+                Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Look_Dir.localPosition, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
 
 
     }
@@ -202,7 +220,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private bool Is_There_Cliff()
     {
-        return !Physics.Raycast(this.transform.position + Moving_Dir, Vector3.down, GameManager.Game_Manager_Instance.Player_Manager.Character_Height * 0.5f + 0.3f * GameManager.Game_Manager_Instance.Player_Manager.Block_Size);
+        return !Physics.Raycast(this.transform.position + Moving_Dir, Vector3.down, GameManager.Game_Manager_Instance.Player_Manager.Character_Height * 0.5f + 0.6f * GameManager.Game_Manager_Instance.Player_Manager.Block_Size);
     }
 
 
@@ -215,9 +233,10 @@ public class PlayerMove : MonoBehaviour
     /// <returns></returns>
     private bool Razer(Vector3 origin, Vector3 TargetVec, float distance)
     {
-        Physics.Raycast(origin, TargetVec, out hit, distance, 2 | 3); //2와3 레이어 마스크를 무시한다(포탈 등 있어도 가는곳),interact을 위한 콜라이더(Look Dir,잡고있는 블럭등)
+        Physics.Raycast(origin, TargetVec, out hit, distance); //2와3 레이어 마스크를 무시한다(포탈 등 있어도 가는곳),interact을 위한 콜라이더(Look Dir,잡고있는 블럭등)
         if (hit.collider != null)
         {
+            
             if (hit.collider.tag == "Stair")
             {
                 return true;

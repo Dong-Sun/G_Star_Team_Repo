@@ -1,24 +1,43 @@
+using System.Collections;
 using UnityEngine;
 
 public class PapyrusController : MonoBehaviour {
     [SerializeField] Animator tutorial;
+    Coroutine c;
+    public CameraController cam;
     bool isActive = false;
+    bool playOneShot = true;
+    private void Awake() {
+        cam = GameObject.FindObjectOfType<CameraController>();
+    }
+
     private void Update() {
-        transform.rotation = Camera.main.transform.rotation;
-        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-    }
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag == "Player" && !isActive && !GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving) {
-            tutorial.SetBool("Active", true);
-            AudioManager.instance.PaperOpen();
-            isActive = true;
+        if(playOneShot && !GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving) {
+            playOneShot = false;
+            OpenPapyrus();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Backspace) && !playOneShot && cam.isRotate) {
+            if (isActive)
+                c = StartCoroutine(ClosePapyrus());
+            else {
+                if(c != null)
+                    StopCoroutine(c);
+                OpenPapyrus();
+            }
+                
         }
     }
-    private void OnTriggerExit(Collider other) {
-        if (other.tag == "Player" && isActive) {
-            tutorial.SetBool("Active", false);
-            AudioManager.instance.PaperClose();
-            isActive = false;
-        }
+    void OpenPapyrus() {
+        Time.timeScale = 0;
+        tutorial.SetBool("Active", true);
+        isActive = true;
+    }
+
+    IEnumerator ClosePapyrus() {
+        tutorial.SetBool("Active", false);
+        yield return new WaitForSecondsRealtime(0.75f);
+        Time.timeScale = 1;
+        isActive = false;
     }
 }

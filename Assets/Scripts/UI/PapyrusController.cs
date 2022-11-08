@@ -12,7 +12,7 @@ public class PapyrusController : MonoBehaviour {
     }
 
     private void Update() {
-        if(playOneShot && !GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving) {
+        if(playOneShot && !SceneLoadManager.scene_load_manager_instance.SceneChanging) {
             playOneShot = false;
             OpenPapyrus();
         }

@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameManager.Game_Manager_Instance.Game_Stop || GameManager.Game_Manager_Instance.Player_Manager.Player_Die) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
+        if (GameManager.Game_Manager_Instance.Game_Stop || GameManager.Game_Manager_Instance.Player_Manager.Player_Die||Time.timeScale==0) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
         {
             return;
         }

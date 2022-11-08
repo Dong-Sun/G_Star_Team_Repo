@@ -36,7 +36,6 @@ public class SceneLoadManager : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                SceneChanging = true;
                 SceneLoadManager.scene_load_manager_instance.Start_Scene_Load(2);
             }
         }
@@ -60,7 +59,6 @@ public class SceneLoadManager : MonoBehaviour {
             if (holdingTimer > 2f)
             {
                 holdingTimer = 0;
-                SceneChanging = true;
                 SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);
             }
         }
@@ -82,7 +80,6 @@ public class SceneLoadManager : MonoBehaviour {
             }
             if (holdingTimer > 2f)
             {
-                SceneChanging = true;
                 holdingTimer = 0;
                 SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
                 
@@ -95,7 +92,6 @@ public class SceneLoadManager : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneChanging = true;
                 GameObject.FindWithTag("Player").GetComponent<Animator>().SetBool("Start", true);
                 SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
             }
@@ -114,10 +110,12 @@ public class SceneLoadManager : MonoBehaviour {
     }
     public void Start_Scene_Load(int time)
     {
+        
         StartCoroutine(LoadScene(0, time));
     }
     
     IEnumerator LoadScene(int buildIndex, float Time) {
+        SceneChanging = true;
         Fade_UI_Control.Fade_in = true;
         yield return new WaitForSeconds(Time);
         SceneManager.LoadScene(buildIndex);

@@ -13,6 +13,7 @@ public class KeyHole : MonoBehaviour,Interact
         {
             KeyObj.SetActive(true);
             StartCoroutine(GameManager.Game_Manager_Instance.End_Animation_Coroutine());
+            GameManager.Game_Manager_Instance.Get_Stage_Key = false;
         }
     }
 }

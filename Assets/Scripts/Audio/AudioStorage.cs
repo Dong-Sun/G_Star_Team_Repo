@@ -103,6 +103,7 @@ public class AudioStorage {
 
         // 열쇠 생성 소리, 열쇠 먹는 소리
         createKey = Resources.Load<AudioClip>(soundPath + "createKey");
+        if (createKey == null) Debug.Log("Empty");
         getKey = Resources.Load<AudioClip>(soundPath + "getKey");
 
         // 스테이지 클리어 소리, 플레이어가 죽는 소리

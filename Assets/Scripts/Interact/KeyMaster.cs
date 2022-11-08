@@ -24,5 +24,9 @@ public class KeyMaster : MonoBehaviour
                 myKey.gameObject.SetActive(isActive);
             }
         }
+        else if(!myKey.GetKey) {
+            isActive = true;
+            myKey.gameObject.SetActive(isActive);
+        }
     }
 }

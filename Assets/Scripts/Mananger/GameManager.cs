@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         Change_Camera = GameObject.FindObjectOfType<ChangeCamera>();
         Game_Dir = Dir.ForWard;
         Game_Stop = false;
+        Get_Stage_Key = false;
         StopAllCoroutines();
         GameObject g = GameObject.FindGameObjectWithTag("Player");
         if (g != null && Player_Manager == null)

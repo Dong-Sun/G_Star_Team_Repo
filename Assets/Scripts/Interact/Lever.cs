@@ -4,6 +4,7 @@ using UnityEngine;
 /// 상호작용 시, 할당받은 오브젝트 필드를 돌려서 길을 만들어 줍니다.
 /// </summary>
 public class Lever : MonoBehaviour, Interact {
+    [SerializeField] GameObject arrow;
     [SerializeField] GameObject stick;              // 레버 스틱
     [SerializeField] float stickSpeed = 3f;         // 스틱 당기는 속도
     float stickTimer = 0f;                          // stick 오브젝트 돌리는 시간 체크를 위한 임의의 타이머 변수
@@ -29,6 +30,7 @@ public class Lever : MonoBehaviour, Interact {
         }
     }
     private void PullStick() {
+        arrow.SetActive(false);
         stickTimer += Time.deltaTime * stickSpeed;
         if (!switching)
             stick.transform.localRotation

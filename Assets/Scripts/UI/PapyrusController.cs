@@ -17,15 +17,14 @@ public class PapyrusController : MonoBehaviour {
             OpenPapyrus();
         }
 
-        if(Input.GetKeyDown(KeyCode.Backspace) && !playOneShot && cam.isRotate) {
+        if(Input.GetKeyDown(KeyCode.W) && !playOneShot && cam.isRotate) {
             if (isActive)
                 c = StartCoroutine(ClosePapyrus());
             else {
                 if(c != null)
                     StopCoroutine(c);
                 OpenPapyrus();
-            }
-                
+            }     
         }
     }
     void OpenPapyrus() {

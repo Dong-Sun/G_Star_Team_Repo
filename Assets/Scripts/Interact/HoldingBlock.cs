@@ -6,7 +6,7 @@ public class HoldingBlock : MonoBehaviour, Interact {
     bool switching = true;
     bool isActive = true;
     [SerializeField] bool spawnFallSound = false;
-    
+
     public void Work() {
         if (switching) {
             if (playerTarget != null) {
@@ -41,13 +41,16 @@ public class HoldingBlock : MonoBehaviour, Interact {
     }
     private void OnTriggerExit(Collider other) {
         if (other.GetComponent<PlayerInteraction>() != null) {
-            isActive = false;
             UnHoldBlock();
             this.gameObject.layer = 0;
         }
     }
     private void OnCollisionEnter(Collision collision) {
-        if(collision.transform.parent != null) {
+        if (collision.transform.name == "FloorBase") {
+            isActive = false;
+            arrow.SetActive(true & isActive);
+        }
+        if (collision.transform.parent != null) {
             if (collision.transform.parent.name == "1stFloor" && spawnFallSound) {
                 spawnFallSound = false;
                 AudioManager.instance.OneShotEvent("fallRockFloor");

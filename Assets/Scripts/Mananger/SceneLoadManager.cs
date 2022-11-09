@@ -99,9 +99,12 @@ public class SceneLoadManager : MonoBehaviour {
     }
 
     public void NextSceneLoad(int time) {
-        if (!(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)) {
+        if (!(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1))
+        {
             StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, time));
         }
+        else
+            StartCoroutine(LoadScene(0, time));
     }
 
     public void CurrentSceneLoad(int time) {

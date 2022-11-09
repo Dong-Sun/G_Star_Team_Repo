@@ -5,6 +5,8 @@ public class HoldingBlock : MonoBehaviour, Interact {
     [SerializeField] Transform floor;
     bool switching = true;
     bool isActive = true;
+    bool spawnFallSound = true;
+    
     public void Work() {
         if (switching) {
             if (playerTarget != null) {
@@ -41,5 +43,12 @@ public class HoldingBlock : MonoBehaviour, Interact {
         if (other.GetComponent<PlayerInteraction>() != null) {
             UnHoldBlock();
         }
+    }
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.transform.parent.name == "1stFloor" && spawnFallSound) {
+            spawnFallSound = false;
+            AudioManager.instance.OneShotEvent("fallRockFloor");
+        }
+            
     }
 }

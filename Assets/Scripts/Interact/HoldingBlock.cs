@@ -45,9 +45,11 @@ public class HoldingBlock : MonoBehaviour, Interact {
         }
     }
     private void OnCollisionEnter(Collision collision) {
-        if (collision.transform.parent.name == "1stFloor" && spawnFallSound) {
-            spawnFallSound = false;
-            AudioManager.instance.OneShotEvent("fallRockFloor");
+        if(collision.transform.parent != null) {
+            if (collision.transform.parent.name == "1stFloor" && spawnFallSound) {
+                spawnFallSound = false;
+                AudioManager.instance.OneShotEvent("fallRockFloor");
+            }
         }
     }
 }

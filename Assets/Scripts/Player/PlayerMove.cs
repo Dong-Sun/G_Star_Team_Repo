@@ -71,18 +71,18 @@ public class PlayerMove : MonoBehaviour
                                 Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 1;
                                 break;
                             case -2:
-                                Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.3f;
+                                Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
                                 break;
                             case -1:
-                                Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.7f;
+                                Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
                                 break;
                             case 0:
                                 break;
                             case 1:
-                                Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.7f;
+                                Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
                                 break;
                             case 2:
-                                Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.3f;
+                                Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
                                 break;
                             case 3:
                                 Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 1;
@@ -201,7 +201,7 @@ public class PlayerMove : MonoBehaviour
     {
         
         if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.3f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
         else if (Moving_Dir == Look_Dir.localPosition)
             return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 );
         else 
@@ -273,7 +273,7 @@ public class PlayerMove : MonoBehaviour
             GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
 
         }
-        Player_Character_Controller.Move(Vector3.down * Time.deltaTime * 0.8f);
+        Player_Character_Controller.Move(Vector3.down * Time.deltaTime * 1f);
     }
 
 

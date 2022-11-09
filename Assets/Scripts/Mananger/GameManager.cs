@@ -127,11 +127,12 @@ public class GameManager : MonoBehaviour
         if (Change_Camera != null)
             Change_Camera.ChangeToMain();
         yield return new WaitForSeconds(1.5f);
+        SceneLoadManager.scene_load_manager_instance.SceneChanging = false;
+        yield return new WaitForSeconds(0.25f);
         if (Player_Manager != null)
         {
             Player_Manager.Auto_Moving = false;
         }
-        SceneLoadManager.scene_load_manager_instance.SceneChanging = false;
     }
     public IEnumerator End_Animation_Coroutine()
     {

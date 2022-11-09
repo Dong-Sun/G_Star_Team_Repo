@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ab08612e63d71e8419000749e3c68d16, type: 2}
+  - {fileID: 2100000, guid: 769aef6be5184684bac19f9ff190eb59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,9 +128,9 @@ GameObject:
   - component: {fileID: 5796312776525289452}
   - component: {fileID: 1133820398}
   - component: {fileID: 1133820399}
-  - component: {fileID: 1133820397}
+  - component: {fileID: 2857163342778918424}
   m_Layer: 0
-  m_Name: Switch
+  m_Name: DropRock
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 5957472938137226812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5960924117220473204}
@@ -221,7 +221,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.51, z: 1}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &1133820397
+--- !u!114 &2857163342778918424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,13 +230,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5957472938137226812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebed868c3dd09444daff4a14943e9fa3, type: 3}
+  m_Script: {fileID: 11500000, guid: d3ef37f76d585cb4e9fa2043442ac74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikes: []
-  button: {fileID: 5956606468527316344}
-  isActive: 0
-  speed: 5
 --- !u!1 &5958041683433497906
 GameObject:
   m_ObjectHideFlags: 0

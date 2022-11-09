@@ -14,6 +14,7 @@ public class Switch : MonoBehaviour, Interact
     float timer = 0f;                           // 시간 제어
     Vector3 start = new Vector3(0, 0.2f, 0);    // 버튼 누르기 전 좌표
     Vector3 end = new Vector3(0, 0, 0);         // 버튼 눌렀을 때 좌표
+    [SerializeField] GameObject arrow;
     private void Update() {
         if(isActive) {
             if(!swap) {
@@ -49,5 +50,6 @@ public class Switch : MonoBehaviour, Interact
         foreach (Spike spike in spikes) {   // 할당 받은 모든 Spike들을 탐색해서 공격 비활성화
             spike.isAttack = false;
         }
+        arrow.SetActive(false);
     }
 }

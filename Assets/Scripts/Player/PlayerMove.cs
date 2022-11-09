@@ -58,7 +58,6 @@ public class PlayerMove : MonoBehaviour
                         Audio_Control();
                         GameManager.Game_Manager_Instance.Player_Manager.In_Motion = false;
                         GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
-                        return;
                     }
                     else
                     {
@@ -91,17 +90,6 @@ public class PlayerMove : MonoBehaviour
             }
 
         }//자동 움직임이 돌아는 동안
-        else
-        {
-            if (!GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool)
-            {
-                //if (Fix_Player_Position_Coroutine != null)
-                //{
-                //    StopCoroutine(Fix_Player_Position_Coroutine);//좌우 방향이 아닌 방향으로 이동되는 것을 제한하는 코루틴을 끈다.(자동이동시에 여러 방향으로 이동하는 경우가 있어서)
-                //    GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool = true;
-                //}
-            }
-        }
         transform.GetChild(0).LookAt(Look_Dir.position + Vector3.down * 0.48f);
         Real_Player_Moving();
     }

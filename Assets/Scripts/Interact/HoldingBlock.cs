@@ -5,7 +5,7 @@ public class HoldingBlock : MonoBehaviour, Interact {
     [SerializeField] Transform floor;
     bool switching = true;
     bool isActive = true;
-    bool spawnFallSound = true;
+    [SerializeField] bool spawnFallSound = false;
     
     public void Work() {
         if (switching) {
@@ -49,6 +49,5 @@ public class HoldingBlock : MonoBehaviour, Interact {
             spawnFallSound = false;
             AudioManager.instance.OneShotEvent("fallRockFloor");
         }
-            
     }
 }

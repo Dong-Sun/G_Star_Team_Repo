@@ -97,9 +97,10 @@ GameObject:
   - component: {fileID: 462311698}
   - component: {fileID: 462311697}
   - component: {fileID: 462311696}
-  m_Layer: 0
+  - component: {fileID: 462311699}
+  m_Layer: 6
   m_Name: sandstone_stair_straight_LOD0
-  m_TagString: Untagged
+  m_TagString: Stair
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,8 +181,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3, z: 1.0544691}
-  m_Center: {x: 0.00000047683716, y: 0.15, z: -0.003579946}
+  m_Size: {x: 1, y: 0.25, z: 1}
+  m_Center: {x: 0.00000047683716, y: 0.125, z: -0.003579946}
 --- !u!65 &462311697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -193,8 +194,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3, z: 0.7}
-  m_Center: {x: 0.00000047683716, y: 0.37, z: -0.09}
+  m_Size: {x: 1, y: 0.25, z: 0.75}
+  m_Center: {x: 0.00000047683716, y: 0.375, z: -0.125}
 --- !u!65 &462311696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -206,8 +207,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0597936, y: 0.3, z: 0.5}
-  m_Center: {x: 0.00000047683716, y: 0.6, z: -0.23}
+  m_Size: {x: 1, y: 0.25, z: 0.5}
+  m_Center: {x: 0.00000047683716, y: 0.625, z: -0.25}
+--- !u!65 &462311699
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239283907449338}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.25, z: 0.25}
+  m_Center: {x: 0.00000047683716, y: 0.875, z: -0.375}
 --- !u!1 &1675263899577056
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +254,7 @@ Transform:
   - {fileID: 4019930544543616}
   - {fileID: 4258934273582146}
   - {fileID: 4376487820129704}
+  - {fileID: 2800496204996579600}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -353,3 +368,62 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6784905877586088954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2800496204996579600}
+  - component: {fileID: 7856946357769289741}
+  - component: {fileID: 7949309399917313027}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2800496204996579600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784905877586088954}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4835775811210954}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7856946357769289741
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784905877586088954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 2, z: 1}
+  m_Center: {x: 0.45, y: 0.5, z: 0}
+--- !u!65 &7949309399917313027
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784905877586088954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 2, z: 1}
+  m_Center: {x: -0.45, y: 0.5, z: 0}

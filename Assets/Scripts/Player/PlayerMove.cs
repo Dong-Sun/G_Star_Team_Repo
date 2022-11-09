@@ -6,8 +6,6 @@ using System;
 public class PlayerMove : MonoBehaviour
 {
 
-
-
     private Vector3 Target_Position;
     public Transform Look_Dir;
     private CharacterController Player_Character_Controller;
@@ -340,10 +338,9 @@ public class PlayerMove : MonoBehaviour
         if (GameManager.Game_Manager_Instance.Player_Manager.In_Motion == true && GameManager.Game_Manager_Instance.Player_Manager.Can_Move == true)
         {
             if (GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
-                AudioManager.instance.DragRock();
+                AudioManager.instance.OneShotEvent("dragRock");
             else
-                AudioManager.instance.Walk();
+                AudioManager.instance.OneShotEvent("walk");
         }
     }
 }
-

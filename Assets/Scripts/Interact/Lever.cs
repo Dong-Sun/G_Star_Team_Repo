@@ -22,7 +22,7 @@ public class Lever : MonoBehaviour, Interact {
                 PullStick();
             }
             if (stickTimer >= 1f) {
-                AudioManager.instance.SwitchingLever();
+                AudioManager.instance.OneShotEvent("switchingLever");
                 stickTimer = 0f;
                 switching = true;
                 oneShot = false;
@@ -40,7 +40,6 @@ public class Lever : MonoBehaviour, Interact {
                 = Quaternion.Slerp(Quaternion.Euler(-30f, 0f, 0f), Quaternion.Euler(30f, 0f, 0f), 1f - stickTimer);
     }
     public void Work() {
-        Debug.Log("Lever");
         isRotate = true;
     }
 }

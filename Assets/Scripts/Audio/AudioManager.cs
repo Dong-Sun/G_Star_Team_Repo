@@ -1,16 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class AudioManager : MonoBehaviour {
     public static AudioManager instance;
     public AudioManager Instance { get => instance; }
 
-
     [Range(0f, 1f)] public float volume;
 
     private AudioStorage audioStorage;
     private AudioSource audioSource;
-
 
     private void Awake() {
         if (instance == null) {
@@ -36,7 +35,7 @@ public class AudioManager : MonoBehaviour {
         switch (currentScene) {
             case 0:
                 audioSource.clip = null;
-                audioSource.clip = audioStorage.StartSceneBGM;
+                audioSource.clip = audioStorage.GetSoundTrack("startSceneBGM");
                 audioSource.Play();
                 break;
             case 1:
@@ -44,61 +43,41 @@ public class AudioManager : MonoBehaviour {
                 break;
             case 2:
                 audioSource.clip = null;
-                audioSource.clip = audioStorage.SixthFloor;
+                audioSource.clip = audioStorage.GetSoundTrack("fifthFloor");
                 audioSource.Play();
                 break;
             case 3:
                 audioSource.clip = null;
-                audioSource.clip = audioStorage.FourFloor;
+                audioSource.clip = audioStorage.GetSoundTrack("fourthFloor");
                 audioSource.Play();
                 break;
             case 4:
                 audioSource.clip = null;
-                audioSource.clip = audioStorage.FifthFloor;
+                audioSource.clip = audioStorage.GetSoundTrack("thirdFloor");
                 audioSource.Play();
                 break;
             case 5:
                 audioSource.clip = null;
-                audioSource.clip = audioStorage.ThirdFloor;
+                audioSource.clip = audioStorage.GetSoundTrack("secondFloor");
+                audioSource.Play();
+                break;
+            case 6:
+                audioSource.clip = null;
+                audioSource.clip = audioStorage.GetSoundTrack("firstFloor");
+                audioSource.Play();
+                break;
+            case 7:
+                audioSource.clip = null;
+                audioSource.clip = audioStorage.GetSoundTrack("EndingBGM");
                 audioSource.Play();
                 break;
             default:
-                Debug.LogError("Not Found SceneIndex");
+                Debug.LogError("not found sceneindex");
                 break;
         }
     }
 
-    public void FallRockLava() {
-        audioSource.PlayOneShot(audioStorage.FallRockFloor);
-    }
-    public void SwitchingLever() {
-        audioSource.PlayOneShot(audioStorage.SwitchingLever);
-    }
-    public void OpenDoor() {
-        audioSource.PlayOneShot(audioStorage.OpenDoor);
-    }
-    public void CloseDoor() {
-        audioSource.PlayOneShot(audioStorage.CloseDoor);
-    }
-    public void BulletFire() {
-        audioSource.PlayOneShot(audioStorage.BulletFire);
-    }
-    public void DragRock() {
-        audioSource.PlayOneShot(audioStorage.DragRock);
-    }
-    public void Walk() {
-        audioSource.PlayOneShot(audioStorage.Walk);
-    }
-    public void PaperOpen() {
-        audioSource.PlayOneShot(audioStorage.PaperOpen);
-    }
-    public void PaperClose() {
-        audioSource.PlayOneShot(audioStorage.PaperClose);
-    }
-    public void CreateKey() {
-        audioSource.PlayOneShot(audioStorage.CreateKey);
-    }
-    public void GetKey() {
-        audioSource.PlayOneShot(audioStorage.GetKey);
+    public void OneShotEvent(string name) {
+        audioSource.PlayOneShot(audioStorage.GetSoundTrack(name));
     }
 }

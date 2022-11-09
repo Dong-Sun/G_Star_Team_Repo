@@ -5,7 +5,7 @@ public class Key : MonoBehaviour, Interact {
     public bool GetKey { get => getKey; }
     [SerializeField] GameObject arrow;
     private void Start() {
-        AudioManager.instance.CreateKey();
+        AudioManager.instance.OneShotEvent("createKey");
         arrow.SetActive(true);
     }
     private void Update() {
@@ -19,7 +19,7 @@ public class Key : MonoBehaviour, Interact {
             GameManager.Game_Manager_Instance.Get_Stage_Key = true;
             getKey = true;
             this.gameObject.transform.position += Vector3.down * 2;
-            AudioManager.instance.GetKey();
+            AudioManager.instance.OneShotEvent("getKey");
             Destroy(this.gameObject, 3);
         }
     }

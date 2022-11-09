@@ -28,12 +28,14 @@ public class PapyrusController : MonoBehaviour {
         }
     }
     void OpenPapyrus() {
+        AudioManager.instance.OneShotEvent("paperOpen");
         Time.timeScale = 0;
         tutorial.SetBool("Active", true);
         isActive = true;
     }
 
     IEnumerator ClosePapyrus() {
+        AudioManager.instance.OneShotEvent("paperClose");
         tutorial.SetBool("Active", false);
         yield return new WaitForSecondsRealtime(0.75f);
         Time.timeScale = 1;

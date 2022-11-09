@@ -25,6 +25,6 @@ public class Spike : MonoBehaviour {
     // ÃÑ¾Ë È°¼ºÈ­
     private void InitBullet() {
         Bullet.gameObject.SetActive(true);
-        AudioManager.instance.BulletFire();
+        AudioManager.instance.OneShotEvent("bulletFire");
     }
 }

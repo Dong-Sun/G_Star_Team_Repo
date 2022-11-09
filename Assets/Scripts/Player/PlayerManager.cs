@@ -50,6 +50,7 @@ public class PlayerManager : MonoBehaviour
     public void Player_Dying()
     {
         Player_Die = true;
+        AudioManager.instance.OneShotEvent("playerDie");
         GameManager.Game_Manager_Instance.Game_Stop = true;
         Player_Animator_Controller.Player_Animator_Parameter_Control();
         SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);

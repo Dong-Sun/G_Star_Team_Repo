@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
         if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() < 2)
         {
             Game_Dir = Dir.ForWard;

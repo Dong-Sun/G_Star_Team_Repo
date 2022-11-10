@@ -42,13 +42,13 @@ public class HoldingBlock : MonoBehaviour, Interact {
     private void OnTriggerExit(Collider other) {
         if (other.GetComponent<PlayerInteraction>() != null) {
             UnHoldBlock();
-            this.gameObject.layer = 0;
         }
     }
     private void OnCollisionEnter(Collision collision) {
         if (collision.transform.name == "FloorBase") {
             isActive = false;
             arrow.SetActive(true & isActive);
+            this.gameObject.layer = 0;
         }
         if (collision.transform.parent != null) {
             if (collision.transform.parent.name == "1stFloor" && spawnFallSound) {

@@ -5,7 +5,7 @@ public class PlayerTarget : MonoBehaviour {
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.Find("Look_Dir").transform;
     }
     void Update() {
         transform.position = player.position;

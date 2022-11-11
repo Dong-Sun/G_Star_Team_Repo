@@ -7,6 +7,13 @@ public class HoldingBlock : MonoBehaviour, Interact {
     bool isActive = true;
     [SerializeField] bool spawnFallSound = false;
 
+    private void Update() {
+        if (!switching) {
+
+            transform.localPosition = new Vector3(0, transform.localPosition.y, 0);
+        }
+    }
+
     public void Work() {
         if (switching) {
             if (playerTarget != null) {

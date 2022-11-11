@@ -239,7 +239,8 @@ public class PlayerMove : MonoBehaviour
         {
             Target_Position = Target_Position - Vector3.up * (Target_Position.y - this.transform.position.y); //Target좌표 높이를 현재 높이로 이동시킨다.(없어지면 밑으로 팅기거나 위로 이동할려고 발악 하는 경우 발생)
             Enabling_Player_Character_Controller_To_Fix_Player_Position(Target_Position); //x,z좌표를 Target지점으로 재 변경하는 함수(Controller.Move 함수는 완벽한 한칸 이동이 구현되지 않기에 이렇게 좌표 고정)
-            GameManager.Game_Manager_Instance.Player_Manager.Can_Move = true; //다음칸으로 이동할수 있게 변경
+            if (this.transform.position == Target_Position)
+                GameManager.Game_Manager_Instance.Player_Manager.Can_Move = true; //다음칸으로 이동할수 있게 변경
             if (GameManager.Game_Manager_Instance.Player_Manager.Input == 0) //다음 칸으로 바로 이동하는 경우 Idle로 변경되지 않고 Run 상태를 유지
             {
                 Audio_Control();

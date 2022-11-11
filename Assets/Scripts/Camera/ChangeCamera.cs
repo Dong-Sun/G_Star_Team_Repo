@@ -16,12 +16,6 @@ public class ChangeCamera : MonoBehaviour {
 
     }
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            ChangeToStart();
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            ChangeToMain();
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            ChangeToEnd();
     }
 
     public void ChangeToMain() {

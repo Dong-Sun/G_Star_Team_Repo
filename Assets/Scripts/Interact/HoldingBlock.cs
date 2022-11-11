@@ -16,6 +16,7 @@ public class HoldingBlock : MonoBehaviour, Interact {
 
     private void Update() {
         if (!switching) {
+            transform.localPosition = new Vector3(0, transform.localPosition.y, 0);
             ray.origin = transform.position;
             if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move) {
                 if (Physics.Raycast(ray.origin, ray.direction, out hit, 2)) {
@@ -31,7 +32,6 @@ public class HoldingBlock : MonoBehaviour, Interact {
                     }
                 }
             }
-            transform.localPosition = new Vector3(0, transform.localPosition.y, 0);
         }
     }
     public void Work() {

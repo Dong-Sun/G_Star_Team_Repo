@@ -27,11 +27,15 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         SingleTon();
+        GameManager.Game_Manager_Instance.Player_Manager = this;
     }
 
     void Start()
     {
-        GameManager.Game_Manager_Instance.Player_Manager = this;
+        if (GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving_Needed == true)
+        {
+            GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving = true;
+        }
         Player_Animator_Controller = transform.GetChild(0).GetComponent<PlayerAnimatorController>();
         Player_Move = GetComponent<PlayerMove>();
         

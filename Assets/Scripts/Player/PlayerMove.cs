@@ -25,61 +25,64 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameManager.Game_Manager_Instance.Game_Stop || GameManager.Game_Manager_Instance.Player_Manager.Player_Die || Time.timeScale == 0 || GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
+        if (GameManager.Game_Manager_Instance.Game_Stop || GameManager.Game_Manager_Instance.Player_Manager.Player_Die || Time.timeScale == 0) //게임이 진행이 되고 있지 않다면 또는 플레이어가 죽었다면
         {
             return;
         }
-        GameManager.Game_Manager_Instance.Player_Manager.Input = Transform_input(); //좌우 방향키를 변형한 값을 input에 저장
-        if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move) //움직 일수 있는 상태라면(한칸 단위에 잘 있다면)
+        if (!GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving) //자동 움직임이 되는 중이 아닐때만
         {
-            if (GameManager.Game_Manager_Instance.Player_Manager.Input != 0) //상하좌우 방향키 입력이 있다면
+            GameManager.Game_Manager_Instance.Player_Manager.Input = Transform_input(); //좌우 방향키를 변형한 값을 input에 저장
+            if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move) //움직 일수 있는 상태라면(한칸 단위에 잘 있다면)
             {
-                Moving_Dir = Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input);
-                if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
+                if (GameManager.Game_Manager_Instance.Player_Manager.Input != 0) //상하좌우 방향키 입력이 있다면
                 {
-                    Look_Dir.localPosition = Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
-                }
-                else
-                {
-                    if (!(Moving_Dir == -Look_Dir.localPosition || Moving_Dir == Look_Dir.localPosition))
-                        return;
-                }
-                if (Is_There_Wall() || Is_There_Cliff())
-                {
-                    Audio_Control();
-                    GameManager.Game_Manager_Instance.Player_Manager.In_Motion = false;
-                    GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
-                }
-                else
-                {
-                    Target_Position += Moving_Dir;
-                    switch (Is_There_Stair())
+                    Moving_Dir = Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input);
+                    if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
                     {
-                        case -3:
-                            Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 1;
-                            break;
-                        case -2:
-                            Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
-                            break;
-                        case -1:
-                            Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
-                            break;
-                        case 0:
-                            break;
-                        case 1:
-                            Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
-                            break;
-                        case 2:
-                            Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
-                            break;
-                        case 3:
-                            Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 1;
-                            break;
+                        Look_Dir.localPosition = Change_Dir_To_Position(GameManager.Game_Manager_Instance.Player_Manager.Input); //게임 진행 방향과 인풋값을 조합하여 보고있는 방향을 바꾼다. (뒤에 down은 캐릭터 매쉬랑 높이 맞추기 위한 값더하기)
+                    }
+                    else
+                    {
+                        if (!(Moving_Dir == -Look_Dir.localPosition || Moving_Dir == Look_Dir.localPosition))
+                            return;
+                    }
+                    if (Is_There_Wall() || Is_There_Cliff())
+                    {
+                        Audio_Control();
+                        GameManager.Game_Manager_Instance.Player_Manager.In_Motion = false;
+                        GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
+                    }
+                    else
+                    {
+                        Target_Position += Moving_Dir;
+                        switch (Is_There_Stair())
+                        {
+                            case -3:
+                                Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 1;
+                                break;
+                            case -2:
+                                Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
+                                break;
+                            case -1:
+                                Target_Position -= Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
+                                break;
+                            case 0:
+                                break;
+                            case 1:
+                                Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
+                                break;
+                            case 2:
+                                Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 0.5f;
+                                break;
+                            case 3:
+                                Target_Position += Vector3.up * GameManager.Game_Manager_Instance.Player_Manager.Floor_Height * 1;
+                                break;
+                        }
                     }
                 }
             }
-        }
 
+        }//자동 움직임이 돌아는 동안
         transform.GetChild(0).LookAt(Look_Dir.position + Vector3.down * 0.48f);
         Real_Player_Moving();
     }
@@ -175,12 +178,12 @@ public class PlayerMove : MonoBehaviour
     //총 3개의 경우 블럭을 잡고있을때 없을때 블럭을 잡고있을때 뒤로는 한칸 앞으로는 두칸
     private bool Is_There_Wall()
     {
-
+        
         if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
             return Physics.Raycast(this.transform.position + Vector3.down * 0.3f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 3 | 6);
         else if (Moving_Dir == Look_Dir.localPosition)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
-        else
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 );
+        else 
             return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
     }
 
@@ -229,8 +232,7 @@ public class PlayerMove : MonoBehaviour
         {
             Target_Position = Target_Position - Vector3.up * (Target_Position.y - this.transform.position.y); //Target좌표 높이를 현재 높이로 이동시킨다.(없어지면 밑으로 팅기거나 위로 이동할려고 발악 하는 경우 발생)
             Enabling_Player_Character_Controller_To_Fix_Player_Position(Target_Position); //x,z좌표를 Target지점으로 재 변경하는 함수(Controller.Move 함수는 완벽한 한칸 이동이 구현되지 않기에 이렇게 좌표 고정)
-            if (this.transform.position == Target_Position)
-                GameManager.Game_Manager_Instance.Player_Manager.Can_Move = true; //다음칸으로 이동할수 있게 변경
+            GameManager.Game_Manager_Instance.Player_Manager.Can_Move = true; //다음칸으로 이동할수 있게 변경
             if (GameManager.Game_Manager_Instance.Player_Manager.Input == 0) //다음 칸으로 바로 이동하는 경우 Idle로 변경되지 않고 Run 상태를 유지
             {
                 Audio_Control();

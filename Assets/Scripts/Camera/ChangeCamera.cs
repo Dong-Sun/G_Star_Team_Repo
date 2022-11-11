@@ -6,6 +6,11 @@ public class ChangeCamera : MonoBehaviour {
     [SerializeField] GameObject start;  // 시작할 때 나오는 문을 보여주는 카메라
     [SerializeField] GameObject[] end;    // 끝날 때 문에 들어가면서 들어가는 장면을 보여주는 카메라
 
+    private void Awake()
+    {
+        GameManager.Game_Manager_Instance.Change_Camera = this;
+    }
+
     private void Start() {
         ChangeToStart();    // 처음 시작할 대는 start 카메라를 켜주고
 

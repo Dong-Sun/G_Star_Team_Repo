@@ -123,7 +123,6 @@ public class SceneLoadManager : MonoBehaviour {
         yield return new WaitForSeconds(Time);
         SceneManager.LoadScene(buildIndex);
         AudioManager.instance.ChangeBackSound(buildIndex);
-        yield return new WaitForSeconds(0.5f);
         GameManager.Game_Manager_Instance.Initialize_GameData();
     }
 

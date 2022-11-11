@@ -6147,8 +6147,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979403, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979404, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979405, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979406, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
 --- !u!4 &134217946 stripped
 Transform:
@@ -6162,20 +6176,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 134217945}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &134217948
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134217947}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!65 &134217950
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41128,8 +41128,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979403, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979404, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979405, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979406, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
 --- !u!4 &877095652 stripped
 Transform:
@@ -41143,20 +41157,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 877095651}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &877095654
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877095653}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!65 &877095656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51342,8 +51342,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979403, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979404, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979405, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979406, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
 --- !u!4 &1153697224 stripped
 Transform:
@@ -53407,8 +53421,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979403, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979404, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979405, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979406, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
 --- !u!4 &1206454677 stripped
 Transform:
@@ -55805,8 +55833,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979403, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979404, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979405, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979406, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
 --- !u!4 &1264287294 stripped
 Transform:
@@ -55820,20 +55862,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1264287293}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1264287296
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264287295}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!65 &1264287298
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65318,8 +65346,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979403, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979404, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979405, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979406, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
 --- !u!4 &1465069526 stripped
 Transform:
@@ -72340,8 +72382,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979403, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979404, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979405, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979406, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
 --- !u!4 &1608378944 stripped
 Transform:
@@ -83721,8 +83777,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: stair_stone1_straight_LOD_group
       objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449596469423592890, guid: 03af26efcdbf941a99875a9bd09a1d27,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8257399263685296971, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979403, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979404, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979405, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
+    - {fileID: 1575979406, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03af26efcdbf941a99875a9bd09a1d27, type: 3}
 --- !u!4 &1835978118 stripped
 Transform:
@@ -83736,20 +83806,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1835978117}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1835978120
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835978119}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!65 &1835978122
 BoxCollider:
   m_ObjectHideFlags: 0

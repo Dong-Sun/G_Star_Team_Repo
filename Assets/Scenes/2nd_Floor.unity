@@ -34306,7 +34306,7 @@ GameObject:
   - component: {fileID: 930074851}
   - component: {fileID: 930074850}
   m_Layer: 0
-  m_Name: BoxCollider
+  m_Name: FloorBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

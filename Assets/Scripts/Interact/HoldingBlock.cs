@@ -9,7 +9,6 @@ public class HoldingBlock : MonoBehaviour, Interact {
 
     private void Update() {
         if (!switching) {
-
             transform.localPosition = new Vector3(0, transform.localPosition.y, 0);
         }
     }

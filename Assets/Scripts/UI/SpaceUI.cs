@@ -7,7 +7,7 @@ public class SpaceUI : MonoBehaviour
 {
     private Text text;
     private Color color;
-    public float time = 0.8f;
+    private float time = 0.8f;
     private float Active_Time=0;
     private float cooltime=0.8f;
     private bool Start_text_Control_Bool=false;

@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Key : MonoBehaviour, Interact {
+    [SerializeField] UnityEvent quest;
     private bool getKey = false;
     public bool GetKey { get => getKey; }
     [SerializeField] GameObject arrow;
@@ -20,6 +22,7 @@ public class Key : MonoBehaviour, Interact {
             getKey = true;
             this.gameObject.transform.position += Vector3.down * 2;
             AudioManager.instance.OneShotEvent("getKey");
+            quest.Invoke();
             Destroy(this.gameObject, 3);
         }
     }

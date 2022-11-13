@@ -12,19 +12,18 @@ public class PapyrusController : MonoBehaviour {
     }
 
     private void Update() {
-        if(playOneShot && !SceneLoadManager.scene_load_manager_instance.SceneChanging) {
+        if (playOneShot && !SceneLoadManager.scene_load_manager_instance.SceneChanging) {
             playOneShot = false;
             OpenPapyrus();
         }
 
-        if(Input.GetKeyDown(KeyCode.W) && !playOneShot && cam.isRotate) {
+        if (Input.GetKeyDown(KeyCode.W) && !playOneShot && cam.isRotate) {
             if (isActive)
                 c = StartCoroutine(ClosePapyrus());
             else {
-                if(c != null)
-                    StopCoroutine(c);
+                StopCoroutine(c);
                 OpenPapyrus();
-            }     
+            }
         }
     }
     void OpenPapyrus() {
@@ -37,8 +36,8 @@ public class PapyrusController : MonoBehaviour {
     IEnumerator ClosePapyrus() {
         AudioManager.instance.OneShotEvent("paperClose");
         tutorial.SetBool("Active", false);
+        isActive = false;
         yield return new WaitForSecondsRealtime(0.75f);
         Time.timeScale = 1;
-        isActive = false;
     }
 }

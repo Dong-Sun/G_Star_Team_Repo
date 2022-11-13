@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class KeyHole : MonoBehaviour,Interact
-{
+public class KeyHole : MonoBehaviour, Interact {
+    [SerializeField] UnityEvent quest;
     public GameObject KeyObj;
     [SerializeField] GameObject arrow;
     bool oneTake = true;
@@ -15,12 +14,11 @@ public class KeyHole : MonoBehaviour,Interact
         }
     }
 
-    public void Work()
-    {
-        if (GameManager.Game_Manager_Instance.Get_Stage_Key)
-        {
+    public void Work() {
+        if (GameManager.Game_Manager_Instance.Get_Stage_Key) {
             arrow.SetActive(false);
             KeyObj.SetActive(true);
+            quest.Invoke();
             StartCoroutine(GameManager.Game_Manager_Instance.End_Animation_Coroutine());
             GameManager.Game_Manager_Instance.Get_Stage_Key = false;
         }

@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 상호작용 시, 할당받은 오브젝트 필드를 돌려서 길을 만들어 줍니다.
 /// </summary>
 public class Lever : MonoBehaviour, Interact {
+    [SerializeField] UnityEvent quest;
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject stick;              // 레버 스틱
     [SerializeField] float stickSpeed = 3f;         // 스틱 당기는 속도
@@ -20,6 +22,7 @@ public class Lever : MonoBehaviour, Interact {
         if (oneShot) {
             if (isRotate) {
                 PullStick();
+                quest.Invoke();
             }
             if (stickTimer >= 1f) {
                 AudioManager.instance.OneShotEvent("switchingLever");

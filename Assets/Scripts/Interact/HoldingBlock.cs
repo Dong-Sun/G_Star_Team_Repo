@@ -1,5 +1,8 @@
 using UnityEngine;
+using UnityEngine.Events;
+
 public class HoldingBlock : MonoBehaviour, Interact {
+    [SerializeField] UnityEvent quest;
     [SerializeField] GameObject arrow;
     [SerializeField] Transform playerTarget;
     [SerializeField] Transform floor;
@@ -18,7 +21,7 @@ public class HoldingBlock : MonoBehaviour, Interact {
         if (!switching) {
             transform.localPosition = new Vector3(0, transform.localPosition.y, 0);
             ray.origin = transform.position;
-            if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move&&GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Look_Dir.position == this.transform.position) {
+            if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move && GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Look_Dir.position == this.transform.position) {
                 if (Physics.Raycast(ray.origin, ray.direction, out hit, 2)) {
                     if (hit.collider.transform.gameObject.name == "FloorBase" || hit.collider.GetComponent<Lava>() != null) {
                         if (hit.collider.GetComponent<Lava>() != null) {
@@ -27,8 +30,8 @@ public class HoldingBlock : MonoBehaviour, Interact {
                         }
                         isActive = false;
                         UnHoldBlock();
-                        this.gameObject.layer = 0;
-                        return;
+                        gameObject.layer = 0;
+                        quest.Invoke();
                     }
                 }
             }

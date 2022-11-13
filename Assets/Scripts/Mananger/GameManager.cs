@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public Dir Game_Dir;
     public bool Game_Stop = false;
     public bool Get_Stage_Key = false;
-
     public ChangeCamera Change_Camera;
     public Door Entrance;
     public Door Exit;
@@ -62,51 +61,14 @@ public class GameManager : MonoBehaviour
 
     public void Initialize_GameData()
     {
-
-
-        Change_Camera = GameObject.FindObjectOfType<ChangeCamera>();
         Game_Dir = Dir.ForWard;
         Game_Stop = false;
         Get_Stage_Key = false;
         StopAllCoroutines();
-        GameObject g = GameObject.FindGameObjectWithTag("Player");
-        if (g != null && Player_Manager == null)
-        {
-            Player_Manager = g.GetComponent<PlayerManager>();
-        }
-        if (Player_Manager != null && Player_Manager.Auto_Moving_Needed == true)
-        {
-            Player_Manager.Auto_Moving = true;
-        }
-        g = GameObject.FindWithTag("Entrance");
-        if (g != null)
-            g.TryGetComponent<Door>(out Entrance);
-        g = GameObject.FindGameObjectWithTag("Exit");
-        if (g != null)
-            g.TryGetComponent<Door>(out Exit);
         StartCoroutine(Start_Animation_Coroutine());
 
     }
 
-
-
-    /// <summary>
-    /// 딜레이 시간과 쿨타임을 가진 함수 호출용 corotine
-    /// </summary>
-    /// <param name="Func">여러번 호출할 함수</param>
-    /// <param name="delay_time">딜레이 타임</param>
-    /// <param name="cool_time">쿨 타임</param>
-    public IEnumerator Delay_And_Cool_Func(Action Func, int delay_time, int cool_time)
-    {
-        yield return new WaitForSeconds(delay_time);
-
-        while (true)
-        {
-            yield return new WaitForSeconds(cool_time);
-
-            Func();
-        }
-    }
 
     private IEnumerator Start_Animation_Coroutine()
     {

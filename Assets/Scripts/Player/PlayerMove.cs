@@ -31,13 +31,6 @@ public class PlayerMove : MonoBehaviour
         }
         if (!GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving) //자동 움직임이 되는 중이 아닐때만
         {
-            //if (GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool) //충돌이나 계단등에 의해 좌우 이동이 아닌 앞 이동이 발생하는 경우가 있어 그것을 제한하는 코루틴이 여러번 호출되는 것을 방지 하기 위함
-            //{
-            //    Fix_Player_Position_Coroutine = StartCoroutine(GameManager.Game_Manager_Instance.Delay_And_Cool_Func(Fix_Player_Position_To_Dir, 0, 1));
-            //    GameManager.Game_Manager_Instance.Player_Manager.Fixed_Position_Control_Bool = false;
-
-            //}
-
             GameManager.Game_Manager_Instance.Player_Manager.Input = Transform_input(); //좌우 방향키를 변형한 값을 input에 저장
             if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move) //움직 일수 있는 상태라면(한칸 단위에 잘 있다면)
             {
@@ -187,7 +180,7 @@ public class PlayerMove : MonoBehaviour
     {
         
         if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.3f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 | 6);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.3f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 3 | 6);
         else if (Moving_Dir == Look_Dir.localPosition)
             return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 );
         else 
@@ -218,12 +211,10 @@ public class PlayerMove : MonoBehaviour
         Physics.Raycast(origin, TargetVec, out hit, distance); //2와3 레이어 마스크를 무시한다(포탈 등 있어도 가는곳),interact을 위한 콜라이더(Look Dir,잡고있는 블럭등)
         if (hit.collider != null)
         {
-            
             if (hit.collider.tag == "Stair")
             {
                 return true;
             }
-
         }
         return false;
     }
@@ -277,24 +268,6 @@ public class PlayerMove : MonoBehaviour
         Player_Character_Controller.enabled = true;
     }
 
-
-
-
-    /// <summary>
-    /// 계단이나 충돌에 의해 이동시에 좌표가 이상하게 변경되는 것을 방지하기 위한 함수
-    /// </summary>
-    /// <returns></returns>
-    void Fix_Player_Position_To_Dir()
-    {
-        if (GameManager.Game_Manager_Instance.Game_Dir == Dir.BackWard || GameManager.Game_Manager_Instance.Game_Dir == Dir.ForWard) //진행 방향이 앞뒤일때
-        {
-            Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.forward * (Target_Position.z - this.transform.position.z));
-        }
-        else if (GameManager.Game_Manager_Instance.Game_Dir == Dir.Right || GameManager.Game_Manager_Instance.Game_Dir == Dir.Left) //진행 방향이 양옆일때
-        {
-            Enabling_Player_Character_Controller_To_Fix_Player_Position(this.transform.position + Vector3.right * (Target_Position.x - this.transform.position.x));
-        }
-    }
 
 
 

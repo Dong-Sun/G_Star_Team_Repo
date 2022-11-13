@@ -9,7 +9,7 @@ public class IntroController : MonoBehaviour {
 
     void Update() {
         timelineTimer += Time.deltaTime;
-        if (timelineTimer > director.duration) {
+        if (timelineTimer > director.duration && !SceneLoadManager.scene_load_manager_instance.SceneChanging) {
             SceneLoadManager.scene_load_manager_instance.NextSceneLoad(0);
             timelineTimer = 0;
         }

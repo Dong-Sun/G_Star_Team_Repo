@@ -34,9 +34,19 @@ public class SceneLoadManager : MonoBehaviour {
     {
         if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 1)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKey(KeyCode.Escape))
             {
-                SceneLoadManager.scene_load_manager_instance.Start_Scene_Load(2);
+                holdingTimer += Time.deltaTime;
+
+            }
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                holdingTimer = 0;
+            }
+            if (holdingTimer > 2f)
+            {
+                holdingTimer = 0;
+                SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(0);
             }
         }
     }

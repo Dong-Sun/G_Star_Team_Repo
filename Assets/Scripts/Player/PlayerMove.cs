@@ -45,8 +45,8 @@ public class PlayerMove : MonoBehaviour
                     }
                     if (Is_There_Wall() || Is_There_Cliff())
                     {
-                        Audio_Control();
                         GameManager.Game_Manager_Instance.Player_Manager.In_Motion = false;
+                        Audio_Control();
                         GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
                     }
                     else
@@ -232,18 +232,18 @@ public class PlayerMove : MonoBehaviour
             GameManager.Game_Manager_Instance.Player_Manager.Can_Move = true; //다음칸으로 이동할수 있게 변경
             if (GameManager.Game_Manager_Instance.Player_Manager.Input == 0) //다음 칸으로 바로 이동하는 경우 Idle로 변경되지 않고 Run 상태를 유지
             {
-                Audio_Control();
                 GameManager.Game_Manager_Instance.Player_Manager.In_Motion = false;
+                Audio_Control();
                 GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
 
             }
         }
         else
         {
+            GameManager.Game_Manager_Instance.Player_Manager.In_Motion = true;
             Audio_Control();
             Player_Character_Controller.Move((Target_Position - this.transform.position).normalized * Time.deltaTime * Moving_Speed);
             GameManager.Game_Manager_Instance.Player_Manager.Can_Move = false;
-            GameManager.Game_Manager_Instance.Player_Manager.In_Motion = true;
             GameManager.Game_Manager_Instance.Player_Manager.Player_Animator_Controller.Player_Animator_Parameter_Control();
 
         }

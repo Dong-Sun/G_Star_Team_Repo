@@ -5,15 +5,12 @@ using System;
 
 public class PlayerMove : MonoBehaviour
 {
-
     private Vector3 Target_Position;
     public Transform Look_Dir;
     private CharacterController Player_Character_Controller;
     private int Moving_Speed = 2;
     static RaycastHit hit;
-    Coroutine Fix_Player_Position_Coroutine;
     public Vector3 Moving_Dir;
-
 
     private void Start()
     {

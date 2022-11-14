@@ -24,6 +24,7 @@ public class Lever : MonoBehaviour, Interact {
                 PullStick();
             }
             if (stickTimer >= 1f) {
+                arrow.SetActive(false);
                 AudioManager.instance.OneShotEvent("switchingLever");
                 stickTimer = 0f;
                 switching = true;
@@ -33,14 +34,9 @@ public class Lever : MonoBehaviour, Interact {
         }
     }
     private void PullStick() {
-        arrow.SetActive(false);
         stickTimer += Time.deltaTime * stickSpeed;
-        if (!switching)
-            stick.transform.localRotation
-                = Quaternion.Slerp(Quaternion.Euler(-30f, 0f, 0f), Quaternion.Euler(30f, 0f, 0f), stickTimer);
-        else
-            stick.transform.localRotation
-                = Quaternion.Slerp(Quaternion.Euler(-30f, 0f, 0f), Quaternion.Euler(30f, 0f, 0f), 1f - stickTimer);
+        stick.transform.localRotation = Quaternion.Slerp(Quaternion.Euler(-30f, 0f, 0f), Quaternion.Euler(30f, 0f, 0f), stickTimer);
+
     }
     public void Work() {
         isRotate = true;

@@ -32,7 +32,7 @@ public class SceneLoadManager : MonoBehaviour {
 
     private void Rewind_To_Start()
     {
-        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 1)
+        if (CurrentSceneIndex() >= 1)
         {
             if (Input.GetKey(KeyCode.Escape))
             {
@@ -46,7 +46,7 @@ public class SceneLoadManager : MonoBehaviour {
             if (holdingTimer > 2f)
             {
                 holdingTimer = 0;
-                SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(0);
+                Start_Scene_Load(0);
             }
         }
     }
@@ -55,7 +55,7 @@ public class SceneLoadManager : MonoBehaviour {
     private void Rewind_To_Current()
     {
 
-        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() >= 2)
+        if (CurrentSceneIndex() >= 2)
         {
             if (Input.GetKey(KeyCode.R))
             {
@@ -69,7 +69,7 @@ public class SceneLoadManager : MonoBehaviour {
             if (holdingTimer > 2f)
             {
                 holdingTimer = 0;
-                SceneLoadManager.scene_load_manager_instance.CurrentSceneLoad(2);
+                CurrentSceneLoad(2);
             }
         }
     }
@@ -77,7 +77,7 @@ public class SceneLoadManager : MonoBehaviour {
 
     private void Skip_Intro()
     {
-        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() == 1)
+        if (CurrentSceneIndex() == 1)
         {
             if (Input.GetKey(KeyCode.Space))
             {
@@ -91,27 +91,27 @@ public class SceneLoadManager : MonoBehaviour {
             if (holdingTimer > 2f)
             {
                 holdingTimer = 0;
-                SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
+                NextSceneLoad(2);
                 
             }
         }
     }
     private void ToIntro()
     {
-        if (SceneLoadManager.scene_load_manager_instance.CurrentSceneIndex() == 0)
+        if (CurrentSceneIndex() == 0)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 GameObject.FindWithTag("Player").GetComponent<Animator>().SetBool("Start", true);
-                SceneLoadManager.scene_load_manager_instance.NextSceneLoad(2);
+                NextSceneLoad(2);
             }
         }
     }
 
     public void NextSceneLoad(int time) {
-        if (!(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1))
+        if (!(CurrentSceneIndex() == SceneManager.sceneCountInBuildSettings - 1))
         {
-            StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, time));
+            StartCoroutine(LoadScene(CurrentSceneIndex() + 1, time));
         }
         else
             StartCoroutine(LoadScene(0, time));
@@ -119,7 +119,7 @@ public class SceneLoadManager : MonoBehaviour {
 
     public void CurrentSceneLoad(int time) {
 
-        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex, time));
+        StartCoroutine(LoadScene(CurrentSceneIndex(), time));
     }
     public void Start_Scene_Load(int time)
     {

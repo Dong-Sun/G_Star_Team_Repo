@@ -26,12 +26,12 @@ public class PlayerManager : MonoBehaviour
   // Start is called before the first frame update
     private void Awake()
     {
-        SingleTon();
-        GameManager.Game_Manager_Instance.Player_Manager = this;
+        
     }
 
     void Start()
     {
+        GameManager.Game_Manager_Instance.Player_Manager = this;
         if (GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving_Needed == true)
         {
             GameManager.Game_Manager_Instance.Player_Manager.Auto_Moving = true;
@@ -45,10 +45,6 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
 
-    }
-
-    private void SingleTon()
-    {
     }
 
     public void Player_Dying()

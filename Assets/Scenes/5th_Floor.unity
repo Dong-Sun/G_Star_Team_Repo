@@ -5707,7 +5707,7 @@ PrefabInstance:
     - target: {fileID: 6393444581325668636, guid: 211e19e945f58bd46ba3c8bc10812b48,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6393444581325668636, guid: 211e19e945f58bd46ba3c8bc10812b48,
         type: 3}
@@ -10096,10 +10096,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1802362399}
-  - {fileID: 1688573453}
-  - {fileID: 1202783985}
-  - {fileID: 569246004}
-  - {fileID: 892605600}
+  - {fileID: 1408723640}
   - {fileID: 1770742046}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -19488,6 +19485,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 731967680}
     m_Modifications:
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1408723639}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CompletionQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4803615259020385924, guid: 0a9224b41ee310b43983dbd640c67a1a,
         type: 3}
       propertyPath: m_RootOrder
@@ -27010,6 +27039,7 @@ GameObject:
   - component: {fileID: 569246004}
   - component: {fileID: 569246006}
   - component: {fileID: 569246005}
+  - component: {fileID: 569246007}
   m_Layer: 5
   m_Name: 1
   m_TagString: Untagged
@@ -27026,15 +27056,15 @@ RectTransform:
   m_GameObject: {fileID: 569246003}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95238096, y: 1.6666665, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 228594894}
-  m_RootOrder: 3
+  m_Father: {fileID: 1688573453}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 740, y: 350}
+  m_AnchoredPosition: {x: 2.8571167, y: -37.49997}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569246005
@@ -27079,6 +27109,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569246003}
   m_CullTransparentMesh: 1
+--- !u!114 &569246007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569246003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864643f17d8e90f4e9d1474d66bfa049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 1
 --- !u!4 &569989693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4065223895735050, guid: 1e3e89a9932575644ae6697c585dc150,
@@ -41860,6 +41903,7 @@ GameObject:
   - component: {fileID: 892605600}
   - component: {fileID: 892605602}
   - component: {fileID: 892605601}
+  - component: {fileID: 892605603}
   m_Layer: 5
   m_Name: 2
   m_TagString: Untagged
@@ -41876,15 +41920,15 @@ RectTransform:
   m_GameObject: {fileID: 892605599}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95238096, y: 1.6666665, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 228594894}
-  m_RootOrder: 4
+  m_Father: {fileID: 1688573453}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 740, y: 275}
+  m_AnchoredPosition: {x: 2.8571167, y: -162.49997}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &892605601
@@ -41929,6 +41973,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892605599}
   m_CullTransparentMesh: 1
+--- !u!114 &892605603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892605599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864643f17d8e90f4e9d1474d66bfa049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 1
 --- !u!4 &892887343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6215553940624383342, guid: c7fa8fd966d8c4192a4557f0bf0f1aeb,
@@ -53529,15 +53586,15 @@ RectTransform:
   m_GameObject: {fileID: 1202783984}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95238096, y: 1.6666665, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 228594894}
-  m_RootOrder: 2
+  m_Father: {fileID: 1688573453}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 785, y: 420}
+  m_AnchoredPosition: {x: 45.714294, y: 79.16669}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1202783986
@@ -62456,6 +62513,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1407345015}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408723638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408723640}
+  - component: {fileID: 1408723639}
+  m_Layer: 0
+  m_Name: QuestController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1408723639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408723638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5730a4ce8d0354db57e74a46ae8e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questBar: {fileID: 1688573452}
+  quests:
+  - {fileID: 569246007}
+  - {fileID: 892605603}
+--- !u!4 &1408723640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408723638}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -951.21814, y: -550.0789, z: 13.710638}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1688573453}
+  m_Father: {fileID: 228594894}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1410343947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75897,17 +76003,20 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688573452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -13.710638}
   m_LocalScale: {x: 1.05, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 228594894}
-  m_RootOrder: 1
+  m_Children:
+  - {fileID: 1202783985}
+  - {fileID: 569246004}
+  - {fileID: 892605600}
+  m_Father: {fileID: 1408723640}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 737, y: 372.5}
-  m_SizeDelta: {x: -1526, y: -625}
+  m_AnchoredPosition: {x: 1688.2181, y: 922.5789}
+  m_SizeDelta: {x: 394, y: 455}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1688573454
 MonoBehaviour:
@@ -78569,12 +78678,12 @@ PrefabInstance:
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -11.29
       objectReference: {fileID: 0}
     - target: {fileID: 8022474400911964437, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
@@ -78594,7 +78703,7 @@ PrefabInstance:
     - target: {fileID: 8022474400911964442, guid: be0bc0e5f2818b041ac69109b81d4b01,
         type: 3}
       propertyPath: orthographic size
-      value: 1.6
+      value: 5.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be0bc0e5f2818b041ac69109b81d4b01, type: 3}
@@ -82959,6 +83068,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1408723639}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CompletionQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6861125926920196200, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}
       propertyPath: m_RootOrder

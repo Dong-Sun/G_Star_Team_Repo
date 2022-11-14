@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Quest : MonoBehaviour {
     Text text;
-    public int count;
+    public int count = 1;
     Color clearColor;
     void Start() {
         clearColor = Color.gray;

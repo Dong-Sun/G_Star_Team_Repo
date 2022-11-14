@@ -2103,14 +2103,18 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.05, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1806033936}
+  m_Children:
+  - {fileID: 2025091060}
+  - {fileID: 73095578}
+  - {fileID: 96872197}
+  - {fileID: 1979818232}
+  m_Father: {fileID: 645758025}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 737, y: 345}
-  m_SizeDelta: {x: -1526, y: -625}
+  m_SizeDelta: {x: 294, y: 355}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &55148044
 MonoBehaviour:
@@ -2994,6 +2998,7 @@ GameObject:
   - component: {fileID: 73095578}
   - component: {fileID: 73095580}
   - component: {fileID: 73095579}
+  - component: {fileID: 73095581}
   m_Layer: 5
   m_Name: 1
   m_TagString: Untagged
@@ -3010,15 +3015,15 @@ RectTransform:
   m_GameObject: {fileID: 73095577}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95238096, y: 1.4285713, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1806033936}
-  m_RootOrder: 2
+  m_Father: {fileID: 55148043}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 790, y: 355}
+  m_AnchoredPosition: {x: 50.476196, y: 14.285736}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &73095579
@@ -3063,6 +3068,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73095577}
   m_CullTransparentMesh: 1
+--- !u!114 &73095581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73095577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864643f17d8e90f4e9d1474d66bfa049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 2
 --- !u!1001 &76911575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3770,6 +3788,7 @@ GameObject:
   - component: {fileID: 96872197}
   - component: {fileID: 96872199}
   - component: {fileID: 96872198}
+  - component: {fileID: 96872200}
   m_Layer: 5
   m_Name: 2
   m_TagString: Untagged
@@ -3786,15 +3805,15 @@ RectTransform:
   m_GameObject: {fileID: 96872196}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95238096, y: 1.4285713, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1806033936}
-  m_RootOrder: 3
+  m_Father: {fileID: 55148043}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 740, y: 280}
+  m_AnchoredPosition: {x: 2.8571167, y: -92.85712}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &96872198
@@ -3839,6 +3858,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96872196}
   m_CullTransparentMesh: 1
+--- !u!114 &96872200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96872196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864643f17d8e90f4e9d1474d66bfa049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 1
 --- !u!1001 &98038418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5545,6 +5577,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 645758024}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CompletionQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4898358874719287880, guid: b9194be0cc112584888cea54ae25060e,
         type: 3}
@@ -24164,6 +24231,61 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 645673769}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &645758023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 645758025}
+  - component: {fileID: 645758024}
+  m_Layer: 5
+  m_Name: QuestController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &645758024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645758023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5730a4ce8d0354db57e74a46ae8e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questBar: {fileID: 55148042}
+  quests:
+  - {fileID: 73095581}
+  - {fileID: 96872200}
+  - {fileID: 1979818235}
+--- !u!224 &645758025
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645758023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 55148043}
+  m_Father: {fileID: 1806033936}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &647119760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25978,7 +26100,7 @@ PrefabInstance:
     - target: {fileID: 6393444581325668636, guid: 211e19e945f58bd46ba3c8bc10812b48,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6393444581325668636, guid: 211e19e945f58bd46ba3c8bc10812b48,
         type: 3}
@@ -66764,6 +66886,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 645758024}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CompletionQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264965602249430078, guid: b9194be0cc112584888cea54ae25060e,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4898358874719287880, guid: b9194be0cc112584888cea54ae25060e,
         type: 3}
       propertyPath: m_Name
@@ -71011,6 +71168,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1867707628}
     m_Modifications:
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 645758024}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CompletionQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 241382707, guid: 0a9224b41ee310b43983dbd640c67a1a, type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4803615259020385924, guid: 0a9224b41ee310b43983dbd640c67a1a,
         type: 3}
       propertyPath: m_RootOrder
@@ -73456,12 +73645,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 55148043}
-  - {fileID: 2025091060}
-  - {fileID: 73095578}
-  - {fileID: 96872197}
-  - {fileID: 1979818232}
   - {fileID: 2142685725}
+  - {fileID: 645758025}
   - {fileID: 674287402}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -79109,6 +79294,7 @@ GameObject:
   - component: {fileID: 1979818232}
   - component: {fileID: 1979818234}
   - component: {fileID: 1979818233}
+  - component: {fileID: 1979818235}
   m_Layer: 5
   m_Name: 3
   m_TagString: Untagged
@@ -79125,15 +79311,15 @@ RectTransform:
   m_GameObject: {fileID: 1979818231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95238096, y: 1.4285713, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1806033936}
-  m_RootOrder: 4
+  m_Father: {fileID: 55148043}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 746, y: 205}
+  m_AnchoredPosition: {x: 8.57135, y: -199.99997}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1979818233
@@ -79178,6 +79364,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979818231}
   m_CullTransparentMesh: 1
+--- !u!114 &1979818235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979818231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864643f17d8e90f4e9d1474d66bfa049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 1
 --- !u!1001 &1981418882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80351,6 +80550,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -30
       objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 645758024}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CompletionQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
+        type: 3}
+      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1120655052971872433, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}
       propertyPath: m_Size.x
@@ -81371,15 +81610,15 @@ RectTransform:
   m_GameObject: {fileID: 2025091059}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95238096, y: 1.4285713, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1806033936}
-  m_RootOrder: 1
+  m_Father: {fileID: 55148043}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 785, y: 420}
+  m_AnchoredPosition: {x: 45.714294, y: 107.14288}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025091061
@@ -85520,7 +85759,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1806033936}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

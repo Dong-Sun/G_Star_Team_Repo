@@ -22,13 +22,13 @@ public class Lever : MonoBehaviour, Interact {
         if (oneShot) {
             if (isRotate) {
                 PullStick();
-                quest.Invoke();
             }
             if (stickTimer >= 1f) {
                 AudioManager.instance.OneShotEvent("switchingLever");
                 stickTimer = 0f;
                 switching = true;
                 oneShot = false;
+                quest.Invoke();
             }
         }
     }

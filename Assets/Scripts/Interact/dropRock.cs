@@ -26,6 +26,7 @@ public class dropRock : MonoBehaviour, Interact {
         timer += Time.deltaTime * speed;
         button.transform.localPosition = Vector3.Lerp(start, end, timer);
         if (timer > 1f) {
+            AudioManager.instance.OneShotEvent("buttonSound");
             swap = !swap;
         }
     }

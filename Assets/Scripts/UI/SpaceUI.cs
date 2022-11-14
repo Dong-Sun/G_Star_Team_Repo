@@ -8,7 +8,6 @@ public class SpaceUI : MonoBehaviour
     private Text text;
     private Color color;
     private float time = 0.8f;
-    private float Active_Time=0;
     private float cooltime=0.8f;
     private bool Start_text_Control_Bool=false;
 
@@ -26,9 +25,8 @@ public class SpaceUI : MonoBehaviour
 
     private void Blinking()
     {
-        if(Active_Time<4)
+        if(SceneLoadManager.scene_load_manager_instance.SceneChanging)
         {
-            Active_Time+=Time.deltaTime;
             return;
         }
         if (Start_text_Control_Bool)

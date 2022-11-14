@@ -21,7 +21,9 @@ public class HoldingBlock : MonoBehaviour, Interact {
         if (!switching) {
             transform.localPosition = new Vector3(0, transform.localPosition.y, 0);
             ray.origin = transform.position;
-            if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move && GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Look_Dir.position == this.transform.position) {
+            if (GameManager.Game_Manager_Instance.Player_Manager.Can_Move 
+                && GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Look_Dir.position.x == this.transform.position.x
+                && GameManager.Game_Manager_Instance.Player_Manager.Player_Move.Look_Dir.position.z == this.transform.position.z) {
                 if (Physics.Raycast(ray.origin, ray.direction, out hit, 2)) {
                     if (hit.collider.transform.gameObject.name == "FloorBase" || hit.collider.GetComponent<Lava>() != null) {
                         if (hit.collider.GetComponent<Lava>() != null) {

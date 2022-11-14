@@ -5911,6 +5911,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6401583933328593931, guid: 211e19e945f58bd46ba3c8bc10812b48,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 211e19e945f58bd46ba3c8bc10812b48, type: 3}
 --- !u!1001 &129210320
@@ -83197,39 +83202,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}
-      propertyPath: quest.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
-        type: 3}
-      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
-        type: 3}
       propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1408723639}
-    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
-        type: 3}
-      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
-        type: 3}
-      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CompletionQuest
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
-        type: 3}
-      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: QuestController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1120655052971872430, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
-        type: 3}
-      propertyPath: quest.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6861125926920196200, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}
       propertyPath: m_RootOrder
@@ -83238,17 +83213,17 @@ PrefabInstance:
     - target: {fileID: 6861125926920196200, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6861125926920196200, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6861125926920196200, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6861125926920196200, guid: 9a993b49f47ee904ab5d1dcd5df2dd6c,
         type: 3}

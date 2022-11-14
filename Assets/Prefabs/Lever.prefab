@@ -186,6 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa89cae83b8ac547a195d67e7198d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quest:
+    m_PersistentCalls:
+      m_Calls: []
   arrow: {fileID: 7283921565579946264}
   stick: {fileID: 685687634586822262}
   stickSpeed: 3
@@ -342,7 +345,7 @@ PrefabInstance:
     - target: {fileID: 7278120681106727500, guid: 3e4d42b41197f8d4fbe036168d17612f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.25
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7278120681106727500, guid: 3e4d42b41197f8d4fbe036168d17612f,
         type: 3}

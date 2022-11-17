@@ -177,11 +177,11 @@ public class PlayerMove : MonoBehaviour
     {
         
         if (!GameManager.Game_Manager_Instance.Player_Manager.Holding_Block)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.3f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 3 | 6);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.3f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, ~(1 << 2 | 1 << 3 | 1 << 6));
         else if (Moving_Dir == Look_Dir.localPosition)
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3 );
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f + Moving_Dir, Look_Dir.localPosition, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, ~(1 << 2 | 1 << 3));
         else 
-            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, 2 | 3);
+            return Physics.Raycast(this.transform.position + Vector3.down * 0.4f, Moving_Dir, GameManager.Game_Manager_Instance.Player_Manager.Block_Size, ~(1 << 2 | 1 << 3));
     }
 
 

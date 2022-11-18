@@ -1,4 +1,4 @@
-interface Interact
+public interface Interact
 {
     void Work();
 }

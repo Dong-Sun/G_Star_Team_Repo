@@ -23,4 +23,12 @@ public class KeyHole : MonoBehaviour, Interact {
             GameManager.Game_Manager_Instance.Get_Stage_Key = false;
         }
     }
+
+    private void OnDisable()
+    {
+        if(GameManager.Game_Manager_Instance.Player_Manager.Player_Interation.interact == this as Interact)
+        {
+            GameManager.Game_Manager_Instance.Player_Manager.Player_Interation.interact = null;
+        }
+    }
 }
